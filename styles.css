@@ -1,0 +1,159 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.sidebar {
+    background: #79a9ce;
+    color: #333;
+    width: 250px;
+    padding: 20px;
+    padding-top: 50px;
+    position: fixed;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.sidebar .profile {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.sidebar h1 {
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+
+.sidebar nav ul {
+    list-style-type: none;
+    width: 100%;
+    padding: 0;
+}
+
+.sidebar nav ul li {
+    margin: 15px 0;
+}
+
+.sidebar nav ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: normal;
+    transition: all 0.3s ease;
+}
+
+.sidebar nav ul li a.active {
+    font-weight: bold;
+    text-decoration: underline;
+    color: #000;
+}
+
+.sidebar nav ul li a:hover {
+    color: white;
+}
+
+/* Main Content Styling */
+.content {
+    margin-left: 250px;
+    padding: 40px;
+    overflow-y: auto;
+    height: 100vh;
+    width: 100%;
+}
+
+.content h2 {
+    font-size: 28px;
+    margin-bottom: 15px;
+}
+
+/* Lab Cards */
+.lab-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.lab-card {
+    background: #c7e3fd;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.lab-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+.lab-card h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.lab-card p {
+    font-size: 14px;
+    margin-bottom: 10px;
+    color: #555;
+}
+
+.lab-card span {
+    font-size: 12px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* cards that expand */
+/* .card-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+}
+
+.card {
+    width: 300px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+.card-summary {
+    padding: 15px;
+    background-color: #f7f7f7;
+}
+
+.card-details {
+    padding: 15px;
+    display: none;
+    background-color: #fff;
+    border-top: 1px solid #ccc;
+}
+
+.card.expanded {
+    width: 500px;
+}
+
+.card.expanded .card-details {
+    display: block;
+} */

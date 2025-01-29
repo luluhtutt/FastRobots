@@ -1,6 +1,63 @@
 <!DOCTYPE html>
-  <body>
-    <h1>Fast Robots</h1>
-  </body>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ECE 4160: Fast Robots</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <script src="script.js"></script>
+    <div class="container">
+        <aside class="sidebar">
+            <div class="profile">
+                <h1>Fast Robots</h1>
+                <h3>Spring 2025</h3>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#about">About Me</a></li>
+                    <li><a href="#lab1">Lab 1: Artemis & Bluetooth</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="content">
+            <section id="about">
+                <h2>About Me</h2>
+                <p>Hi, my name is Lulu Htutt, and I am a senior studying computer science. I like robots and space! Here
+                    you can find the labs I have completed for Cornell's ECE 4160: Fast Robots class.</p>
+            </section>
+
+            <br>
+            <br>
+            <section id="labs">
+                <h2>Labs</h2>
+                <!-- <div class="card-container">
+                    <div class="card" onclick="toggleCard(this)">
+                        <div class="card-summary">
+                            <h3>Lab 1: Artemis and Bluetooth</h3>
+                            <p>Short description.</p>
+                            <span>Click for more</span>
+                        </div>
+                        <div class="card-details">
+                            <p>more lab descr</p>
+                        </div>
+                    </div>
+                </div> -->
+
+                <div class="lab-cards">
+                    <div class="lab-card" onclick="location.href='labs/lab1.html';">
+                        <h3>Lab 1: Artemis and Bluetooth</h3>
+                        <p>Short description.</p>
+                        <span>Click for more</span>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
 
 </html>
