@@ -5,7 +5,8 @@
 }
 
 body {
-    font-family: "Gill Sans", sans-serif;
+    /* font-family: "Gill Sans", sans-serif; */
+    font-family: "Trebuchet MS", sans-serif;
     display: flex;
     height: 100vh;
     overflow: hidden;
@@ -69,7 +70,7 @@ body {
     color: white;
 }
 
-/* Main Content Styling */
+/* main content */
 .content {
     margin-left: 350px;
     margin-right: 50px;
@@ -84,25 +85,93 @@ body {
     margin-bottom: 15px;
 }
 
-/* Lab Cards */
+/* about me section */
+#about h2 {
+    margin-bottom: 30px;
+}
+
+.profile-container {
+    display: flex;
+    align-items: flex-start;
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+.profile-photo {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #79a9ce;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    flex-shrink: 0;
+}
+
+.profile-text {
+    flex: 1;
+}
+
+.profile-text p {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    line-height: 1.6;
+}
+
+/* lab cards */
+
 .lab-cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 0 auto;
 }
 
 .lab-card {
+    position: relative;
     background: #c7e3fd;
     border-radius: 8px;
     padding: 20px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    cursor: pointer;
+    margin-bottom: 20px;
+    margin-left: 100px;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .lab-card:hover {
     transform: translateY(-5px);
     box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+.lab-icon {
+    width: 75px;
+    height: 75px;
+    margin-top: 10px;
+    border-radius: 50%;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    left: -100px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    border: 2px solid #79a9ce;
+}
+
+.lab-content {
+    margin-top: 0;
+    padding-left: 0;
+}
+
+.lab-details {
+    display: none;
+    margin-top: 15px;
+    font-size: 14px;
+    color: #555;
+}
+
+.lab-card.expanded .lab-details {
+    display: block;
 }
 
 .lab-card h3 {
@@ -121,41 +190,3 @@ body {
     font-weight: bold;
     color: #333;
 }
-
-/* cards that expand */
-/* .card-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 20px;
-}
-
-.card {
-    width: 300px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    transition: all 0.3s ease-in-out;
-    cursor: pointer;
-}
-
-.card-summary {
-    padding: 15px;
-    background-color: #f7f7f7;
-}
-
-.card-details {
-    padding: 15px;
-    display: none;
-    background-color: #fff;
-    border-top: 1px solid #ccc;
-}
-
-.card.expanded {
-    width: 500px;
-}
-
-.card.expanded .card-details {
-    display: block;
-} */

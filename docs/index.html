@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <script src="script.js"></script>
+    <script src="scripts.js"></script>
     <div class="container">
         <aside class="sidebar">
             <div class="profile">
@@ -27,40 +27,41 @@
         <main class="content">
             <section id="about">
                 <h2>About Me</h2>
-                <p>Hi, my name is Lulu Htutt!</p>
-                <p>I am a senior at Cornell University studying computer science. I like robots, space, and
-                    documentaries about cold places!</p>
-                <p>Here you can find information about the labs I have done in ECE 4160: Fast Robots.</p>
+                <div class="profile-container">
+                    <img src="images/me.JPG" alt="Lulu Htutt" class="profile-photo">
+                    <div class="profile-text">
+                        <p>Hi! My name is Lulu Htutt!</p>
+                        <p> I am a senior at Cornell University studying computer science, interested in robotics,
+                            computer architecture, and embedded software.
+                            I enjoy documentaries about space and Antarctica, meeting pets, winter activities, and
+                            thinking about aquarium themes.
+                        </p>
+                        <p>Here you can find information about the labs I have done in ECE 4160: Fast Robots.</p>
+                    </div>
+                </div>
             </section>
 
-            <br>
-            <br>
             <section id="labs">
                 <h2>Labs</h2>
-                <!-- <div class="card-container">
-                    <div class="card" onclick="toggleCard(this)">
-                        <div class="card-summary">
-                            <h3>Lab 1: Artemis and Bluetooth</h3>
-                            <p>Short description.</p>
-                            <span>Click for more</span>
-                        </div>
-                        <div class="card-details">
-                            <p>more lab descr</p>
-                        </div>
-                    </div>
-                </div> -->
 
-                <section id="lab1">
+                <div class="lab-cards">
 
-                    <div class="lab-cards">
-                        <div class="lab-card" onclick="location.href='labs/lab1.html';">
-                            <h3>Lab 1 - Artemis and Bluetooth</h3>
-                            <p>Short description.</p>
-                            <span>Click for more</span>
+                    <section id="lab1">
+                        <div class="lab-card" onclick="toggleCard(this)">
+                            <img src="images/lab1_icon.png" alt="Lab 1 Icon" class="lab-icon">
+                            <div class="lab-content">
+                                <h3>Lab 1 - Artemis and Bluetooth</h3>
+                                <p>Short description.</p>
+                                <!-- <span class="toggle-text">Click to expand</span> -->
+                                <div class="lab-details">
+                                    <p>Full lab report.</p>
+                                </div>
+                            </div>
                         </div>
-                    </div>
+                    </section>
 
-                </section>
+                </div>
+
             </section>
         </main>
     </div>
