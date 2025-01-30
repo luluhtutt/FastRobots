@@ -130,11 +130,12 @@ body {
     position: relative;
     background: #c7e3fd;
     border-radius: 8px;
-    padding: 20px;
+    padding: 25px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
     margin-left: 100px;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
 }
 
 .lab-card:hover {
@@ -145,7 +146,7 @@ body {
 .lab-icon {
     width: 75px;
     height: 75px;
-    margin-top: 10px;
+    margin-top: 15px;
     border-radius: 50%;
     background-color: #fff;
     display: flex;
@@ -163,17 +164,6 @@ body {
     padding-left: 0;
 }
 
-.lab-details {
-    display: none;
-    margin-top: 15px;
-    font-size: 14px;
-    color: #555;
-}
-
-.lab-card.expanded .lab-details {
-    display: block;
-}
-
 .lab-card h3 {
     font-size: 20px;
     margin-bottom: 10px;
@@ -183,10 +173,4 @@ body {
     font-size: 14px;
     margin-bottom: 10px;
     color: #555;
-}
-
-.lab-card span {
-    font-size: 12px;
-    font-weight: bold;
-    color: #333;
 }
