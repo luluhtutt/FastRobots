@@ -18,16 +18,89 @@
             <nav>
                 <ul>
                     <li><a href="index.html">Home</a></li>
-                    <li><a href="lab1.html">Lab 1 - Artemis & Bluetooth</a></li>
+                    <li><a href="index.html#lab1">Lab 1 - Artemis & Bluetooth</a></li>
                 </ul>
             </nav>
         </aside>
 
         <main class="content">
             <section class="lab-content">
-                <h2>Lab 1: Artemis & Bluetooth</h2>
+                <div class="general-text">
 
-                <!-- <p>In Lab 1, we set up and </p> -->
+                    <h2>Lab 1: Artemis & Bluetooth</h2>
+
+                    <p><i>01.21.2025 - 01.28.2025</i></p>
+
+                    <h3>Objective</h3>
+
+                    <p>Lab 1 is split into two parts, 1A and 1B. The overall objective of this lab was to set up and
+                        familiarize myself with the Arduino IDE and the Artemis board. Lab tasks included programming
+                        the board, reading & writing serial messages over USB, using the onboard temperature sensor and
+                        microphone, and communicating between my computer (Jupyter notebook) and the Artemis board
+                        through Bluetooth.</p>
+
+                    <h3>Lab 1A</h3>
+
+                    <p>I first installed Arduino IDE and made sure that it was updated to the most recent version. I
+                        also followed the set up instructions to install the correct board and libraries. After hooking
+                        up the Artemis board to my computer and selecting the correct Board and Port, I moved on to the
+                        tasks.</p>
+
+                    <h4>Example 1: Blink</h4>
+                    <p>The first example code we ran was blink, which made the LED on the board to turn on and off. I
+                        was able to upload and run the code with no issues. You can see the board executing the
+                        program below:</p>
+
+                    <iframe width="700" height="500" src="https://www.youtube.com/embed/Y12J--JkmSA"
+                        title="ECE 4160 - Blink" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen></iframe>
+
+                    <h4>Example 2: Serial</h4>
+                    <p>I then uploaded and ran the next example, Serial. This code allowed me to type characters in the
+                        Serial monitor and then receive the same input characters as outputs, also in the Serial
+                        monitor.</p>
+
+                    <iframe width="700" height="500" src="https://www.youtube.com/embed/yb4gLH2N_Fk"
+                        title="ECE 4160 - Serial" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen></iframe>
+
+                    <h4>Example 3: Analog Read</h4>
+                    <p>The third example file was analogRead, which utilized the on board temperature sensor. The
+                        temperature measurements were outputted to the serial monitor, and I tested the sensor by
+                        holding the board in my hand to warm it up. There was not a super noticeable change, perhaps
+                        because my hands at the time weren't particularly warm. However, as seen in the video below, the
+                        temperature did increase when I held the board.</p>
+
+                    <iframe width="700" height="500" src="https://www.youtube.com/embed/1iYDIWScxgc"
+                        title="ECE 4160 - Analog Read" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen></iframe>
+
+                    <h4>Example 4: Microphone Output</h4>
+                    <p>The last example had me test the microphone on the Artemis board. Similarly to the temperature
+                        reading in example 3, the frequency measurements were outputted to the Serial Monitor. I tested
+                        whistling, and the frequency increased accordingly.</p>
+
+                    <iframe width="700" height="500" src="https://www.youtube.com/embed/6A2xySlCDnA"
+                        title="ECE 4160 - Microphone Output" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen></iframe>
+
+                    <h4>Blink & Microphone (additional task for 5000-level students)</h4>
+                    <p>I also decided to do the graduate level task, which was to create a program that would make the
+                        Artemis board blink the LED only when it detected a musical “C” note. I did this by creating
+                        a new file, and referencing the Blink and Microphone Output examples to run the blink code only
+                        when the detected frquency was in the "C" note range. The code for this task can be seen on the
+                        github repository (link).</p>
+
+                    <iframe width="700" height="500" src="https://youtube.com/embed/W6rOO9IkQno"
+                        title="ECE 4160 - Blink when C Note" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen></iframe>
+
+                </div>
 
             </section>
         </main>
