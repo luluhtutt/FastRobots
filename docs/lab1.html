@@ -20,9 +20,11 @@
                     <li>
                         <h4>Lab 1 - Artemis & Bluetooth</h4>
                     </li>
-                    <li><a href="index.html">Home</a></li>
                     <li>
-                        <a href="#objective">Objective</a>
+                        <a href="index.html">Home</a>
+                    </li>
+                    <li>
+                        <u><a href="#objective">Objective</a></u>
                     </li>
                     <li>
                         <u><a href="#lab-1a">Lab 1A</a></u>
@@ -41,6 +43,18 @@
                     </li>
                     <li>
                         <a href="#blink-cnote">Blink w/ Microphone (5160)</a>
+                    </li>
+                    <li>
+                        <u><a href="#lab-1b">Lab 1B</a></u>
+                    </li>
+                    <li>
+                        <a href="#ECHO">Task 1: ECHO</a>
+                    </li>
+                    <li>
+                        <a href="#SEND_THREE_FLOATS">Task 2: SEND_THREE_FLOATS</a>
+                    </li>
+                    <li>
+                        <a href="#GET_TIME_MILLIS">Task 3: GET_TIME_MILLIS</a>
                     </li>
                 </ul>
             </nav>
@@ -106,9 +120,8 @@
                         <h4>Example 3: Analog Read</h4>
                         <p>The third example file was analogRead, which utilized the on board temperature sensor. The
                             temperature measurements were outputted to the serial monitor, and I tested the sensor by
-                            holding the board in my hand to warm it up. There was not a super noticeable change, perhaps
-                            because my hands at the time weren't particularly warm. However, as seen in the video below,
-                            the temperature did increase when I held the board.</p>
+                            holding the board in my hand to warm it up. As seen in the video below, the temperature did
+                            increase when I held the board.</p>
 
                         <iframe width="700" height="500" src="https://www.youtube.com/embed/1iYDIWScxgc"
                             title="ECE 4160 - Analog Read" frameborder="0"
@@ -120,9 +133,9 @@
                     <section id="microphone-output">
 
                         <h4>Example 4: Microphone Output</h4>
-                        <p>The last example had me test the microphone on the Artemis board. Similarly to the
-                            temperature reading in example 3, the frequency measurements were outputted to the Serial
-                            Monitor. I tested whistling, and the frequency increased accordingly.</p>
+                        <p>The last example had me test the microphone on the Artemis board. The frequency measurements
+                            were outputted to the Serial Monitor. I tested whistling, and the frequency increased
+                            accordingly.</p>
 
                         <iframe width="700" height="500" src="https://www.youtube.com/embed/6A2xySlCDnA"
                             title="ECE 4160 - Microphone Output" frameborder="0"
@@ -143,6 +156,106 @@
                             title="ECE 4160 - Blink when C Note" frameborder="0"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                             allowfullscreen></iframe>
+
+                    </section>
+                    <br>
+
+                    <section id="lab-1b">
+                        <h3>Lab 1B</h3>
+
+                        <p>I first read through the set up instructions and made sure my Python and pip versions were
+                            correct. I also made a virtual environment, installed the necessary packages, and installed
+                            the Arduino BLE library. Finally, I downloaded the provided codebase and worked on the tasks
+                            using Jupyter lab.</p>
+
+                        <p>I first followed the instructions to get my MAC address, after which I updated the
+                            artemis_address in connections.yaml accordingly. The other set up step was generating a
+                            UUID, and updating connections.yaml and ble_arduino.ino.</p>
+
+                        <img src="images/mac_address.png" alt="mac_address" class="lab-photo" width="700px">
+                        <img src="images/uuid.png" alt="uuid" class="lab-photo" width="400px">
+
+                    </section>
+
+                    <section id="ECHO">
+
+                        <h4>Task 1: ECHO</h4>
+                        <p>The first task was to program the board so that I could send a string from my computer to the
+                            board using ECHO. The board would then send back to the computer an augmented string."</p>
+
+                        <p>I added the arduino code below to make the board return the user's string when the ECHO
+                            command is used.</p>
+
+                        <div class="code-snippet">
+                            <pre>
+case ECHO:
+
+    char char_arr[MAX_MSG_SIZE];
+
+    // Extract the next value from the command string as a character array
+    success = robot_cmd.get_next_value(char_arr);
+    if (!success)
+        return;
+
+    tx_estring_value.clear();
+    tx_estring_value.append("Robot says -> ");
+    tx_estring_value.append(char_arr);
+    tx_estring_value.append(" :)");
+    tx_characteristic_string.writeValue(tx_estring_value.c_str());
+
+    Serial.print("Sent back: ");
+    Serial.println(tx_estring_value.c_str());
+
+    break;</pre>
+                        </div>
+
+                        <p>Below, you can see the Python end of ECHO, which send the command to the board, and then
+                            receives a string back.</p>
+
+                        <img src="images/1b_task1.png" alt="echo" class="lab-photo" width="500px">
+
+                    </section>
+
+                    <section id="SEND_THREE_FLOATS">
+
+                        <h4>Task 2: SEND_THREE_FLOATS</h4>
+                        <p>The next command I completed was SEND_THREE_FLOATS, which would allow me to send three
+                            floats from my computer to the artemis board. For the Arduino code, I referenced
+                            SEND_TWO_INTS, which was already implemented, and changed the implementation accordingly.
+                            Below, you can see the Python code to send the floats, and the Serial Monitor.
+                        </p>
+
+                        <img src="images/1b_task2_python.png" alt="echo" class="lab-photo" height="40px">
+                        <img src="images/1b_task2_arduino.png" alt="echo" class="lab-photo" height="40px">
+
+                    </section>
+
+                    <section id="GET_TIME_MILLIS">
+
+                        <h4>Task 3: GET_TIME_MILLIS</h4>
+                        <p>This task was to get the current time from the Artemis board and return it as a String to the
+                            computer.
+                        </p>
+                        <p>This Arduino code below uses the millis() method to get the time.</p>
+
+                        <div class="code-snippet">
+                            <pre>
+case GET_TIME_MILLIS:
+
+    tx_estring_value.clear();
+    tx_estring_value.append("T: ");
+    tx_estring_value.append(int(millis()));
+    tx_characteristic_string.writeValue(tx_estring_value.c_str());
+
+    Serial.print("Sent back: ");
+    Serial.println(tx_estring_value.c_str());
+
+    break;</pre>
+                        </div>
+
+                        <p>And the Python end is shown below.</p>
+                        <img src="images/1b_task3.png" alt="echo" class="lab-photo" width="500px">
+
 
                     </section>
 
