@@ -9,7 +9,10 @@ body {
     font-family: "Trebuchet MS", sans-serif;
     display: flex;
     height: 100vh;
-    overflow: hidden;
+    /* overflow: hidden; */
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #79a9ce white;
 }
 
 .container {
@@ -31,6 +34,10 @@ body {
     flex-direction: column;
     align-items: center;
     text-align: center;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #4a7fa1 #79a9ce;
+
 }
 
 .sidebar .profile {
@@ -51,6 +58,7 @@ body {
 
 .sidebar nav ul li {
     margin: 15px 0;
+    transition: all 0.3s ease;
 }
 
 .sidebar nav ul li a {
@@ -68,6 +76,33 @@ body {
 
 .sidebar nav ul li a:hover {
     color: white;
+}
+
+.collapsible-content {
+    display: none;
+    padding-left: 20px;
+
+}
+
+.collapsible {
+    cursor: pointer;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    position: relative;
+    justify-content: center;
+    text-align: center;
+    gap: 5px;
+}
+
+.collapsible-arrow {
+    position: absolute;
+    left: 40px;
+    font-size: 0.8em;
+    transition: transform 0.3s ease;
+    transform: rotate(0deg);
+    color: #4a7fa1;
+    line-height: 1;
 }
 
 /* main content */
@@ -117,8 +152,34 @@ body {
     line-height: 1.6;
 }
 
-.general-text h4 {
+.general-text a {
+    color: #6c8da7;
+}
+
+/* .general-text h4 {
     margin-top: 20px;
+    color: #4a7fa1;
+} */
+
+.general-text h4 {
+    color: #4a7fa1;
+    border-left: 4px solid #79a9ce;
+    padding-left: 10px;
+    margin-top: 25px;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+/* .general-text h3 {
+    color: #4a7fa1;
+} */
+
+.general-text h3 {
+    border-bottom: 2px solid #79a9ce;
+    padding-bottom: 10px;
+    color: #365f7a;
+    margin-top: 30px;
+    margin-bottom: 20px;
 }
 
 .general-text i {

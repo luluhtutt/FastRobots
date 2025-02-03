@@ -9,6 +9,7 @@
 </head>
 
 <body>
+    <script src="scripts.js"></script>
     <div class="container">
         <aside class="sidebar">
             <div class="profile">
@@ -18,44 +19,46 @@
             <nav>
                 <ul>
                     <li>
-                        <h4>Lab 1 - Artemis & Bluetooth</h4>
+                        <h3>Lab 1 - Artemis & Bluetooth</h3>
                     </li>
                     <li>
-                        <a href="index.html">Home</a>
+                        <a href="index.html">
+                            <h4>Home</h4>
+                        </a>
                     </li>
                     <li>
-                        <u><a href="#objective">Objective</a></u>
+                        <a href="#objective">
+                            <h4>Objective</h4>
+                        </a>
                     </li>
+
                     <li>
-                        <u><a href="#lab-1a">Lab 1A</a></u>
+                        <h4 class="collapsible">Lab 1A</h4>
+                        <ul class="collapsible-content">
+                            <li><a href="#lab-1a">Overview</a></li>
+                            <li><a href="#blink">Example 1: Blink</a></li>
+                            <li><a href="#serial">Example 2: Serial</a></li>
+                            <li><a href="#analog-read">Example 3: Analog Read</a></li>
+                            <li><a href="#microphone-output">Example 4: Microphone</a></li>
+                            <li><a href="#blink-cnote">Blink w/ Microphone (5160)</a></li>
+                        </ul>
                     </li>
+
                     <li>
-                        <a href="#blink">Example 1: Blink</a>
+                        <h4 class="collapsible">Lab 1B</h4>
+                        <ul class="collapsible-content">
+                            <li><a href="#lab-1b">Overview</a></li>
+                            <li><a href="#ECHO">Task 1: ECHO</a></li>
+                            <li><a href="#SEND_THREE_FLOATS">Task 2: SEND_THREE_FLOATS</a></li>
+                            <li><a href="#GET_TIME_MILLIS">Task 3: GET_TIME_MILLIS</a></li>
+                            <li><a href="#notification-handler">Task 4: Notification Handler</a></li>
+                            <li><a href="#message-speed">Task 5: Message Speed</a></li>
+                            <li><a href="#SEND_TIME_DATA">Task 6: SEND_TIME_DATA</a></li>
+                            <li><a href="#GET_TEMP_READINGS">Task 7: GET_TEMP_READINGS</a></li>
+                            <li><a href="#comparison">Task 8: Data Collection Method Comparison</a></li>
+                        </ul>
                     </li>
-                    <li>
-                        <a href="#serial">Example 2: Serial</a>
-                    </li>
-                    <li>
-                        <a href="#analog-read">Example 3: Analog Read</a>
-                    </li>
-                    <li>
-                        <a href="#microphone-output">Example 4: Microphone</a>
-                    </li>
-                    <li>
-                        <a href="#blink-cnote">Blink w/ Microphone (5160)</a>
-                    </li>
-                    <li>
-                        <u><a href="#lab-1b">Lab 1B</a></u>
-                    </li>
-                    <li>
-                        <a href="#ECHO">Task 1: ECHO</a>
-                    </li>
-                    <li>
-                        <a href="#SEND_THREE_FLOATS">Task 2: SEND_THREE_FLOATS</a>
-                    </li>
-                    <li>
-                        <a href="#GET_TIME_MILLIS">Task 3: GET_TIME_MILLIS</a>
-                    </li>
+
                 </ul>
             </nav>
         </aside>
@@ -149,8 +152,10 @@
                         <p>I also decided to do the graduate level task, which was to create a program that would make
                             the Artemis board blink the LED only when it detected a musical “C” note. I did this by
                             creating a new file, and referencing the Blink and Microphone Output examples to run the
-                            blink code only when the detected frquency was in the "C" note range. The code for this task
-                            can be seen on the github repository (link).</p>
+                            blink code only when the detected frquency was in the "C" note range. The code can be found
+                            on my <a
+                                href="https://github.com/luluhtutt/FastRobots/blob/main/labs/lab1/lab_1a.ino">Github</a>.
+                        </p>
 
                         <iframe width="700" height="500" src="https://youtube.com/embed/W6rOO9IkQno"
                             title="ECE 4160 - Blink when C Note" frameborder="0"
@@ -168,11 +173,11 @@
                             the Arduino BLE library. Finally, I downloaded the provided codebase and worked on the tasks
                             using Jupyter lab.</p>
 
-                        <p>I first followed the instructions to get my MAC address, after which I updated the
-                            artemis_address in connections.yaml accordingly. The other set up step was generating a
-                            UUID, and updating connections.yaml and ble_arduino.ino.</p>
+                        <p>Before beginning the tasks, I followed the instructions to get my MAC address, after which I
+                            updated the artemis_address in connections.yaml accordingly. The other set up step was
+                            generating a UUID, and updating connections.yaml and ble_arduino.ino.</p>
 
-                        <img src="images/mac_address.png" alt="mac_address" class="lab-photo" width="700px">
+                        <img src="images/mac_address.png" alt="mac_address" class="lab-photo" width="900px">
                         <img src="images/uuid.png" alt="uuid" class="lab-photo" width="400px">
 
                     </section>
@@ -225,8 +230,9 @@ case ECHO:
                             Below, you can see the Python code to send the floats, and the Serial Monitor.
                         </p>
 
-                        <img src="images/1b_task2_python.png" alt="echo" class="lab-photo" height="40px">
-                        <img src="images/1b_task2_arduino.png" alt="echo" class="lab-photo" height="40px">
+                        <img src="images/1b_task2_python.png" alt="three_floats_python" class="lab-photo" height="40px">
+                        <img src="images/1b_task2_arduino.png" alt="three_floats_arduino" class="lab-photo"
+                            height="40px">
 
                     </section>
 
@@ -254,8 +260,176 @@ case GET_TIME_MILLIS:
                         </div>
 
                         <p>And the Python end is shown below.</p>
-                        <img src="images/1b_task3.png" alt="echo" class="lab-photo" width="500px">
+                        <img src="images/1b_task3.png" alt="get_time_millis" class="lab-photo" width="500px">
 
+
+                    </section>
+
+                    <section id="notification-handler">
+
+                        <h4>Task 4: Notification Handler</h4>
+                        <p>The next few tasks all required the implementation of a notification handler, and Task 4 was
+                            to set up a handler which would return the time as a string.
+                        </p>
+
+                        <img src="images/1b_task4.png" alt="notif_handler_task4" class="lab-photo" width="500px">
+
+                    </section>
+
+                    <section id="message-speed">
+
+                        <h4>Task 5: Message Speed</h4>
+                        <p>For task 5, I wanted to check how fast the board could send messages. To do this, in Arduino,
+                            I made a command GET_TIME_LOOP, which repeatedly sent the current time for five seconds:
+                        </p>
+
+                        <div class="code-snippet">
+                            <pre>
+case GET_TIME_LOOP:
+{
+    unsigned long startMillis = millis();
+    int i = 0;
+
+    while(millis() - startMillis < 5000)  {
+        // tx_estring_value.clear();
+        // tx_estring_value.append("T: ");
+        // tx_estring_value.append(int(millis()));
+        // tx_characteristic_string.writeValue(tx_estring_value.c_str());
+
+        if (i < 1000) {
+            times[i] = int(millis());
+            i++;
+        }
+        delay(50);
+
+    }
+    break;
+}</pre>
+                        </div>
+
+                        <p>I modified the notification handler in Python slightly by changing msg to an array instead of
+                            a String. This way, I knew how many messages were sent by the Arduino by just checking the
+                            length of msg.</p>
+                        <img src="images/1b_task5_python.png" alt="task5_python" class="lab-photo" width="500px">
+
+                        <p>Because there were 596 integer messages sent in 5 seconds, I calculated the data transfer
+                            rate to be (596 messages * 4 bytes)/5 = 476.8 bytes/second.</p>
+
+                    </section>
+
+                    <section id="SEND_TIME_DATA">
+
+                        <h4>Task 6: SEND_TIME_DATA</h4>
+                        <p>In task 6, I explored a different way to get time stamps, and its effect on the data transfer
+                            rate. Instead of sending every message within the loop, I created an array and filled it
+                            with time stamps. I then looped through that array and sent the messages to my computer.
+                        </p>
+
+                        <div class="code-snippet">
+                            <pre>
+case SEND_TIME_DATA:
+{
+    unsigned long startMillis = millis();
+    int num_msgs = 0;
+
+    // collect time data
+    while(millis() - startMillis < 5000)  {
+        if (num_msgs < 1000) {
+            times[num_msgs] = int(millis());
+            num_msgs++;
+        }
+        delay(50);
+    }
+
+    // send time data from the times array to python
+    int i = 0;
+    while(i <= num_msgs)  {
+        tx_estring_value.clear();
+        tx_estring_value.append(times[i]);
+        tx_characteristic_string.writeValue(tx_estring_value.c_str());
+        i++;
+    }
+
+    break;
+}
+                            </pre>
+                        </div>
+
+                        <p>I used the same notification handler as in task 5, and got the following data transfer
+                            measurements. This came out to be (1001 messages * 4 bytes)/5 second = 800.8 bytes/second.
+                        </p>
+                        <img src="images/1b_task6_python.png" alt="time_loop_python" class="lab-photo" width="350px">
+
+                    </section>
+
+
+                    <section id="GET_TEMP_READINGS">
+
+                        <h4>Task 7: GET_TEMP_READINGS</h4>
+
+                        <p>Building from task 6, I added another array to keep track of temperature measurements. The
+                            logic is the same as in task 6 as well:
+                        </p>
+
+                        <div class="code-snippet">
+                            <pre>
+case GET_TEMP_READINGS:
+{
+    unsigned long startMillis = millis();
+    int num_msgs = 0;
+
+    // collect time data
+    while(millis() - startMillis < 5000)  {
+        if (num_msgs < 1000) {
+            times[num_msgs] = int(millis());
+            temps[num_msgs] = float(getTempDegF());
+            num_msgs++;
+        }
+    }
+
+    int i = 0;
+    while(i <= num_msgs)  {
+        tx_estring_value.clear();
+        tx_estring_value.append("Time: ");
+        tx_estring_value.append(times[i]);
+        tx_estring_value.append(", Temperature: ");
+        tx_estring_value.append(temps[i]);
+        tx_characteristic_string.writeValue(tx_estring_value.c_str());
+        i++;
+    }
+
+    break;
+}</pre>
+                        </div>
+
+                        <img src="images/1b_task7_python.png" alt="temp_readings_python" class="lab-photo"
+                            width="350px">
+
+                        <p>The computer would then receive the time and temperature measurements, which can be seen
+                            above.
+                        </p>
+
+                    </section>
+
+                    <section id="comparison">
+                        <h4>Task 8: Data Collection Method Comparison</h4>
+
+                        <p><b>Method 1</b> had one loop that sent a message every single iteration. This approach would
+                            be beneficial in situations where I need real-time monitoring and action. It has a data
+                            transfer rate of 476.8 bytes/second. This is slower than the other method, meaning that
+                            although it allowed for quick response and action, it is inefficient for data collection and
+                            could use too much bandwidth.</p>
+
+                        <p><b>Method 2</b> used a global array and two loops, one that would populate the array, and
+                            another that would iterate through the array and send the stored messages. This method is
+                            better for data collection purposes, as it sends larger packets of information and thus
+                            reduces the comparative overhead of BLE transmissions. There might be a slight delay due to
+                            some time allocated at the beginning to collecting data, as well as more memory used for the
+                            data arrays. However, it does have a faster data transfer rate (800.8 bytes/second).</p>
+
+                        <p>With the knowledge that the Artemis board has 384 kB of RAM, I calculated roughly how much
+                            data can be stored. For a single data type (ie just temperature or just time), we can store
+                            384kB / 4B = 96000 messages.</p>
 
                     </section>
 
