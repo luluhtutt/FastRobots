@@ -2,7 +2,7 @@
 
 Code, lab reports, and website for ECE 4160: Fast Robots, taken at Cornell University in Spring 2025.
 
-Website is hosted at: [https://luluhtutt.github.io/FastRobots/index.html](https://luluhtutt.github.io/FastRobots/index.html)
+Website is hosted at: [https://luluhtutt.github.io/FastRobots/](https://luluhtutt.github.io/FastRobots/)
 
 ### Repository Structure
 * docs/
