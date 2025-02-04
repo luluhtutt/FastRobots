@@ -193,25 +193,11 @@
 
                         <div class="code-snippet">
                             <pre>
-case ECHO:
-
-    char char_arr[MAX_MSG_SIZE];
-
-    // Extract the next value from the command string as a character array
-    success = robot_cmd.get_next_value(char_arr);
-    if (!success)
-        return;
-
-    tx_estring_value.clear();
-    tx_estring_value.append("Robot says -> ");
-    tx_estring_value.append(char_arr);
-    tx_estring_value.append(" :)");
-    tx_characteristic_string.writeValue(tx_estring_value.c_str());
-
-    Serial.print("Sent back: ");
-    Serial.println(tx_estring_value.c_str());
-
-    break;</pre>
+tx_estring_value.clear();
+tx_estring_value.append("Robot says -> ");
+tx_estring_value.append(char_arr);
+tx_estring_value.append(" :)");
+tx_characteristic_string.writeValue(tx_estring_value.c_str());</pre>
                         </div>
 
                         <p>Below, you can see the Python end of ECHO, which send the command to the board, and then
@@ -246,17 +232,10 @@ case ECHO:
 
                         <div class="code-snippet">
                             <pre>
-case GET_TIME_MILLIS:
-
-    tx_estring_value.clear();
-    tx_estring_value.append("T: ");
-    tx_estring_value.append(int(millis()));
-    tx_characteristic_string.writeValue(tx_estring_value.c_str());
-
-    Serial.print("Sent back: ");
-    Serial.println(tx_estring_value.c_str());
-
-    break;</pre>
+tx_estring_value.clear();
+tx_estring_value.append("T: ");
+tx_estring_value.append(int(millis()));
+tx_characteristic_string.writeValue(tx_estring_value.c_str());</pre>
                         </div>
 
                         <p>And the Python end is shown below.</p>
@@ -288,21 +267,16 @@ case GET_TIME_MILLIS:
 case GET_TIME_LOOP:
 {
     unsigned long startMillis = millis();
-    int i = 0;
+    int i = 1;
 
     while(millis() - startMillis < 5000)  {
-        // tx_estring_value.clear();
-        // tx_estring_value.append("T: ");
-        // tx_estring_value.append(int(millis()));
-        // tx_characteristic_string.writeValue(tx_estring_value.c_str());
-
-        if (i < 1000) {
-            times[i] = int(millis());
-            i++;
-        }
-        delay(50);
-
+        tx_estring_value.clear();
+        tx_estring_value.append("T: ");
+        tx_estring_value.append(int(millis()));
+        tx_characteristic_string.writeValue(tx_estring_value.c_str());
+        i++;
     }
+
     break;
 }</pre>
                         </div>
@@ -368,37 +342,18 @@ case SEND_TIME_DATA:
                         <h4>Task 7: GET_TEMP_READINGS</h4>
 
                         <p>Building from task 6, I added another array to keep track of temperature measurements. The
-                            logic is the same as in task 6 as well:
+                            logic was the same as in task 6 as well. Shown below is the updated loop for populating the
+                            arrays:
                         </p>
 
                         <div class="code-snippet">
                             <pre>
-case GET_TEMP_READINGS:
-{
-    unsigned long startMillis = millis();
-    int num_msgs = 0;
-
-    // collect time data
-    while(millis() - startMillis < 5000)  {
-        if (num_msgs < 1000) {
-            times[num_msgs] = int(millis());
-            temps[num_msgs] = float(getTempDegF());
-            num_msgs++;
-        }
+while(millis() - startMillis < 5000)  {
+    if (num_msgs < 1000) {
+        times[num_msgs] = int(millis());
+        temps[num_msgs] = float(getTempDegF());
+        num_msgs++;
     }
-
-    int i = 0;
-    while(i <= num_msgs)  {
-        tx_estring_value.clear();
-        tx_estring_value.append("Time: ");
-        tx_estring_value.append(times[i]);
-        tx_estring_value.append(", Temperature: ");
-        tx_estring_value.append(temps[i]);
-        tx_characteristic_string.writeValue(tx_estring_value.c_str());
-        i++;
-    }
-
-    break;
 }</pre>
                         </div>
 
