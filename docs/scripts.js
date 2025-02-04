@@ -2,12 +2,12 @@ function navigateToLab(labPage) {
     window.location.href = labPage;
 }
 
+// for the sidebar collapsibles
 document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.collapsible').forEach(item => {
-        // Create an arrow span
         const arrow = document.createElement('span');
         arrow.classList.add('collapsible-arrow');
-        arrow.innerHTML = '▶'; // Right-pointing triangle
+        arrow.innerHTML = '▶';
         item.insertBefore(arrow, item.firstChild);
 
         item.addEventListener('click', () => {
@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const isExpanded = content.style.display === 'block';
                 content.style.display = isExpanded ? 'none' : 'block';
 
-                // Rotate arrow
+                // rotate arrow
                 arrow.style.transform = isExpanded ? 'rotate(0deg)' : 'rotate(90deg)';
             }
         });
