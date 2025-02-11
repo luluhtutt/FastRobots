@@ -177,8 +177,8 @@
                             updated the artemis_address in connections.yaml accordingly. The other set up step was
                             generating a UUID, and updating connections.yaml and ble_arduino.ino.</p>
 
-                        <img src="images/mac_address.png" alt="mac_address" class="lab-photo" width="900px">
-                        <img src="images/uuid.png" alt="uuid" class="lab-photo" width="400px">
+                        <img src="images/lab1_images/mac_address.png" alt="mac_address" class="lab-photo" width="900px">
+                        <img src="images/lab1_images/uuid.png" alt="uuid" class="lab-photo" width="400px">
 
                     </section>
 
@@ -203,7 +203,7 @@ tx_characteristic_string.writeValue(tx_estring_value.c_str());</pre>
                         <p>Below, you can see the Python end of ECHO, which send the command to the board, and then
                             receives a string back.</p>
 
-                        <img src="images/1b_task1.png" alt="echo" class="lab-photo" width="500px">
+                        <img src="images/lab1_images/1b_task1.png" alt="echo" class="lab-photo" width="500px">
 
                     </section>
 
@@ -216,8 +216,9 @@ tx_characteristic_string.writeValue(tx_estring_value.c_str());</pre>
                             Below, you can see the Python code to send the floats, and the Serial Monitor.
                         </p>
 
-                        <img src="images/1b_task2_python.png" alt="three_floats_python" class="lab-photo" height="40px">
-                        <img src="images/1b_task2_arduino.png" alt="three_floats_arduino" class="lab-photo"
+                        <img src="images/lab1_images/1b_task2_python.png" alt="three_floats_python" class="lab-photo"
+                            height="40px">
+                        <img src="images/lab1_images/1b_task2_arduino.png" alt="three_floats_arduino" class="lab-photo"
                             height="40px">
 
                     </section>
@@ -239,7 +240,8 @@ tx_characteristic_string.writeValue(tx_estring_value.c_str());</pre>
                         </div>
 
                         <p>And the Python end is shown below.</p>
-                        <img src="images/1b_task3.png" alt="get_time_millis" class="lab-photo" width="500px">
+                        <img src="images/lab1_images/1b_task3.png" alt="get_time_millis" class="lab-photo"
+                            width="500px">
 
 
                     </section>
@@ -251,7 +253,8 @@ tx_characteristic_string.writeValue(tx_estring_value.c_str());</pre>
                             to set up a handler which would return the time as a string.
                         </p>
 
-                        <img src="images/1b_task4.png" alt="notif_handler_task4" class="lab-photo" width="500px">
+                        <img src="images/lab1_images/1b_task4.png" alt="notif_handler_task4" class="lab-photo"
+                            width="500px">
 
                     </section>
 
@@ -284,7 +287,8 @@ case GET_TIME_LOOP:
                         <p>I modified the notification handler in Python slightly by changing msg to an array instead of
                             a String. This way, I knew how many messages were sent by the Arduino by just checking the
                             length of msg.</p>
-                        <img src="images/1b_task5_python.png" alt="task5_python" class="lab-photo" width="500px">
+                        <img src="images/lab1_images/1b_task5_python.png" alt="task5_python" class="lab-photo"
+                            width="500px">
 
                         <p>Because there were 596 integer messages sent in 5 seconds, I calculated the data transfer
                             rate to be (596 messages * 4 bytes)/5 = 476.8 bytes/second.</p>
@@ -332,7 +336,8 @@ case SEND_TIME_DATA:
                         <p>I used the same notification handler as in task 5, and got the following data transfer
                             measurements. This came out to be (1001 messages * 4 bytes)/5 second = 800.8 bytes/second.
                         </p>
-                        <img src="images/1b_task6_python.png" alt="time_loop_python" class="lab-photo" width="350px">
+                        <img src="images/lab1_images/1b_task6_python.png" alt="time_loop_python" class="lab-photo"
+                            width="350px">
 
                     </section>
 
@@ -357,7 +362,7 @@ while(millis() - startMillis < 5000)  {
 }</pre>
                         </div>
 
-                        <img src="images/1b_task7_python.png" alt="temp_readings_python" class="lab-photo"
+                        <img src="images/lab1_images/1b_task7_python.png" alt="temp_readings_python" class="lab-photo"
                             width="350px">
 
                         <p>The computer would then receive the time and temperature measurements, which can be seen

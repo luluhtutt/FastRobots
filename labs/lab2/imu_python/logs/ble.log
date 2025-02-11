@@ -1,0 +1,341 @@
+2025-01-27 12:34:36,522 | MainThread   | [DEBUG   ] | <module>            |: debug
+2025-01-27 12:34:36,523 | MainThread   | [INFO    ] | <module>            |: info
+2025-01-27 12:34:36,525 | MainThread   | [WARNING ] | <module>            |: warning
+2025-01-27 12:34:36,534 | MainThread   | [ERROR   ] | <module>            |: error
+2025-01-27 12:34:36,536 | MainThread   | [CRITICAL] | <module>            |: critical
+2025-01-27 12:34:43,989 | MainThread   | [DEBUG   ] | __init__            |: Python Info: sys.version_info(major=3, minor=13, micro=1, releaselevel='final', serial=0)
+2025-01-27 12:34:43,989 | MainThread   | [DEBUG   ] | __init__            |: System Info: macOS-14.6.1-x86_64-i386-64bit-Mach-O
+2025-01-27 12:34:43,990 | MainThread   | [INFO    ] | _connect            |: Looking for Artemis Nano Peripheral Device: c0:81:25:26:04:64
+2025-01-27 12:34:51,336 | MainThread   | [INFO    ] | _connect            |: Looking for Artemis Nano Peripheral Device: c0:81:25:26:04:64
+2025-01-27 12:35:05,930 | MainThread   | [INFO    ] | _connect            |: Looking for Artemis Nano Peripheral Device: c0:81:25:26:04:64
+2025-01-27 12:35:08,906 | MainThread   | [INFO    ] | _connect            |: Connected to c0:81:25:26:04:64
+2025-01-27 12:37:03,362 | MainThread   | [INFO    ] | disconnect_handler  |: Disconnected from EB36BB92-4002-31C3-42B2-2592FE207A21
+2025-01-27 12:40:28,946 | MainThread   | [DEBUG   ] | <module>            |: debug
+2025-01-27 12:40:28,946 | MainThread   | [INFO    ] | <module>            |: info
+2025-01-27 12:40:28,949 | MainThread   | [WARNING ] | <module>            |: warning
+2025-01-27 12:40:28,951 | MainThread   | [ERROR   ] | <module>            |: error
+2025-01-27 12:40:28,953 | MainThread   | [CRITICAL] | <module>            |: critical
+2025-01-27 12:40:32,623 | MainThread   | [INFO    ] | _connect            |: Looking for Artemis Nano Peripheral Device: c0:81:25:26:04:64
+2025-01-27 12:45:39,948 | MainThread   | [DEBUG   ] | <module>            |: debug
+2025-01-27 12:45:39,949 | MainThread   | [INFO    ] | <module>            |: info
+2025-01-27 12:45:39,950 | MainThread   | [WARNING ] | <module>            |: warning
+2025-01-27 12:45:39,952 | MainThread   | [ERROR   ] | <module>            |: error
+2025-01-27 12:45:39,954 | MainThread   | [CRITICAL] | <module>            |: critical
+2025-01-27 12:45:43,735 | MainThread   | [INFO    ] | _connect            |: Looking for Artemis Nano Peripheral Device: c0:81:25:26:04:64
+2025-01-27 12:45:47,026 | MainThread   | [INFO    ] | _connect            |: Connected to c0:81:25:26:04:64
+2025-01-27 12:55:02,676 | MainThread   | [INFO    ] | disconnect_handler  |: Disconnected from EB36BB92-4002-31C3-42B2-2592FE207A21
+2025-01-27 12:57:16,543 | MainThread   | [DEBUG   ] | <module>            |: debug
+2025-01-27 12:57:16,544 | MainThread   | [INFO    ] | <module>            |: info
+2025-01-27 12:57:16,545 | MainThread   | [WARNING ] | <module>            |: warning
+2025-01-27 12:57:16,546 | MainThread   | [ERROR   ] | <module>            |: error
+2025-01-27 12:57:16,548 | MainThread   | [CRITICAL] | <module>            |: critical
+2025-01-27 12:57:20,496 | MainThread   | [INFO    ] | _connect            |: Looking for Artemis Nano Peripheral Device: c0:81:25:26:04:64
+2025-01-27 12:57:23,072 | MainThread   | [INFO    ] | _connect            |: Connected to c0:81:25:26:04:64
+2025-01-27 12:59:47,057 | MainThread   | [INFO    ] | disconnect_handler  |: Disconnected from EB36BB92-4002-31C3-42B2-2592FE207A21
+2025-01-27 13:00:19,165 | MainThread   | [DEBUG   ] | <module>            |: debug
+2025-01-27 13:00:19,165 | MainThread   | [INFO    ] | <module>            |: info
+2025-01-27 13:00:19,167 | MainThread   | [WARNING ] | <module>            |: warning
+2025-01-27 13:00:19,168 | MainThread   | [ERROR   ] | <module>            |: error
+2025-01-27 13:00:19,169 | MainThread   | [CRITICAL] | <module>            |: critical
+2025-01-27 13:00:22,236 | MainThread   | [INFO    ] | _connect            |: Looking for Artemis Nano Peripheral Device: c0:81:25:26:04:64
+2025-01-27 13:00:26,990 | MainThread   | [INFO    ] | _connect            |: Connected to c0:81:25:26:04:64
+2025-01-27 13:17:07,395 | MainThread   | [INFO    ] | disconnect_handler  |: Disconnected from EB36BB92-4002-31C3-42B2-2592FE207A21
+2025-01-27 13:17:27,459 | MainThread   | [DEBUG   ] | <module>            |: debug
+2025-01-27 13:17:27,459 | MainThread   | [INFO    ] | <module>            |: info
+2025-01-27 13:17:27,460 | MainThread   | [WARNING ] | <module>            |: warning
+2025-01-27 13:17:27,462 | MainThread   | [ERROR   ] | <module>            |: error
+2025-01-27 13:17:27,464 | MainThread   | [CRITICAL] | <module>            |: critical
+2025-01-27 13:17:31,408 | MainThread   | [INFO    ] | _connect            |: Looking for Artemis Nano Peripheral Device: c0:81:25:26:04:64
+2025-01-27 13:17:34,056 | MainThread   | [INFO    ] | _connect            |: Connected to c0:81:25:26:04:64
+2025-01-27 14:38:03,485 | MainThread   | [INFO    ] | disconnect_handler  |: Disconnected from EB36BB92-4002-31C3-42B2-2592FE207A21
+2025-01-27 14:50:27,269 | MainThread   | [DEBUG   ] | <module>            |: debug
+2025-01-27 14:50:27,271 | MainThread   | [INFO    ] | <module>            |: info
+2025-01-27 14:50:27,272 | MainThread   | [WARNING ] | <module>            |: warning
+2025-01-27 14:50:27,273 | MainThread   | [ERROR   ] | <module>            |: error
+2025-01-27 14:50:27,275 | MainThread   | [CRITICAL] | <module>            |: critical
+2025-01-27 14:50:31,552 | MainThread   | [INFO    ] | _connect            |: Looking for Artemis Nano Peripheral Device: c0:81:25:26:04:64
+2025-01-27 14:50:34,567 | MainThread   | [INFO    ] | _connect            |: Connected to c0:81:25:26:04:64
+2025-01-27 15:24:10,004 | MainThread   | [INFO    ] | disconnect_handler  |: Disconnected from EB36BB92-4002-31C3-42B2-2592FE207A21
+2025-01-28 14:11:38,639 | MainThread   | [DEBUG   ] | <module>            |: debug
+2025-01-28 14:11:38,640 | MainThread   | [INFO    ] | <module>            |: info
+2025-01-28 14:11:38,643 | MainThread   | [WARNING ] | <module>            |: warning
+2025-01-28 14:11:38,645 | MainThread   | [ERROR   ] | <module>            |: error
+2025-01-28 14:11:38,648 | MainThread   | [CRITICAL] | <module>            |: critical
+2025-01-28 14:11:46,374 | MainThread   | [DEBUG   ] | __init__            |: Python Info: sys.version_info(major=3, minor=13, micro=1, releaselevel='final', serial=0)
+2025-01-28 14:11:46,375 | MainThread   | [DEBUG   ] | __init__            |: System Info: macOS-14.6.1-x86_64-i386-64bit-Mach-O
+2025-01-28 14:11:46,376 | MainThread   | [INFO    ] | _connect            |: Looking for Artemis Nano Peripheral Device: c0:81:25:26:04:64
+2025-01-28 14:12:02,734 | MainThread   | [INFO    ] | _connect            |: Looking for Artemis Nano Peripheral Device: c0:81:25:26:04:64
+2025-01-28 14:12:06,084 | MainThread   | [INFO    ] | _connect            |: Connected to c0:81:25:26:04:64
+2025-01-28 14:25:15,924 | MainThread   | [DEBUG   ] | <module>            |: debug
+2025-01-28 14:25:15,925 | MainThread   | [INFO    ] | <module>            |: info
+2025-01-28 14:25:15,926 | MainThread   | [WARNING ] | <module>            |: warning
+2025-01-28 14:25:15,927 | MainThread   | [ERROR   ] | <module>            |: error
+2025-01-28 14:25:15,930 | MainThread   | [CRITICAL] | <module>            |: critical
+2025-01-28 14:25:19,674 | MainThread   | [INFO    ] | _connect            |: Already connected to a BLE device
+2025-01-28 14:27:33,270 | MainThread   | [INFO    ] | disconnect_handler  |: Disconnected from EB36BB92-4002-31C3-42B2-2592FE207A21
+2025-01-28 14:27:49,665 | MainThread   | [INFO    ] | _connect            |: Looking for Artemis Nano Peripheral Device: c0:81:25:26:04:64
+2025-01-28 14:27:52,535 | MainThread   | [INFO    ] | _connect            |: Connected to c0:81:25:26:04:64
+2025-01-28 14:30:59,632 | MainThread   | [INFO    ] | disconnect_handler  |: Disconnected from EB36BB92-4002-31C3-42B2-2592FE207A21
+2025-01-28 14:34:13,806 | MainThread   | [DEBUG   ] | <module>            |: debug
+2025-01-28 14:34:13,808 | MainThread   | [INFO    ] | <module>            |: info
+2025-01-28 14:34:13,816 | MainThread   | [WARNING ] | <module>            |: warning
+2025-01-28 14:34:13,818 | MainThread   | [ERROR   ] | <module>            |: error
+2025-01-28 14:34:13,820 | MainThread   | [CRITICAL] | <module>            |: critical
+2025-01-28 14:34:17,408 | MainThread   | [INFO    ] | _connect            |: Looking for Artemis Nano Peripheral Device: c0:81:25:26:04:64
+2025-01-28 14:34:19,948 | MainThread   | [INFO    ] | _connect            |: Connected to c0:81:25:26:04:64
+2025-01-28 14:40:54,136 | MainThread   | [INFO    ] | disconnect_handler  |: Disconnected from EB36BB92-4002-31C3-42B2-2592FE207A21
+2025-01-28 14:41:09,500 | MainThread   | [INFO    ] | _connect            |: Looking for Artemis Nano Peripheral Device: c0:81:25:26:04:64
+2025-01-28 14:41:12,530 | MainThread   | [INFO    ] | _connect            |: Connected to c0:81:25:26:04:64
+2025-01-28 14:42:52,266 | MainThread   | [INFO    ] | disconnect_handler  |: Disconnected from EB36BB92-4002-31C3-42B2-2592FE207A21
+2025-01-28 14:43:08,424 | MainThread   | [INFO    ] | _connect            |: Looking for Artemis Nano Peripheral Device: c0:81:25:26:04:64
+2025-01-28 14:43:11,177 | MainThread   | [INFO    ] | _connect            |: Connected to c0:81:25:26:04:64
+2025-01-28 14:49:29,152 | MainThread   | [INFO    ] | disconnect_handler  |: Disconnected from EB36BB92-4002-31C3-42B2-2592FE207A21
+2025-01-28 14:56:39,100 | MainThread   | [INFO    ] | _connect            |: Looking for Artemis Nano Peripheral Device: c0:81:25:26:04:64
+2025-01-28 14:57:44,691 | MainThread   | [DEBUG   ] | <module>            |: debug
+2025-01-28 14:57:44,691 | MainThread   | [INFO    ] | <module>            |: info
+2025-01-28 14:57:44,692 | MainThread   | [WARNING ] | <module>            |: warning
+2025-01-28 14:57:44,693 | MainThread   | [ERROR   ] | <module>            |: error
+2025-01-28 14:57:44,694 | MainThread   | [CRITICAL] | <module>            |: critical
+2025-01-28 14:57:48,291 | MainThread   | [INFO    ] | _connect            |: Looking for Artemis Nano Peripheral Device: c0:81:25:26:04:64
+2025-01-28 14:57:50,868 | MainThread   | [INFO    ] | _connect            |: Connected to c0:81:25:26:04:64
+2025-01-28 15:12:12,916 | MainThread   | [INFO    ] | disconnect_handler  |: Disconnected from EB36BB92-4002-31C3-42B2-2592FE207A21
+2025-01-28 15:12:28,356 | MainThread   | [DEBUG   ] | <module>            |: debug
+2025-01-28 15:12:28,356 | MainThread   | [INFO    ] | <module>            |: info
+2025-01-28 15:12:28,357 | MainThread   | [WARNING ] | <module>            |: warning
+2025-01-28 15:12:28,359 | MainThread   | [ERROR   ] | <module>            |: error
+2025-01-28 15:12:28,360 | MainThread   | [CRITICAL] | <module>            |: critical
+2025-01-28 15:12:32,210 | MainThread   | [INFO    ] | _connect            |: Looking for Artemis Nano Peripheral Device: c0:81:25:26:04:64
+2025-01-28 15:12:34,883 | MainThread   | [INFO    ] | _connect            |: Connected to c0:81:25:26:04:64
+2025-01-28 15:15:20,125 | MainThread   | [INFO    ] | disconnect_handler  |: Disconnected from EB36BB92-4002-31C3-42B2-2592FE207A21
+2025-01-28 15:16:44,127 | MainThread   | [DEBUG   ] | <module>            |: debug
+2025-01-28 15:16:44,128 | MainThread   | [INFO    ] | <module>            |: info
+2025-01-28 15:16:44,129 | MainThread   | [WARNING ] | <module>            |: warning
+2025-01-28 15:16:44,131 | MainThread   | [ERROR   ] | <module>            |: error
+2025-01-28 15:16:44,134 | MainThread   | [CRITICAL] | <module>            |: critical
+2025-01-28 15:16:52,042 | MainThread   | [INFO    ] | _connect            |: Looking for Artemis Nano Peripheral Device: c0:81:25:26:04:64
+2025-01-28 15:16:54,798 | MainThread   | [INFO    ] | _connect            |: Connected to c0:81:25:26:04:64
+2025-01-28 15:20:27,179 | MainThread   | [INFO    ] | disconnect_handler  |: Disconnected from EB36BB92-4002-31C3-42B2-2592FE207A21
+2025-01-28 15:20:41,913 | MainThread   | [DEBUG   ] | <module>            |: debug
+2025-01-28 15:20:41,913 | MainThread   | [INFO    ] | <module>            |: info
+2025-01-28 15:20:41,915 | MainThread   | [WARNING ] | <module>            |: warning
+2025-01-28 15:20:41,916 | MainThread   | [ERROR   ] | <module>            |: error
+2025-01-28 15:20:41,917 | MainThread   | [CRITICAL] | <module>            |: critical
+2025-01-28 15:20:44,769 | MainThread   | [INFO    ] | _connect            |: Looking for Artemis Nano Peripheral Device: c0:81:25:26:04:64
+2025-01-28 15:20:47,492 | MainThread   | [INFO    ] | _connect            |: Connected to c0:81:25:26:04:64
+2025-01-28 15:21:18,157 | MainThread   | [INFO    ] | disconnect_handler  |: Disconnected from EB36BB92-4002-31C3-42B2-2592FE207A21
+2025-01-28 15:21:36,159 | MainThread   | [INFO    ] | _connect            |: Looking for Artemis Nano Peripheral Device: c0:81:25:26:04:64
+2025-01-28 15:21:39,105 | MainThread   | [INFO    ] | _connect            |: Connected to c0:81:25:26:04:64
+2025-01-28 15:24:34,657 | MainThread   | [INFO    ] | disconnect_handler  |: Disconnected from EB36BB92-4002-31C3-42B2-2592FE207A21
+2025-01-28 15:24:58,846 | MainThread   | [DEBUG   ] | <module>            |: debug
+2025-01-28 15:24:58,846 | MainThread   | [INFO    ] | <module>            |: info
+2025-01-28 15:24:58,847 | MainThread   | [WARNING ] | <module>            |: warning
+2025-01-28 15:24:58,848 | MainThread   | [ERROR   ] | <module>            |: error
+2025-01-28 15:24:58,849 | MainThread   | [CRITICAL] | <module>            |: critical
+2025-01-28 15:25:08,227 | MainThread   | [INFO    ] | _connect            |: Looking for Artemis Nano Peripheral Device: c0:81:25:26:04:64
+2025-01-28 15:25:10,852 | MainThread   | [INFO    ] | _connect            |: Connected to c0:81:25:26:04:64
+2025-01-28 15:38:01,881 | MainThread   | [INFO    ] | disconnect_handler  |: Disconnected from EB36BB92-4002-31C3-42B2-2592FE207A21
+2025-01-28 15:38:25,026 | MainThread   | [DEBUG   ] | <module>            |: debug
+2025-01-28 15:38:25,026 | MainThread   | [INFO    ] | <module>            |: info
+2025-01-28 15:38:25,027 | MainThread   | [WARNING ] | <module>            |: warning
+2025-01-28 15:38:25,029 | MainThread   | [ERROR   ] | <module>            |: error
+2025-01-28 15:38:25,030 | MainThread   | [CRITICAL] | <module>            |: critical
+2025-01-28 15:38:28,959 | MainThread   | [INFO    ] | _connect            |: Looking for Artemis Nano Peripheral Device: c0:81:25:26:04:64
+2025-01-28 15:38:32,436 | MainThread   | [INFO    ] | _connect            |: Connected to c0:81:25:26:04:64
+2025-01-28 15:40:18,886 | MainThread   | [INFO    ] | disconnect_handler  |: Disconnected from EB36BB92-4002-31C3-42B2-2592FE207A21
+2025-01-28 15:40:37,482 | MainThread   | [DEBUG   ] | <module>            |: debug
+2025-01-28 15:40:37,483 | MainThread   | [INFO    ] | <module>            |: info
+2025-01-28 15:40:37,484 | MainThread   | [WARNING ] | <module>            |: warning
+2025-01-28 15:40:37,485 | MainThread   | [ERROR   ] | <module>            |: error
+2025-01-28 15:40:37,486 | MainThread   | [CRITICAL] | <module>            |: critical
+2025-01-28 15:40:41,505 | MainThread   | [INFO    ] | _connect            |: Looking for Artemis Nano Peripheral Device: c0:81:25:26:04:64
+2025-01-28 15:40:44,042 | MainThread   | [INFO    ] | _connect            |: Connected to c0:81:25:26:04:64
+2025-01-28 15:41:47,529 | MainThread   | [INFO    ] | disconnect_handler  |: Disconnected from EB36BB92-4002-31C3-42B2-2592FE207A21
+2025-01-28 15:42:30,067 | MainThread   | [INFO    ] | _connect            |: Looking for Artemis Nano Peripheral Device: c0:81:25:26:04:64
+2025-01-28 15:42:33,328 | MainThread   | [INFO    ] | _connect            |: Connected to c0:81:25:26:04:64
+2025-01-28 15:42:53,598 | MainThread   | [INFO    ] | disconnect_handler  |: Disconnected from EB36BB92-4002-31C3-42B2-2592FE207A21
+2025-01-28 15:43:31,269 | MainThread   | [DEBUG   ] | <module>            |: debug
+2025-01-28 15:43:31,269 | MainThread   | [INFO    ] | <module>            |: info
+2025-01-28 15:43:31,270 | MainThread   | [WARNING ] | <module>            |: warning
+2025-01-28 15:43:31,272 | MainThread   | [ERROR   ] | <module>            |: error
+2025-01-28 15:43:31,273 | MainThread   | [CRITICAL] | <module>            |: critical
+2025-01-28 15:43:37,251 | MainThread   | [INFO    ] | _connect            |: Looking for Artemis Nano Peripheral Device: c0:81:25:26:04:64
+2025-01-28 15:44:52,695 | MainThread   | [DEBUG   ] | <module>            |: debug
+2025-01-28 15:44:52,695 | MainThread   | [INFO    ] | <module>            |: info
+2025-01-28 15:44:52,696 | MainThread   | [WARNING ] | <module>            |: warning
+2025-01-28 15:44:52,698 | MainThread   | [ERROR   ] | <module>            |: error
+2025-01-28 15:44:52,700 | MainThread   | [CRITICAL] | <module>            |: critical
+2025-01-28 15:44:56,020 | MainThread   | [INFO    ] | _connect            |: Looking for Artemis Nano Peripheral Device: c0:81:25:26:04:64
+2025-01-28 15:45:00,812 | MainThread   | [INFO    ] | _connect            |: Connected to c0:81:25:26:04:64
+2025-01-28 15:45:55,373 | MainThread   | [INFO    ] | disconnect_handler  |: Disconnected from EB36BB92-4002-31C3-42B2-2592FE207A21
+2025-02-08 22:58:20,373 | MainThread   | [DEBUG   ] | <module>            |: debug
+2025-02-08 22:58:20,379 | MainThread   | [INFO    ] | <module>            |: info
+2025-02-08 22:58:20,381 | MainThread   | [WARNING ] | <module>            |: warning
+2025-02-08 22:58:20,382 | MainThread   | [ERROR   ] | <module>            |: error
+2025-02-08 22:58:20,383 | MainThread   | [CRITICAL] | <module>            |: critical
+2025-02-08 22:58:24,348 | MainThread   | [DEBUG   ] | __init__            |: Python Info: sys.version_info(major=3, minor=13, micro=1, releaselevel='final', serial=0)
+2025-02-08 22:58:24,348 | MainThread   | [DEBUG   ] | __init__            |: System Info: macOS-14.6.1-x86_64-i386-64bit-Mach-O
+2025-02-08 22:58:24,348 | MainThread   | [INFO    ] | _connect            |: Looking for Artemis Nano Peripheral Device: c0:81:25:26:04:64
+2025-02-08 22:58:27,264 | MainThread   | [INFO    ] | _connect            |: Connected to c0:81:25:26:04:64
+2025-02-08 23:09:47,740 | MainThread   | [INFO    ] | disconnect_handler  |: Disconnected from EB36BB92-4002-31C3-42B2-2592FE207A21
+2025-02-08 23:26:03,366 | MainThread   | [INFO    ] | _connect            |: Looking for Artemis Nano Peripheral Device: c0:81:25:26:04:64
+2025-02-08 23:26:06,121 | MainThread   | [INFO    ] | _connect            |: Connected to c0:81:25:26:04:64
+2025-02-09 00:08:03,841 | MainThread   | [INFO    ] | exit_handler        |: Exiting...
+2025-02-09 00:08:03,849 | MainThread   | [INFO    ] | disconnect_handler  |: Disconnected from EB36BB92-4002-31C3-42B2-2592FE207A21
+2025-02-09 00:08:03,850 | MainThread   | [INFO    ] | exit_handler        |: Gracefully Exiting
+2025-02-09 00:08:04,058 | MainThread   | [WARNING ] | __del__             |: Could not delete BaseBLEController instance before exiting
+2025-02-09 00:08:49,894 | MainThread   | [DEBUG   ] | __init__            |: Python Info: sys.version_info(major=3, minor=13, micro=1, releaselevel='final', serial=0)
+2025-02-09 00:08:49,895 | MainThread   | [DEBUG   ] | __init__            |: System Info: macOS-14.6.1-x86_64-i386-64bit-Mach-O
+2025-02-09 00:08:49,895 | MainThread   | [INFO    ] | _connect            |: Looking for Artemis Nano Peripheral Device: c0:81:25:26:04:64
+2025-02-09 00:08:52,705 | MainThread   | [INFO    ] | _connect            |: Connected to c0:81:25:26:04:64
+2025-02-09 00:09:40,683 | MainThread   | [INFO    ] | exit_handler        |: Exiting...
+2025-02-09 00:09:40,686 | MainThread   | [INFO    ] | disconnect_handler  |: Disconnected from EB36BB92-4002-31C3-42B2-2592FE207A21
+2025-02-09 00:09:40,687 | MainThread   | [INFO    ] | exit_handler        |: Gracefully Exiting
+2025-02-09 00:09:40,839 | MainThread   | [WARNING ] | __del__             |: Could not delete BaseBLEController instance before exiting
+2025-02-09 00:10:04,486 | MainThread   | [DEBUG   ] | <module>            |: debug
+2025-02-09 00:10:04,487 | MainThread   | [INFO    ] | <module>            |: info
+2025-02-09 00:10:04,489 | MainThread   | [WARNING ] | <module>            |: warning
+2025-02-09 00:10:04,490 | MainThread   | [ERROR   ] | <module>            |: error
+2025-02-09 00:10:04,496 | MainThread   | [CRITICAL] | <module>            |: critical
+2025-02-09 00:10:08,429 | MainThread   | [DEBUG   ] | __init__            |: Python Info: sys.version_info(major=3, minor=13, micro=1, releaselevel='final', serial=0)
+2025-02-09 00:10:08,429 | MainThread   | [DEBUG   ] | __init__            |: System Info: macOS-14.6.1-x86_64-i386-64bit-Mach-O
+2025-02-09 00:10:08,429 | MainThread   | [INFO    ] | _connect            |: Looking for Artemis Nano Peripheral Device: c0:81:25:26:04:64
+2025-02-09 00:10:11,247 | MainThread   | [INFO    ] | _connect            |: Connected to c0:81:25:26:04:64
+2025-02-09 00:11:08,921 | MainThread   | [INFO    ] | disconnect_handler  |: Disconnected from EB36BB92-4002-31C3-42B2-2592FE207A21
+2025-02-09 00:13:22,797 | MainThread   | [INFO    ] | _connect            |: Looking for Artemis Nano Peripheral Device: c0:81:25:26:04:64
+2025-02-09 00:13:25,647 | MainThread   | [INFO    ] | _connect            |: Connected to c0:81:25:26:04:64
+2025-02-09 00:14:18,156 | MainThread   | [INFO    ] | _connect            |: Already connected to a BLE device
+2025-02-09 00:16:49,830 | MainThread   | [INFO    ] | _connect            |: Already connected to a BLE device
+2025-02-09 00:16:58,864 | MainThread   | [INFO    ] | disconnect_handler  |: Disconnected from EB36BB92-4002-31C3-42B2-2592FE207A21
+2025-02-09 00:17:05,145 | MainThread   | [DEBUG   ] | <module>            |: debug
+2025-02-09 00:17:05,145 | MainThread   | [INFO    ] | <module>            |: info
+2025-02-09 00:17:05,146 | MainThread   | [WARNING ] | <module>            |: warning
+2025-02-09 00:17:05,147 | MainThread   | [ERROR   ] | <module>            |: error
+2025-02-09 00:17:05,149 | MainThread   | [CRITICAL] | <module>            |: critical
+2025-02-09 00:17:07,962 | MainThread   | [INFO    ] | _connect            |: Looking for Artemis Nano Peripheral Device: c0:81:25:26:04:64
+2025-02-09 00:17:11,063 | MainThread   | [INFO    ] | _connect            |: Connected to c0:81:25:26:04:64
+2025-02-09 00:39:09,254 | MainThread   | [INFO    ] | disconnect_handler  |: Disconnected from EB36BB92-4002-31C3-42B2-2592FE207A21
+2025-02-09 00:56:07,511 | MainThread   | [DEBUG   ] | <module>            |: debug
+2025-02-09 00:56:07,513 | MainThread   | [INFO    ] | <module>            |: info
+2025-02-09 00:56:07,515 | MainThread   | [WARNING ] | <module>            |: warning
+2025-02-09 00:56:07,518 | MainThread   | [ERROR   ] | <module>            |: error
+2025-02-09 00:56:07,520 | MainThread   | [CRITICAL] | <module>            |: critical
+2025-02-09 00:56:10,748 | MainThread   | [INFO    ] | _connect            |: Looking for Artemis Nano Peripheral Device: c0:81:25:26:04:64
+2025-02-09 00:56:13,345 | MainThread   | [INFO    ] | _connect            |: Connected to c0:81:25:26:04:64
+2025-02-09 01:08:58,638 | MainThread   | [INFO    ] | disconnect_handler  |: Disconnected from EB36BB92-4002-31C3-42B2-2592FE207A21
+2025-02-09 01:10:17,652 | MainThread   | [INFO    ] | _connect            |: Looking for Artemis Nano Peripheral Device: c0:81:25:26:04:64
+2025-02-09 01:10:20,387 | MainThread   | [INFO    ] | _connect            |: Connected to c0:81:25:26:04:64
+2025-02-09 01:11:12,641 | MainThread   | [INFO    ] | disconnect_handler  |: Disconnected from EB36BB92-4002-31C3-42B2-2592FE207A21
+2025-02-09 01:16:52,299 | MainThread   | [DEBUG   ] | <module>            |: debug
+2025-02-09 01:16:52,299 | MainThread   | [INFO    ] | <module>            |: info
+2025-02-09 01:16:52,300 | MainThread   | [WARNING ] | <module>            |: warning
+2025-02-09 01:16:52,302 | MainThread   | [ERROR   ] | <module>            |: error
+2025-02-09 01:16:52,304 | MainThread   | [CRITICAL] | <module>            |: critical
+2025-02-09 01:16:55,768 | MainThread   | [INFO    ] | _connect            |: Looking for Artemis Nano Peripheral Device: c0:81:25:26:04:64
+2025-02-09 01:18:02,435 | MainThread   | [DEBUG   ] | <module>            |: debug
+2025-02-09 01:18:02,436 | MainThread   | [INFO    ] | <module>            |: info
+2025-02-09 01:18:02,437 | MainThread   | [WARNING ] | <module>            |: warning
+2025-02-09 01:18:02,438 | MainThread   | [ERROR   ] | <module>            |: error
+2025-02-09 01:18:02,440 | MainThread   | [CRITICAL] | <module>            |: critical
+2025-02-09 01:18:06,746 | MainThread   | [INFO    ] | _connect            |: Looking for Artemis Nano Peripheral Device: c0:81:25:26:04:64
+2025-02-09 01:18:09,422 | MainThread   | [INFO    ] | _connect            |: Connected to c0:81:25:26:04:64
+2025-02-09 01:27:13,876 | MainThread   | [INFO    ] | exit_handler        |: Exiting...
+2025-02-09 01:27:13,880 | MainThread   | [INFO    ] | disconnect_handler  |: Disconnected from EB36BB92-4002-31C3-42B2-2592FE207A21
+2025-02-09 01:27:13,882 | MainThread   | [INFO    ] | exit_handler        |: Gracefully Exiting
+2025-02-09 01:27:14,240 | MainThread   | [WARNING ] | __del__             |: Could not delete BaseBLEController instance before exiting
+2025-02-10 11:39:22,605 | MainThread   | [DEBUG   ] | <module>            |: debug
+2025-02-10 11:39:22,607 | MainThread   | [INFO    ] | <module>            |: info
+2025-02-10 11:39:22,608 | MainThread   | [WARNING ] | <module>            |: warning
+2025-02-10 11:39:22,609 | MainThread   | [ERROR   ] | <module>            |: error
+2025-02-10 11:39:22,610 | MainThread   | [CRITICAL] | <module>            |: critical
+2025-02-10 11:39:25,509 | MainThread   | [DEBUG   ] | __init__            |: Python Info: sys.version_info(major=3, minor=13, micro=1, releaselevel='final', serial=0)
+2025-02-10 11:39:25,509 | MainThread   | [DEBUG   ] | __init__            |: System Info: macOS-14.6.1-x86_64-i386-64bit-Mach-O
+2025-02-10 11:39:25,510 | MainThread   | [INFO    ] | _connect            |: Looking for Artemis Nano Peripheral Device: c0:81:25:26:04:64
+2025-02-10 11:39:28,521 | MainThread   | [INFO    ] | _connect            |: Connected to c0:81:25:26:04:64
+2025-02-10 13:06:31,915 | MainThread   | [INFO    ] | disconnect_handler  |: Disconnected from EB36BB92-4002-31C3-42B2-2592FE207A21
+2025-02-10 13:13:56,064 | MainThread   | [INFO    ] | _connect            |: Looking for Artemis Nano Peripheral Device: c0:81:25:26:04:64
+2025-02-10 13:13:59,345 | MainThread   | [INFO    ] | _connect            |: Connected to c0:81:25:26:04:64
+2025-02-10 14:02:40,852 | MainThread   | [INFO    ] | disconnect_handler  |: Disconnected from EB36BB92-4002-31C3-42B2-2592FE207A21
+2025-02-10 16:56:45,644 | MainThread   | [INFO    ] | _connect            |: Looking for Artemis Nano Peripheral Device: c0:81:25:26:04:64
+2025-02-10 16:56:48,337 | MainThread   | [INFO    ] | _connect            |: Connected to c0:81:25:26:04:64
+2025-02-10 17:20:21,974 | MainThread   | [INFO    ] | disconnect_handler  |: Disconnected from EB36BB92-4002-31C3-42B2-2592FE207A21
+2025-02-10 17:21:17,536 | MainThread   | [INFO    ] | _connect            |: Looking for Artemis Nano Peripheral Device: c0:81:25:26:04:64
+2025-02-10 17:21:20,114 | MainThread   | [INFO    ] | _connect            |: Connected to c0:81:25:26:04:64
+2025-02-10 17:21:22,332 | MainThread   | [INFO    ] | _connect            |: Already connected to a BLE device
+2025-02-10 17:22:23,328 | MainThread   | [DEBUG   ] | <module>            |: debug
+2025-02-10 17:22:23,329 | MainThread   | [INFO    ] | <module>            |: info
+2025-02-10 17:22:23,330 | MainThread   | [WARNING ] | <module>            |: warning
+2025-02-10 17:22:23,331 | MainThread   | [ERROR   ] | <module>            |: error
+2025-02-10 17:22:23,333 | MainThread   | [CRITICAL] | <module>            |: critical
+2025-02-10 17:22:26,919 | MainThread   | [INFO    ] | _connect            |: Already connected to a BLE device
+2025-02-10 17:42:57,379 | MainThread   | [DEBUG   ] | <module>            |: debug
+2025-02-10 17:42:57,381 | MainThread   | [INFO    ] | <module>            |: info
+2025-02-10 17:42:57,383 | MainThread   | [WARNING ] | <module>            |: warning
+2025-02-10 17:42:57,386 | MainThread   | [ERROR   ] | <module>            |: error
+2025-02-10 17:42:57,388 | MainThread   | [CRITICAL] | <module>            |: critical
+2025-02-10 17:43:00,106 | MainThread   | [INFO    ] | _connect            |: Already connected to a BLE device
+2025-02-10 17:46:16,366 | MainThread   | [INFO    ] | disconnect_handler  |: Disconnected from EB36BB92-4002-31C3-42B2-2592FE207A21
+2025-02-10 17:46:34,593 | MainThread   | [INFO    ] | _connect            |: Looking for Artemis Nano Peripheral Device: c0:81:25:26:04:64
+2025-02-10 17:46:39,251 | MainThread   | [INFO    ] | _connect            |: Connected to c0:81:25:26:04:64
+2025-02-10 17:50:47,089 | MainThread   | [INFO    ] | disconnect_handler  |: Disconnected from EB36BB92-4002-31C3-42B2-2592FE207A21
+2025-02-10 17:51:12,685 | MainThread   | [INFO    ] | _connect            |: Looking for Artemis Nano Peripheral Device: c0:81:25:26:04:64
+2025-02-10 17:51:15,441 | MainThread   | [INFO    ] | _connect            |: Connected to c0:81:25:26:04:64
+2025-02-10 18:08:53,304 | MainThread   | [INFO    ] | disconnect_handler  |: Disconnected from EB36BB92-4002-31C3-42B2-2592FE207A21
+2025-02-10 18:10:31,177 | MainThread   | [DEBUG   ] | <module>            |: debug
+2025-02-10 18:10:31,178 | MainThread   | [INFO    ] | <module>            |: info
+2025-02-10 18:10:31,181 | MainThread   | [WARNING ] | <module>            |: warning
+2025-02-10 18:10:31,183 | MainThread   | [ERROR   ] | <module>            |: error
+2025-02-10 18:10:31,185 | MainThread   | [CRITICAL] | <module>            |: critical
+2025-02-10 18:10:34,261 | MainThread   | [INFO    ] | _connect            |: Looking for Artemis Nano Peripheral Device: c0:81:25:26:04:64
+2025-02-10 18:10:38,251 | MainThread   | [INFO    ] | _connect            |: Connected to c0:81:25:26:04:64
+2025-02-10 18:20:03,335 | MainThread   | [INFO    ] | disconnect_handler  |: Disconnected from EB36BB92-4002-31C3-42B2-2592FE207A21
+2025-02-10 18:21:06,561 | MainThread   | [DEBUG   ] | <module>            |: debug
+2025-02-10 18:21:06,562 | MainThread   | [INFO    ] | <module>            |: info
+2025-02-10 18:21:06,563 | MainThread   | [WARNING ] | <module>            |: warning
+2025-02-10 18:21:06,565 | MainThread   | [ERROR   ] | <module>            |: error
+2025-02-10 18:21:06,566 | MainThread   | [CRITICAL] | <module>            |: critical
+2025-02-10 18:21:15,518 | MainThread   | [INFO    ] | _connect            |: Looking for Artemis Nano Peripheral Device: c0:81:25:26:04:64
+2025-02-10 18:21:18,238 | MainThread   | [INFO    ] | _connect            |: Connected to c0:81:25:26:04:64
+2025-02-10 18:21:50,985 | MainThread   | [INFO    ] | disconnect_handler  |: Disconnected from EB36BB92-4002-31C3-42B2-2592FE207A21
+2025-02-10 18:22:10,083 | MainThread   | [INFO    ] | _connect            |: Looking for Artemis Nano Peripheral Device: c0:81:25:26:04:64
+2025-02-10 18:22:32,038 | MainThread   | [DEBUG   ] | <module>            |: debug
+2025-02-10 18:22:32,039 | MainThread   | [INFO    ] | <module>            |: info
+2025-02-10 18:22:32,040 | MainThread   | [WARNING ] | <module>            |: warning
+2025-02-10 18:22:32,042 | MainThread   | [ERROR   ] | <module>            |: error
+2025-02-10 18:22:32,044 | MainThread   | [CRITICAL] | <module>            |: critical
+2025-02-10 18:22:37,382 | MainThread   | [INFO    ] | _connect            |: Looking for Artemis Nano Peripheral Device: c0:81:25:26:04:64
+2025-02-10 18:23:43,634 | MainThread   | [DEBUG   ] | <module>            |: debug
+2025-02-10 18:23:43,635 | MainThread   | [INFO    ] | <module>            |: info
+2025-02-10 18:23:43,636 | MainThread   | [WARNING ] | <module>            |: warning
+2025-02-10 18:23:43,638 | MainThread   | [ERROR   ] | <module>            |: error
+2025-02-10 18:23:43,641 | MainThread   | [CRITICAL] | <module>            |: critical
+2025-02-10 18:23:49,621 | MainThread   | [INFO    ] | _connect            |: Looking for Artemis Nano Peripheral Device: c0:81:25:26:04:64
+2025-02-10 18:23:57,178 | MainThread   | [INFO    ] | _connect            |: Connected to c0:81:25:26:04:64
+2025-02-10 18:39:06,797 | MainThread   | [INFO    ] | disconnect_handler  |: Disconnected from EB36BB92-4002-31C3-42B2-2592FE207A21
+2025-02-10 18:39:25,899 | MainThread   | [INFO    ] | _connect            |: Looking for Artemis Nano Peripheral Device: c0:81:25:26:04:64
+2025-02-10 18:39:28,733 | MainThread   | [INFO    ] | _connect            |: Connected to c0:81:25:26:04:64
+2025-02-10 18:45:43,007 | MainThread   | [INFO    ] | disconnect_handler  |: Disconnected from EB36BB92-4002-31C3-42B2-2592FE207A21
+2025-02-10 18:45:58,607 | MainThread   | [DEBUG   ] | <module>            |: debug
+2025-02-10 18:45:58,607 | MainThread   | [INFO    ] | <module>            |: info
+2025-02-10 18:45:58,609 | MainThread   | [WARNING ] | <module>            |: warning
+2025-02-10 18:45:58,611 | MainThread   | [ERROR   ] | <module>            |: error
+2025-02-10 18:45:58,613 | MainThread   | [CRITICAL] | <module>            |: critical
+2025-02-10 18:46:05,017 | MainThread   | [INFO    ] | _connect            |: Looking for Artemis Nano Peripheral Device: c0:81:25:26:04:64
+2025-02-10 18:46:07,747 | MainThread   | [INFO    ] | _connect            |: Connected to c0:81:25:26:04:64
+2025-02-10 18:50:53,283 | MainThread   | [INFO    ] | disconnect_handler  |: Disconnected from EB36BB92-4002-31C3-42B2-2592FE207A21
+2025-02-10 18:51:08,066 | MainThread   | [DEBUG   ] | <module>            |: debug
+2025-02-10 18:51:08,067 | MainThread   | [INFO    ] | <module>            |: info
+2025-02-10 18:51:08,068 | MainThread   | [WARNING ] | <module>            |: warning
+2025-02-10 18:51:08,069 | MainThread   | [ERROR   ] | <module>            |: error
+2025-02-10 18:51:08,070 | MainThread   | [CRITICAL] | <module>            |: critical
+2025-02-10 18:51:11,261 | MainThread   | [INFO    ] | _connect            |: Looking for Artemis Nano Peripheral Device: c0:81:25:26:04:64
+2025-02-10 18:51:16,579 | MainThread   | [INFO    ] | _connect            |: Connected to c0:81:25:26:04:64
+2025-02-10 18:53:01,515 | MainThread   | [INFO    ] | disconnect_handler  |: Disconnected from EB36BB92-4002-31C3-42B2-2592FE207A21
+2025-02-10 18:53:17,611 | MainThread   | [INFO    ] | _connect            |: Looking for Artemis Nano Peripheral Device: c0:81:25:26:04:64
+2025-02-10 18:53:20,244 | MainThread   | [INFO    ] | _connect            |: Connected to c0:81:25:26:04:64
+2025-02-10 18:54:36,200 | MainThread   | [INFO    ] | _connect            |: Already connected to a BLE device
+2025-02-10 18:58:18,095 | MainThread   | [INFO    ] | _connect            |: Already connected to a BLE device
+2025-02-10 18:58:39,135 | MainThread   | [INFO    ] | _connect            |: Already connected to a BLE device
+2025-02-10 18:59:01,803 | MainThread   | [INFO    ] | disconnect_handler  |: Disconnected from EB36BB92-4002-31C3-42B2-2592FE207A21
+2025-02-10 18:59:27,482 | MainThread   | [INFO    ] | _connect            |: Looking for Artemis Nano Peripheral Device: c0:81:25:26:04:64
+2025-02-10 18:59:30,930 | MainThread   | [INFO    ] | _connect            |: Connected to c0:81:25:26:04:64
+2025-02-10 19:02:01,708 | MainThread   | [INFO    ] | disconnect_handler  |: Disconnected from EB36BB92-4002-31C3-42B2-2592FE207A21

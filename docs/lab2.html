@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab 2 - Fast Robots</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <script src="scripts.js"></script>
+    <div class="container">
+        <aside class="sidebar">
+            <div class="profile">
+                <h1>Fast Robots</h1>
+                <h3>Spring 2025</h3>
+            </div>
+            <nav>
+                <ul>
+                    <li>
+                        <h3>Lab 2 - IMU</h3>
+                    </li>
+                    <li>
+                        <a href="index.html">
+                            <h4>Home</h4>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#setup">
+                            <h4>Setup</h4>
+                        </a>
+                    </li>
+
+                    <li>
+                        <h4 class="collapsible">Accelerometer</h4>
+                        <ul class="collapsible-content">
+                            <li><a href="#accelerometer">Overview</a></li>
+                            <li><a href="#fft">FFT</a></li>
+                            <li><a href="#lpf">Low Pass Filter</a></li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <h4 class="collapsible">Gyroscope</h4>
+                        <ul class="collapsible-content">
+                            <li><a href="#gyroscope">Overview</a></li>
+                            <li><a href="#cf">Complementary Filter</a></li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="#sample-data">
+                            <h4>Sample Data</h4>
+                        </a>
+                    </li>
+
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="content">
+            <section class="lab-content">
+                <div class="general-text">
+
+                    <h2>Lab 2: IMU</h2>
+
+                    <p><i>02.04.2025</i></p>
+
+                    <section id="setup">
+                        <h3>Setup</h3>
+                    </section>
+
+                    <p>The objective of Lab 2 was to configure the IMU sensors on my robot and thoroughly test its
+                        accelerometer and gyroscope sensor data. I used Python to analyze the data and implemented
+                        filters and data collection on the Arduino side.</p>
+
+                    <p>I first directly connected the IMU to the Artemic board and installed the IMU library in the
+                        Arduino IDE. Shown below is a picture of my IMU to Artemis connection:</p>
+
+                    <img src="images/lab2_images/imu_setup.png" alt="imu_setup" class="lab-photo" width="300px">
+
+                    <p>I also added in code that made the LED on the board blink three times after the gyroscope had
+                        been initialized:</p>
+
+                    <iframe width="700" height="500" src="https://youtube.com/embed/IsxHk-VmGk4?si=hPrrAG40gENh6TOg"
+                        title="ECE 4160 - Startup Blink" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen></iframe>
+
+                    <p>Next, I ran the IMU example code to ensure that my sensors were working. I moved and rotated the
+                        IMU around, checking what effects this would have on the Arduino's Serial Plotter.</p>
+
+                    <iframe width="700" height="500" src="https://youtube.com/embed/d3_YqiH03Ok"
+                        title="ECE 4160 - IMU Example Code" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen></iframe>
+
+                    <section id="accelerometer">
+                        <h3>Accelerometer</h3>
+
+                        <p>The first sensor that I tested was the accelerometer. Because the accelerometer measured X,
+                            Y, and Z translation, I used geometry to convert data into pitch and roll. In Arduino, I
+                            created conversion functions, using the atan2 function to ensure a correct output range.</p>
+
+                        <div class="code-snippet">
+                            <pre>
+pitch_a = atan2(myICM.accY(),myICM.accZ())*180/M_PI; 
+roll_a  = atan2(myICM.accX(),myICM.accZ())*180/M_PI; </pre>
+                        </div>
+
+                        <p>I then tested my accelerometer sensor by positioning my IMU to be at {-90, 0, 90} degrees for
+                            both pitch and roll. As can be seen in the serial plotter in the videos below, the values
+                            were decently accurate. A source of error that may have caused inaccuracy was human error -
+                            I was in control of the positioning, so the measurements were not exactly -90, 0, or 90
+                            degrees.</p>
+
+                        <iframe width="450" height="300"
+                            src="https://www.youtube.com/embed/eAQG8OrHAWM?si=NrULHsgRU6fLv-CR"
+                            title="ECE 4160 - IMU Example Code" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen></iframe>
+
+                        <iframe width="450" height="300"
+                            src="https://www.youtube.com/embed/mxlTeeNq4h4?si=lcdfJylHAo27ulkl"
+                            title="ECE 4160 - IMU Example Code" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen></iframe>
+                    </section>
+
+
+                    <section id="fft">
+
+                        <h4>FFT</h4>
+                        <p>After the initial accelerometer testing, I moved on to determining how much noise the
+                            accelerometer data had. To do this, I sent the data from the board to my computer and
+                            analyzed using jupyter notebook.</p>
+                        <p>I first held the IMU stable in one position, but realized from previous years' labs that I
+                            would need to move the IMU to be able to conduct a Fourier transform. I then collected data
+                            for both pitch and roll movements where I rotated the IMU along the respective axis at as
+                            constant of a speed as I could.</p>
+
+                        <p>The pitch plot below shows the approximately sinusoidal movements generated by pitching.</p>
+                        <img src="images/lab2_images/pitch_plot.png" alt="pitch_plot" class="lab-photo" width="800px">
+
+                        <p>The roll plot is similar to the pitch plot, but it seemed to have more noise and spikes in
+                            data. This could be due to my unsteadiness when rolling the IMU.</p>
+                        <img src="images/lab2_images/roll_plot.png" alt="roll_plot" class="lab-photo" width="800px">
+
+                        <p>Next, I conducted a Fourier transform on both of these sets of pitch and roll data, getting
+                            the following results:</p>
+                        <img src="images/lab2_images/pitch_fft.png" alt="pitch_fft" class="lab-photo" width="450px">
+                        <img src="images/lab2_images/roll_fft.png" alt="roll_fft" class="lab-photo" width="450px">
+
+
+                    </section>
+
+                    <section id="lpf">
+
+                        <h4>Low Pass Filter</h4>
+
+                        <p>From the Fourier transform, I set my cutoff frequency to 5 Hz, as the plots seemed to show
+                            that most noise was between 1-5 Hz. I also determined that my sampling rate was around 396
+                            messages/sec by dividing the number of messages by the difference in the first and last time
+                            stamps. Using these values and the equations provided in class, I calculated an alpha value
+                            of ~0.0735. I then used this value to code a low pass filter in Arduino (code below is just
+                            for roll): </p>
+
+                        <div class="code-snippet">
+                            <pre>
+const float alpha = 0.0735;
+
+acc_roll_lpf[0] = acc_roll_raw[0];
+
+for (int n = 1; n < array_size; n++)
+{
+    float roll_raw_curr = acc_roll_raw[n];
+    acc_roll_lpf[n] = alpha * roll_raw_curr + (1 - alpha) * acc_roll_lpf[n - 1];
+    acc_roll_lpf[n - 1] = acc_roll_lpf[n];
+}</pre>
+                        </div>
+
+                        <p>I then plotted the filtered data against the raw data.</p>
+
+                        <p>The pitch data showed significantly less noise with the low pass filter, as can be seen with
+                            the smoothing of large spikes and vertical movements.</p>
+                        <img src="images/lab2_images/pitch_lpf_plot.png" alt="pitch_lpf" class="lab-photo"
+                            width="800px">
+
+                        <p>The low pass filter was especially necessary for the roll data, as there were significantly
+                            more spikes and noise compared to the pitch data. The LPF visibly smoothed out a lot of
+                            these points.</p>
+                        <img src="images/lab2_images/roll_lpf_plot.png" alt="roll_lpf" class="lab-photo" width="800px">
+
+                    </section>
+
+                    <section id="gyroscope">
+                        <h3>Gyroscope</h3>
+
+                        <p>After finishing up with the low pass for the accelerometer, I moved on to testing the
+                            gyroscope. I was able to calculate roll, pitch, and yaw by referencing the code provided in
+                            the example file. Because the gyroscope measured angular velocity, I needed to incorporate
+                            some kind of time interval to integrate the velocity and add to the previous value. Below,
+                            you can see my code implementation for collecting yaw data from the gyroscope. The pitch and
+                            roll collection follows the same logic.</p>
+
+                        <div class="code-snippet">
+                            <pre>
+float yaw_g = 0, dt = 0;
+unsigned long last_time = millis();
+for (int i = 0; i < array_size; i++)
+{
+    if (myICM.dataReady())
+    {
+        myICM.getAGMT();
+        // gyro data
+        dt = (millis() - last_time) / 1000.;
+        last_time = millis();
+        yaw_g = yaw_g + myICM.gyrZ() * dt;
+        gyro_yaw_raw[i] = yaw_g;
+        comp_yaw[i] = (1 - alpha) * gyro_yaw_raw[i];
+
+        // time
+        times[i] = (int)millis();
+    }
+}</pre>
+                        </div>
+
+                        <p>I used the same method of collecting data as with the accelerometer - rotating at
+                            approximately a constant rate.</p>
+
+                        <p>Roll and pitch gyroscope data can be seen below, along with the raw and filtered
+                            accelerometer
+                            roll and pitch data for comparison.</p>
+
+                        <img src="images/lab2_images/roll_gyro_plot.png" alt="roll_gyro" class="lab-photo"
+                            width="450px">
+                        <img src="images/lab2_images/pitch_gyro_plot.png" alt="pitch_gyro" class="lab-photo"
+                            width="450px">
+
+                        <p>Because I was taking measurements from the gyroscope, I was able to take yaw data:</p>
+                        <img src="images/lab2_images/yaw_gyro_plot.png" alt="yaw_gyro" class="lab-photo" width="800px">
+
+                        <p>The graphs show that the gyroscope data has less noise than the accelerometer, but has a
+                            tendency to drift over time, which led to lower accuracy.</p>
+
+                    </section>
+
+                    <section id="cf">
+
+                        <h4>Complementary Filter</h4>
+                        <p>The data analysis done on the accelerometer and gyroscope data revealed that while the
+                            accelerometer was accurate but noisy, the gyroscope had the opposite problem, struggling
+                            with accuracy while having little noise. To balance this effect out, I implemented a
+                            complementary filter to optimize the noise and accuracy of the IMU's rotational data.</p>
+
+                        <p>For the pitch and roll data, I used my previous alpha value of 0.0735 to determine the
+                            weights of the accelerometer and gyroscope:</p>
+
+                        <div class="code-snippet">
+                            <pre>
+comp_pitch[n] = (1 - alpha) * gyro_pitch_raw[n] + alpha * acc_pitch_lpf[n];
+comp_roll[n] = (1 - alpha) * gyro_roll_raw[n] + alpha * acc_roll_lpf[n];</pre>
+                        </div>
+
+                        <p>I then graphed the accelerometer raw and filtered data, the gyroscope raw data, and the
+                            complementary filtered data for pitch (shown below). The red line is the complementary
+                            filter values, and it shows a balance between the accuracy of the accelerometer and the
+                            noiselessness of the gyroscope.</p>
+
+                        <img src="images/lab2_images/pitch_comp_filter_plot.png" alt="pitch_comp_filter_plot"
+                            class="lab-photo" width="800px">
+
+                        <p>I also graphed the roll data to compare. The complementary filter showed similar results to
+                            the pitch data.</p>
+
+                        <img src="images/lab2_images/roll_comp_filter_plot.png" alt="roll_comp_filter_plot"
+                            class="lab-photo" width="800px">
+
+                    </section>
+
+                    <section id="sample-data">
+                        <h3>Sample Data</h3>
+
+                        <p>The next step was to optimize my data collection speed. I did this by making sure that all
+                            buffers and debugging statements were removed, including lines that printed to the Serial
+                            monitor. I coded my data collection by first storing the data in arrays and then separately
+                            sending them to the computer, which I found was the optimal way to send and analyze data in
+                            Lab 1.</p>
+
+                        <p>Finally, I created a command, GET_IMU_DATA, that collected time-stamped IMU data, which
+                            followed the format:</p>
+
+                        <p>Time | Accelerometer Raw|LPF Pitch | Accelerometer Raw|LPF Roll | Gyroscope Raw
+                            Pitch|Roll|Yaw | Comp Filter Data</p>
+
+                        <img src="images/lab2_images/imu_all_data.png" alt="imu_all_data" class="lab-photo"
+                            width="800px">
+
+                        <p>Finally, I ensured that I was able to collect data for more than five seconds:</p>
+
+                        <img src="images/lab2_images/imu_all_data_stats.png" alt="imu_all_data_stats" class="lab-photo"
+                            width="800px">
+
+
+                    </section>
+
+                </div>
+
+            </section>
+        </main>
+    </div>
+</body>
+
+</html>
