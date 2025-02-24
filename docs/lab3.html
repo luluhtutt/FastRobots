@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab 3 - Fast Robots</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <script src="scripts.js"></script>
+    <div class="container">
+        <aside class="sidebar">
+            <div class="profile">
+                <h1>Fast Robots</h1>
+                <h3>Spring 2025</h3>
+            </div>
+            <nav>
+                <ul>
+                    <li>
+                        <h3>Lab 3 - ToF Sensors</h3>
+                    </li>
+                    <li>
+                        <a href="index.html">
+                            <h4>Home</h4>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#setup">
+                            <h4>Setup</h4>
+                        </a>
+                    </li>
+
+                    <li>
+                        <h4 class="collapsible">Soldering</h4>
+                        <ul class="collapsible-content">
+                            <li><a href="#soldering">Overview</a></li>
+                            <li><a href="#battery">Battery</a></li>
+                            <li><a href="#tof-sensors">ToF Sensors</a></li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="#i2c">
+                            <h4>I2C</h4>
+                        </a>
+                    </li>
+
+                    <li>
+                        <h4 class="collapsible">Three Modes</h4>
+                        <ul class="collapsible-content">
+                            <li><a href="#three-modes-disc">Discussion</a></li>
+                            <li><a href="#three-modes-testing">Testing</a></li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="#two-sensors">
+                            <h4>Two Sensors Working</h4>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#speed">
+                            <h4>Sensor Speed</h4>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#data-collection">
+                            <h4>Data Collection</h4>
+                        </a>
+                    </li>
+
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="content">
+            <section class="lab-content">
+                <div class="general-text">
+
+                    <h2>Lab 3: ToF Sensors</h2>
+
+                    <p><i>02.11.2025 - 02.25.2025</i></p>
+
+                    <section id="setup">
+                        <h3>Setup</h3>
+
+                    </section>
+
+                    <section id="soldering">
+                        <h3>Soldering</h3>
+                    </section>
+
+
+                    <section id="battery">
+                        <h4>Battery</h4>
+                    </section>
+
+                    <section id="tof-sensors">
+                        <h4>ToF Sensors</h4>
+                    </section>
+
+                    <section id="i2c">
+                        <h3>I2C Address</h3>
+
+                        <p>I installed the SparkFun VL53L1X 4m laser distance sensor library in Arduino IDE. Next, I ran
+                            Example05_Wire_I2C and found that the address was 0x29. This is different from the address
+                            listed in the datasheet, 0x52, because the address is shifted right one bit (0x52 >> 1 =
+                            0x29) to account for the rightmost bit being used to identify if data is being read or
+                            written.</p>
+
+                        <img src="images/lab3_images/i2c_address.png" alt="imu_setup" class="lab-photo" width="600px">
+
+                    </section>
+
+                    <section id="three-modes-disc">
+                        <h3>Three Modes</h3>
+
+                        <h4>Discussion</h4>
+                    </section>
+
+                    <section id="three-modes-testing">
+                        <h4>Testing</h4>
+                    </section>
+
+                    <section id="two-sensors">
+                        <h3>Two Sensors Working</h3>
+                    </section>
+
+                    <section id="speed">
+                        <h3>Sensor Speed</h3>
+                    </section>
+
+                    <section id="data-collection">
+                        <h3>Data Collection</h3>
+                    </section>
+
+                </div>
+
+            </section>
+        </main>
+    </div>
+</body>
+
+</html>

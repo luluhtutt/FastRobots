@@ -71,36 +71,38 @@
 
                     <h2>Lab 2: IMU</h2>
 
-                    <p><i>02.04.2025</i></p>
+                    <p><i>02.04.2025 - 02.11.2025</i></p>
 
                     <section id="setup">
                         <h3>Setup</h3>
+
+                        <p>The objective of Lab 2 was to configure the IMU sensors on my robot and thoroughly test its
+                            accelerometer and gyroscope sensor data. I used Python to analyze the data and implemented
+                            filters and data collection on the Arduino side.</p>
+
+                        <p>I first directly connected the IMU to the Artemic board and installed the IMU library in the
+                            Arduino IDE. Shown below is a picture of my IMU to Artemis connection:</p>
+
+                        <img src="images/lab2_images/imu_setup.png" alt="imu_setup" class="lab-photo" width="300px">
+
+                        <p>I also added in code that made the LED on the board blink three times after the gyroscope had
+                            been initialized:</p>
+
+                        <iframe width="700" height="500" src="https://youtube.com/embed/IsxHk-VmGk4?si=hPrrAG40gENh6TOg"
+                            title="ECE 4160 - Startup Blink" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen></iframe>
+
+                        <p>Next, I ran the IMU example code to ensure that my sensors were working. I moved and rotated
+                            the
+                            IMU around, checking what effects this would have on the Arduino's Serial Plotter.</p>
+
+                        <iframe width="700" height="500" src="https://youtube.com/embed/d3_YqiH03Ok"
+                            title="ECE 4160 - IMU Example Code" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen></iframe>
+
                     </section>
-
-                    <p>The objective of Lab 2 was to configure the IMU sensors on my robot and thoroughly test its
-                        accelerometer and gyroscope sensor data. I used Python to analyze the data and implemented
-                        filters and data collection on the Arduino side.</p>
-
-                    <p>I first directly connected the IMU to the Artemic board and installed the IMU library in the
-                        Arduino IDE. Shown below is a picture of my IMU to Artemis connection:</p>
-
-                    <img src="images/lab2_images/imu_setup.png" alt="imu_setup" class="lab-photo" width="300px">
-
-                    <p>I also added in code that made the LED on the board blink three times after the gyroscope had
-                        been initialized:</p>
-
-                    <iframe width="700" height="500" src="https://youtube.com/embed/IsxHk-VmGk4?si=hPrrAG40gENh6TOg"
-                        title="ECE 4160 - Startup Blink" frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        allowfullscreen></iframe>
-
-                    <p>Next, I ran the IMU example code to ensure that my sensors were working. I moved and rotated the
-                        IMU around, checking what effects this would have on the Arduino's Serial Plotter.</p>
-
-                    <iframe width="700" height="500" src="https://youtube.com/embed/d3_YqiH03Ok"
-                        title="ECE 4160 - IMU Example Code" frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        allowfullscreen></iframe>
 
                     <section id="accelerometer">
                         <h3>Accelerometer</h3>
