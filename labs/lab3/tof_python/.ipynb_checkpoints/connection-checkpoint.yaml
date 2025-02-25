@@ -1,0 +1,10 @@
+artemis_address: 'c0:81:e4:22:2:64'
+
+ble_service: '2bb357d9-bff9-49ae-92fe-7935d8da4d69'
+
+characteristics:
+  TX_CMD_STRING: '9750f60b-9c9c-4158-b620-02ec9521cd99'
+
+  RX_FLOAT: '27616294-3063-4ecc-b60b-3470ddef2938'
+  RX_STRING: 'f235a225-6735-4d73-94cb-ee5dfce9ba83'
+
