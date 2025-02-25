@@ -73,6 +73,12 @@
                         </a>
                     </li>
 
+                    <li>
+                        <a href="#references">
+                            <h4>References</h4>
+                        </a>
+                    </li>
+
                 </ul>
             </nav>
         </aside>
@@ -232,15 +238,134 @@
                     <section id="two-sensors">
                         <h3>Two Sensors Working</h3>
 
-                        <p>The next task was </p>
+                        <p>The next task was to modify our code to collect data from both sensors instead of just one.
+                            To set this up, I switched between LOW and HIGH to set the address of the first sensor. The
+                            code to do this is shown below.</p>
+
+
+                        <div class="code-snippet">
+                            <pre>
+digitalWrite(XSHUT, LOW);
+distanceSensor1.setI2CAddress(ADDRESS);
+Serial.print("Distance Sensor 1 Address: 0x");
+Serial.println(distanceSensor1.getI2CAddress(), HEX);
+
+if (distanceSensor1.begin() != 0) // Begin returns 0 on a good init
+{
+    Serial.println("Sensor 1 failed to begin. Please check wiring. Freezing...");
+    while (1)
+        ;
+}
+distanceSensor1.setDistanceModeShort();
+digitalWrite(XSHUT, HIGH);
+
+Serial.print("Distance Sensor 2 Address: 0x");
+Serial.println(distanceSensor2.getI2CAddress(), HEX);
+
+if (distanceSensor2.begin() != 0) // Begin returns 0 on a good init
+{
+    Serial.println("Sensor 2 failed to begin. Please check wiring. Freezing...");
+    while (1)
+        ;
+}
+Serial.println("Sensors 1 and 2 online!");
+distanceSensor2.setDistanceModeShort();</pre>
+                        </div>
+
+                        <p>I also changed the code in the case statement in order to collect data from both sensors
+                            instead of just one. I then set up the second ToF sensor, also on my laptop, and collected
+                            data to ensure that they were functional. I did this by holding my laptop and rotating it
+                            and moving it around near a wall to get varied data.</p>
+
+
+                        <iframe width="900" height="500"
+                            src="https://www.youtube.com/embed/1sglNnhCMvc?si=iYmC2dHe4Eppqgxe"
+                            title="ECE 4160 - Two ToF Sensor Data Collection" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen></iframe>
+
                     </section>
 
                     <section id="speed">
                         <h3>Sensor Speed</h3>
+
+                        <p>The next task focused on optimizing our code to send data as fast as possible. To speed up my
+                            data collection loop, I moved the startRanding(), clearInterrupt(), and stopRanging()
+                            functions outside of the loop. My optimized code is shown below:</p>
+
+
+                        <div class="code-snippet">
+                            <pre>
+distanceSensor1.startRanging();
+distanceSensor2.startRanging();
+
+int st = millis();
+
+for(int i = 0; i < array_size; i++)
+{
+
+    while (!distanceSensor1.checkForDataReady())    {
+        delay(1);
+    }
+    distance1[i] = distanceSensor1.getDistance();
+
+    while (!distanceSensor2.checkForDataReady())    {
+        delay(1);
+    }
+    distance2[i] = distanceSensor2.getDistance();
+
+    times[i] = millis();
+
+}
+
+int et = millis();
+
+distanceSensor1.clearInterrupt();
+distanceSensor1.stopRanging();
+distanceSensor2.clearInterrupt();
+distanceSensor2.stopRanging();
+</pre>
+                        </div>
+
+                        <p>The variables st and et were used for me to check how quickly the loop executed. I ran this
+                            implementation, and also measured the time that an empty loop with the same amount of
+                            iterations took. As can be seen from the measurements in the photo below, it took 1296 ms to
+                            collect 500 sensor readings from each of the sensors (500 iterations of the loop, 1000 total
+                            messages). From this measurement, I calculated that it took an average of 2.592 ms per
+                            iteration of the loop. This is an immense improvement over the previously measured values of
+                            high-90s. The increased speed is due to not having to continuously start, clear, and stop
+                            ranging.</p>
+
+                        <img src="images/lab3_images/loop_times.png" alt="loop_times" class="lab-photo" width="500px">
+
                     </section>
 
                     <section id="data-collection">
                         <h3>Data Collection</h3>
+
+                        <p>I used this optimized code to send over ToF sensor data to my python notebook and
+                            graphed that data over time. I used the same Python code logic as in Lab 2.</p>
+
+                        <img src="images/lab3_images/tof_vs_time.png" alt="tof_vs_time" class="lab-photo" width="800px">
+
+                        <p>I also printed out the number of messages sent, as well as the time elapsed. These came out
+                            to be 1000 messages in 2783 ms, which is a sampling rate of 359.32 messages/second.</p>
+
+                        <img src="images/lab3_images/tof_data.png" alt="tof_data" class="lab-photo" width="900px">
+
+                        <p>In comparison to collecting IMU data, using my code from Lab 2, the ToF sensors have a much
+                            faster sampling rate. Sending IMU data took 6.112 seconds for 1000 messages, which comes out
+                            to be a sampling rate of 163.61 messages/second. This could be due to the IMU sending over
+                            more data, as I had to send over measurements from the accelerometer, gyroscope, and also
+                            the filtered values.</p>
+                    </section>
+
+                    <section id="references">
+                        <h3>References</h3>
+
+                        <p>I referenced Mikayla Lahr and Nila Narayan's past Lab 3 reports. Furthermore, I used the same
+                            hardware and corresponding set up as Sana Chawla (sc2347), but we each implemented our own
+                            software.</p>
                     </section>
 
                 </div>
