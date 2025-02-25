@@ -87,20 +87,49 @@
 
                     <section id="setup">
                         <h3>Setup</h3>
+                        <p>The objective of Lab 3 was to configure the time of flight sensors, which measure distance to
+                            aid with obstacle detection and navigation. Lab tasks included soldering components to the
+                            Artemis and analyzing data and communication speed.</p>
+
+                        <img src="images/lab3_images/wiring_diagram.jpeg" alt="wiring_diagram" class="lab-photo"
+                            width="900px">
+
+                        <p>Before beginning the lab, I planned out how I was going to wire the components together,
+                            which can be seen in the figure above. I decided to place one ToF sensor on the front of the
+                            car, and the other on the side of the car. This would be helpful when detecting obstacles,
+                            as this placement would allow the robot to see in front and to the side. Because we are
+                            using two ToF sensors, they will have the same I2C address by default. In order to measure
+                            data using both of the sensors, I used the XSHUT pin on one of the sensors in order to
+                            temporarily shut off one of the sensors and change the I2C address of the other.</p>
 
                     </section>
 
                     <section id="soldering">
                         <h3>Soldering</h3>
+
+                        <p>In this lab, I had to solder a connector to the battery, two QWIIC connectors to the
+                            ToF sensors, and the XSHUT pin of one of the sensors to one of the GPIO pins on the Artemis.
+                        </p>
                     </section>
 
 
                     <section id="battery">
                         <h4>Battery</h4>
+                        <p>First, I soldered the battery wires to the JST jumper wires. I checked the polarity on the
+                            Artemis port to ensure that I was connecting the wires correctly, and then tested the
+                            battery by sending BLE data from the Arduino IDE to my computer (using previous lab code).
+                        </p>
+
+                        <img src="images/lab3_images/battery_solder.png" alt="battery_solder" class="lab-photo"
+                            width="400px">
                     </section>
 
                     <section id="tof-sensors">
                         <h4>ToF Sensors</h4>
+                        <p>Following my wiring diagram plan, I soldered the ToF sensors to two QWIIC connectors. For the
+                            second sensor, I soldered a green wire from the XSHUT pin to pin 6 on the Artemis.</p>
+
+                        <img src="images/lab3_images/tof_solder.png" alt="tof_solder" class="lab-photo" width="400px">
                     </section>
 
                     <section id="i2c">
@@ -119,15 +148,91 @@
                     <section id="three-modes-disc">
                         <h3>Three Modes</h3>
 
+                        <p>The ToF sensors have three modes: short, medium, and long. I looked into the pros and cons of
+                            each mode, and made a decision about which mode to use.</p>
+
                         <h4>Discussion</h4>
+                        <p><b>Short</b>: The short distance mode has a maximum distance of 1.3 meters and is the least
+                            susceptible to ambient light. Overall, this mode has greater accuracy and less noise than
+                            the other modes.</p>
+                        <p><b>Long</b>: The long distance mode has a maximum distance of 4 meters but is the most
+                            susceptible to ambient light.</p>
+                        <p><b>Medium</b>: This mode is only available with the Polulu VL53L1X Library, and therefore I
+                            did not take this mode into consideration. It has a detection distance between the short and
+                            long, and also has noise resistance between short and long.</p>
+                        <p>I chose to use short mode for my robot because 1.3 meters is enough distance to detect
+                            obstacles, and the better resistance to noise will be greatly beneficial for when I run the
+                            car in different settings.</p>
                     </section>
 
                     <section id="three-modes-testing">
                         <h4>Testing</h4>
+
+                        <p>To test the ToF sensors at short mode, I taped one of the sensors flat on my laptop and used
+                            a tape measure to set up different distances from the wall. I decided to take 10 sensor
+                            measurements at six different distances:
+                        </p>
+                        <img src="images/lab3_images/tof_10in.png" alt="tof_10in" class="lab-photo" width="600px">
+                        <u>
+                            <p>10 in (254 mm)</p>
+                        </u>
+                        <img src="images/lab3_images/tof_20in.png" alt="tof_20in" class="lab-photo" width="600px">
+                        <u>
+                            <p>20 in (508 mm)</p>
+                        </u>
+                        <img src="images/lab3_images/tof_30in.png" alt="tof_30in" class="lab-photo" width="600px">
+                        <u>
+                            <p>30 in (762 mm)</p>
+                        </u>
+                        <img src="images/lab3_images/tof_40in.png" alt="tof_40in" class="lab-photo" width="600px">
+                        <u>
+                            <p>40 in (1016 mm)</p>
+                        </u>
+                        <img src="images/lab3_images/tof_50in.png" alt="tof_50in" class="lab-photo" width="600px">
+                        <u>
+                            <p>50 in (1270 mm)</p>
+                        </u>
+                        <img src="images/lab3_images/tof_60in.png" alt="tof_60in" class="lab-photo" width="600px">
+                        <u>
+                            <p>60 in (1524 mm)</p>
+                        </u>
+
+                        <p>To check the accuracy of the sensors, I plotted the average values I calculated against the
+                            actual distances, shown below. From the plot, it can be seen that the measured distance has
+                            the greatest deviation from the actual distance at 1524 mm, which is outside of the short
+                            mode range. I also observed that the measured values were consistently less than the actual
+                            values, which could indicate a human error that remained throughout the data measurements.
+                            Because the experiment was manually set up, there was a lot of room for error, such as my
+                            laptop screen not being exactly aligned with the measuring tape distance due to a small
+                            angle deviation.
+                        </p>
+                        <img src="images/lab3_images/av_dist_plot.png" alt="av_dist_plot" class="lab-photo"
+                            width="800px">
+
+                        <p>Next, in order to determine repeatability, I took the standard deviations of the measured
+                            sensor data and plotted it against the actual distances, shown in the figure below. Similar
+                            to the trend in the plotted average measurements, I observed that the standard deviation was
+                            its highest at 1524 mm, which is outside of the short mode range. The other standard
+                            deviation values remained close to 1.
+                        </p>
+
+                        <img src="images/lab3_images/std_plot.png" alt="std_plot" class="lab-photo" width="800px">
+
+                        <p>In order to measure ranging time, I took the start and end times at the beginning and end of
+                            each iteration of the data collection loop. I then found the difference and printed that
+                            value out to the Serial Monitor. From one test run, I noted that the ranging time hovered
+                            around the high-90s (data shown below). These values were higher than I was expecting, which
+                            indicated that there was room for optimization within the data collection.</p>
+
+                        <img src="images/lab3_images/ranging_time.png" alt="ranging_time" class="lab-photo"
+                            width="250px">
+
                     </section>
 
                     <section id="two-sensors">
                         <h3>Two Sensors Working</h3>
+
+                        <p>The next task was </p>
                     </section>
 
                     <section id="speed">
