@@ -239,7 +239,7 @@ void loop()
                         <p>Next, I used the power supply to power both sets of wheels. Using the power supply's
                             alligator clips, I clipped both VINs together, and both GNDs together.</p>
 
-                        <iframe width="400" height="500" src="https://youtube.com/embed/Nz6KCvKHMJE"
+                        <iframe width="800" height="500" src="https://youtube.com/embed/Nz6KCvKHMJE"
                             title="ECE 4160 - Two ToF Sensor Data Collection" frameborder="0"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                             allowfullscreen></iframe>
@@ -249,20 +249,78 @@ void loop()
                     <section id="battery">
                         <h3>Spinning Wheels using Battery</h3>
 
+                        <p>Next, I tested the motor drivers and wheels using the 850 mAh battery. To do this, I soldered
+                            the two VIN pins together with the battery's positive lead, and th etwo GND pins together
+                            with the battery's negative lead. Then, I connected my charged battery to the other end.</p>
+
+                        <p>I first ran both sets of wheels independently to ensure that they were functional:</p>
+
+                        <iframe width="400" height="500" src="https://youtube.com/embed/P0bsEA09eps"
+                            title="ECE 4160 - Two ToF Sensor Data Collection" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen></iframe>
+
+                        <iframe width="400" height="500" src="https://youtube.com/embed/Rk20HHHOINA"
+                            title="ECE 4160 - Two ToF Sensor Data Collection" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen></iframe>
+
+                        <p>Next, I used the same code as above (spinning wheels with the power supply) to test spinning
+                            both wheels.</p>
+
+                        <iframe width="800" height="500" src="https://youtube.com/embed/mIzyAen1gfg"
+                            title="ECE 4160 - Two ToF Sensor Data Collection" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen></iframe>
+
                     </section>
 
                     <section id="assemble-car">
                         <h3>Assembling Car</h3>
+
+                        <p>After testing to make sure that my motors were all working correctly, I started to assemble
+                            all of my hardware inside of the car. Below, you can see a diagram of where every component
+                            is placed on the car.</p>
+
+                        <img src="images/lab4_images/component_diagram.jpeg" alt="component_diagram" class="lab-photo"
+                            width="600px">
+
+                        <p>As of this lab, everything is taped down. I made sure to tape down any wire or parts that
+                            were sticking out, but over iterations of testing, some wires would escape their binding. I
+                            also decided to put my ToF sensors on the front and back of the car, as I was slightly
+                            concerned by the possibility of the wheels causing disturbances in the sensor measurement if
+                            it was on the side. I put my Artemis and two motor drivers into the compartment that used to
+                            house the PCB board. For one of my motor drivers, I had used longer heat shrink, which
+                            caused issues when trying to fit all of wiring into the compartment.</p>
 
                     </section>
 
                     <section id="pwm-testing">
                         <h3>PWM Testing</h3>
 
+                        <p>The next task was to explore the lower limits in PWM value for which the robot moved forward,
+                            overcoming the friction of the ground. To do this, I set the car at rest, and increased the
+                            PWM value incrementally by 10 until the robot started to move. I noted that the values
+                            ranged between 45-55 PWM, the value increasing as time went on. This could be due to using a
+                            fresh battery versus a worn one.</p>
+
+                        <p>I also noticed that the range of 45-55 PWM was not enough to turn, as there is rotational
+                            friction to overcome in addition. The car started to turn from rest at ~100 PWM.</p>
+
                     </section>
 
                     <section id="calibration">
                         <h3>Calibration</h3>
+
+                        <p>After testing for the lower PWM limits, I moved on to calibrating the wheels. I first wrote
+                            some code to move forward and backward, with ample breaks so that I didn't have to chase the
+                            car down. I noticed that the car would turn to the left slightly when moving forwards. Below
+                            is a video of my car without calibration, where the slight turn can be seen.</p>
+
+                        <iframe width="800" height="500" src="https://youtube.com/embed/mIzyAen1gfg"
+                            title="ECE 4160 - Two ToF Sensor Data Collection" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen></iframe>
 
                     </section>
 
