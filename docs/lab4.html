@@ -94,15 +94,155 @@
                             I finished soldering and assembling hardware in the robot, adding on two motor drivers to
                             the components done in past labs. I then wrote code to move the robot around to show an open
                             loop system.</p>
+
+                        <p>I started the lab by planning out how to wire the motor drivers. From the instructions, I
+                            knew that there would be connections between the Artemis, the motor drivers, and the 850 mAh
+                            battery. You can see my wiring diagram below.</p>
+
+                        <img src="images/lab4_images/hardware_diagram.jpeg" alt="hardware_diagram" class="lab-photo"
+                            width="800px">
+
+                        <p>The diagram includes the ToF and QWIIC connect connections from Lab 3, but the motor driver
+                            connections can be seen between the Artemis and the motor drivers on the bottom of the
+                            diagram. The VIN and GND pins were to be connected, and then connected to the battery. I
+                            chose four pins on the Artemis to connect my motor drivers to: A1, A2, A3, and A4. A1
+                            connected to BIN2 and AIN2 of one of the drivers, and A2 was then connected to BIN1 and AIN1
+                            of the same driver. A3 and A4 were connected similarly to the other driver. For each motor
+                            driver, BOUT1 and AOUT1 were connected to a negative motor lead, and BOUT2 and AOUT2 were
+                            connected to a positive motor lead. I connected pins together (ie AIN1 and BIN1) by
+                            soldering short wires into the pins; I then soldered them to another wire and put heat
+                            shrink over the exposed area.</p>
+
+                        <h4>Battery Discussion</h4>
+                        <p>The Artemis and motor drivers are powered from separate batteries. This is because the motor
+                            drivers and the Artemis have different power requirements and having separate batteries
+                            ensured that there is no disruption caused by a shared power supply. This way, using more
+                            power on the motor drivers won't affect the Artemis's power.</p>
+
+                        <p></p>
+
                     </section>
 
                     <section id="oscilloscope">
                         <h3>Power Supply and Oscilloscope</h3>
 
+                        <p>The first step was to connect one motor driver to the Artemis, and use the power supply and
+                            oscilloscope. To set this up, I soldered the motor driver's IN connections to the
+                            corresponding pins on the Artemis, as well as one of the GND pins. I used the oscilloscope
+                            to probe the OUT connections' signal. I then connected the VIN and the other GND pin to the
+                            power supply and set the voltage to 3.7V because that is what our battery provides. The
+                            motor driver has a range of 2.7V to 10.8V, so any value within that range would have worked.
+                            Below, you can see a picture of my set up.</p>
+
+                        <img src="images/lab4_images/oscilloscope_setup.png" alt="oscilloscope_setup" class="lab-photo"
+                            width="600px">
+
+                        <p>In order to see the PWM signal on the oscilloscope, I wrote code that sent PWM signals using
+                            analogWrite(). </p>
+
+                        <div class="code-snippet">
+                            <pre>
+void loop() {
+    analogWrite(3, 0);
+    for (int i = 0; i < 255; i++) {
+        analogWrite(3, i);
+        analogWrite(4, 0);
+        analogWrite(1, 255-i);
+        analogWrite(2, 0);
+        delay(10);
+    }
+}</pre>
+                        </div>
+
+                        <p>I captured the following image on the oscilloscope.</p>
+
+                        <img src="images/lab4_images/oscilliscope.png" alt="oscilliscope" class="lab-photo"
+                            width="600px">
+
+                        <p>I also captured a video of the signal and the setup.</p>
+
+                        <iframe width="800" height="500" src="https://youtube.com/embed/XumPOgPh4y4"
+                            title="ECE 4160 - Two ToF Sensor Data Collection" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen></iframe>
+
+                        <p>I then tested the other motor driver to confirm that both drivers were functional, which
+                            yielded the same results.</p>
+
                     </section>
 
                     <section id="power-supply">
                         <h3>Spinning Wheels using Power Supply</h3>
+
+                        <p>The next step was to use the power supply and motor drivers to spin the robot's wheels. To do
+                            this, I opened the car up and removed the control PCB, cutting the wires between the board
+                            and motors as closely to the board as possible. I also removed the LEDs, as they will no
+                            longer be used. I then taped down the other hardware components to keep wires and parts from
+                            moving around. Below, you can see a picture of the emptied car with all of the hardware
+                            components taped in, except the motor drivers which had not yet been connected.</p>
+
+                        <img src="images/lab4_images/initial_setup.png" alt="initial_setup" class="lab-photo"
+                            width="400px">
+
+                        <p>In order to test spinning the wheels, I had to connect the motor drivers to the motor rather
+                            than the oscilloscope. I focused on one of the motors first, soldering the OUT pins to the
+                            motor's positive and negative wires accordingly. I kept the same power supply setup and
+                            wrote code to spin the wheels forwards and backwards to ensure the motor was functional. I
+                            wrote some Arduino code to make the wheels spin forward and backward by switching which pin
+                            had the non-zero duty cycle.</p>
+                        <div class="code-snippet">
+                            <pre>
+void loop()
+{
+    delay(1000);
+    analogWrite(1, 0);
+    analogWrite(2, 200);
+    analogWrite(3, 0);
+    analogWrite(4, 200);
+
+    delay(2000);
+
+    analogWrite(1, 0);
+    analogWrite(2, 0);
+    analogWrite(3, 0);
+    analogWrite(4, 0);
+    delay(1000);
+
+    analogWrite(1, 200);
+    analogWrite(2, 0);
+    analogWrite(3, 200);
+    analogWrite(4, 0);
+
+    delay(2000);
+
+    analogWrite(1, 0);
+    analogWrite(2, 0);
+    analogWrite(3, 0);
+    analogWrite(4, 0);
+    delay(1000);
+}</pre>
+                        </div>
+
+                        <p>I set the power supply voltage to 3.7V again to test one set of wheels, and then soldered the
+                            other motor driver to the other motor and tested that second set of wheels.</p>
+
+                        <iframe width="400" height="500" src="https://youtube.com/embed/lYbYlpGB7GQ"
+                            title="ECE 4160 - Two ToF Sensor Data Collection" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen></iframe>
+
+                        <iframe width="400" height="500" src="https://youtube.com/embed/iYWP-FmoImU"
+                            title="ECE 4160 - Two ToF Sensor Data Collection" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen></iframe>
+
+                        <p>Next, I used the power supply to power both sets of wheels. Using the power supply's
+                            alligator clips, I clipped both VINs together, and both GNDs together.</p>
+
+                        <iframe width="400" height="500" src="https://youtube.com/embed/Nz6KCvKHMJE"
+                            title="ECE 4160 - Two ToF Sensor Data Collection" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen></iframe>
 
                     </section>
 
