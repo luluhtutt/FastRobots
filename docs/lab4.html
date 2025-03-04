@@ -70,6 +70,12 @@
                     </li>
 
                     <li>
+                        <a href="#open-loop">
+                            <h4>Open Loop Control</h4>
+                        </a>
+                    </li>
+
+                    <li>
                         <a href="#references">
                             <h4>Notes and References</h4>
                         </a>
@@ -317,7 +323,56 @@ void loop()
                             car down. I noticed that the car would turn to the left slightly when moving forwards. Below
                             is a video of my car without calibration, where the slight turn can be seen.</p>
 
-                        <iframe width="800" height="500" src="https://youtube.com/embed/mIzyAen1gfg"
+                        <iframe width="800" height="500" src="https://youtube.com/embed/oCg_1gE8z2w"
+                            title="ECE 4160 - Two ToF Sensor Data Collection" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen></iframe>
+
+                        <p>When observing the wheels spinning in the air, I noticed that the wheels on the right side
+                            would always rotate for a bit longer than the left set. Thus, I decided to add a calibration
+                            factor to the right set's PWM value. Because I wanted the right side's PWM values to be less
+                            than the left side in order to even them out, I played around with factors below 1. After
+                            trial and error, I found that a calibration factor of 0.85 allowed the wheels to look even
+                            while spinning. I tested this out on the ground and found that the cars path was much
+                            straighter.</p>
+
+                        <iframe width="800" height="500" src="https://youtube.com/embed/0ljSP01AX0E"
+                            title="ECE 4160 - Two ToF Sensor Data Collection" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen></iframe>
+
+                        <p>Below, you can see a snippet showing how I implemented the calibration factor. The code used
+                            to run for testing was similar to previous code, but with longer delays.</p>
+
+                        <div class="code-snippet">
+                            <pre>
+#define calibration_factor 0.85
+#define pwm 255
+void loop() {
+    analogWrite(1, 0);
+    analogWrite(2, pwm);
+    analogWrite(3, 0);
+    analogWrite(4, pwm * calibration_factor);
+
+    delay(2000);
+
+    analogWrite(1, 0);
+    analogWrite(2, 0);
+    analogWrite(3, 0);
+    analogWrite(4, 0);
+    delay(5000);
+}</pre>
+                        </div>
+
+                    </section>
+
+                    <section id="open-loop">
+                        <h3>Open Loop Control</h3>
+
+                        <p>After calibrating my straight driving, I added some turns to test the capabilities of my
+                            robot. I did this by pairing different pins than when driving straight.</p>
+
+                        <iframe width="800" height="500" src="https://youtube.com/embed/QXA8_krPp9A"
                             title="ECE 4160 - Two ToF Sensor Data Collection" frameborder="0"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                             allowfullscreen></iframe>
@@ -326,6 +381,22 @@ void loop()
 
                     <section id="references">
                         <h3>Notes and References</h3>
+
+                        <h4>Notes & Conclusion</h4>
+                        <p>This lab gave me a lot more experience with soldering and a better understanding of hardware.
+                            While soldering, I noticed that there were quite a few connections that were fairly close to
+                            other pins and connections, so I made sure to snip those short. I also had a problem with my
+                            battery not working, so I used a battery in lab during office hours.</p>
+
+                        <p>After the first turns video, I was planning to adjust my code to implement more stable
+                            spinning and more frequently. When I tried to upload my code, the Arduino IDE would not
+                            recognize the serial port. After examining my Artemis, I noticed that one of the diodes had
+                            fallen off, likely from the hardware not being secured and therefore scraping up against the
+                            walls of the car. In the future, I plan on more securely taping down the components, and
+                            placing the Artemis farther from the walls where there could be friction.</p>
+
+                        <h4>References</h4>
+                        <p>I referenced Mikayla Lahr and Nidhi Sonwalkar's past Lab 4 reports.</p>
 
                     </section>
 
