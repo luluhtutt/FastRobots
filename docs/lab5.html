@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab 5 - Fast Robots</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <script src="scripts.js"></script>
+    <div class="container">
+        <aside class="sidebar">
+            <div class="profile">
+                <h1>Fast Robots</h1>
+                <h3>Spring 2025</h3>
+            </div>
+            <nav>
+                <ul>
+                    <li>
+                        <h3>Lab 5 - Linear PID and Linear Interpolation</h3>
+                    </li>
+                    <li>
+                        <a href="index.html">
+                            <h4>Home</h4>
+                        </a>
+                    </li>
+
+                    <li>
+                        <h4 class="collapsible">Prelab</h4>
+                        <ul class="collapsible-content">
+                            <li><a href="#pid-overview">PID Overview</a></li>
+                            <li><a href="#bluetooth">bluetooth</a></li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="#kp">
+                            <h4>P Control</h4>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#extrapolation">
+                            <h4>Extrapolation</h4>
+                        </a>
+                    </li>
+
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="content">
+            <section class="lab-content">
+                <div class="general-text">
+
+                    <h2>Lab 5: Linear PID and Linear Interpolation</h2>
+
+                    <p><i>03.04.2025 - 03.11.2025</i></p>
+
+                    <section id="pid-overview">
+                        <h3>Prelab</h3>
+
+                        <p>In this lab, a PID controller is implemented to achieve closed-loop control. The controlled
+                            state was speed, and a ToF sensor was used to ensure the robot stopped at a
+                            set distance from the wall. </p>
+
+                        <h4>PID Overview</h4>
+
+                        <p>A PID controller consists of three key parts:</p>
+                        <li>Proportional (P): responds to the present error</li>
+                        <li>Integral (I): accounts for the accumulation of past errors</li>
+                        <li>Derivative (D): predicts future error by using the rate of change</li>
+
+                        <p>These parts together form the PID control equation, which I took from Lecture 7: </p>
+
+                        <img src="images/lab5_images/pid_equation.png" alt="pid_equation" class="lab-photo"
+                            width="350px">
+
+                        <p>This equation calculates the PID input value 𝑢(𝑡) using the error 𝑒(𝑡), which represents
+                            the difference between the desired and current values. In this lab, the error corresponds to
+                            the difference between the target distance from the wall (1 ft) and the robot’s actual
+                            distance. The resulting PID input value directly influences the robot’s speed.
+
+                            Proportional control scales the error by a constant K_p, providing an immediate response.
+                            Integral control accumulates past errors by integrating over time and multiplying by K_i,
+                            helping to eliminate steady-state error. Derivative control predicts future error changes by
+                            computing the rate of change of the error and multiplying by K_d, improving system
+                            stability.</p>
+
+                    </section>
+
+                    <section id="bluetooth">
+                        <h4>Bluetooth</h4>
+
+                        <p>Before starting the lab tasks, I modified my code to make data collection and debugging
+                            easier. As such, I added a boolean flag, pid_on, that would keep track of whether or not to
+                            use the pid controller. I also added three more command types: START_PID, STOP_PID, and
+                            GET_PID_DATA. These would be easily callable using Bluetooth, and helped running the car and
+                            collecting data much more convenient.</p>
+
+                        <p>The START_PID case set pid_on to true and set up the tof sensors, which then would allow the
+                            pid calculation as well as data collection to begin in the main loop. The STOP_PID case sets
+                            the pid_on flag to false and stops the car.</p>
+
+                        <div class="code-snippet">
+                            <pre>
+case START_PID:
+{
+    set_up_tof();
+
+    pid_i = 0;
+    start_time = (float)millis();
+    error_sum = 0;
+    distanceSensor1.startRanging();
+
+    pid_on = true;
+    break;
+}</pre>
+                        </div>
+                        <!-- 
+                        <div class="code-snippet">
+                            <pre>
+case STOP_PID:
+{
+    pid_on = false;
+    drive(0, 0);
+    break;
+}</pre>
+                        </div> -->
+
+                        <p>The third case that I added was GET_PID_DATA, which returns time, distance, and pwm. I
+                            implemented this in the same way as in previous labs.</p>
+
+                        <div class="code-snippet">
+                            <pre>
+case GET_PID_DATA:
+{
+    for (int i = 0; i < num_data_msgs; i++)
+    {
+        tx_estring_value.clear();
+        tx_estring_value.append(times[i]);
+        tx_estring_value.append(",");
+        tx_estring_value.append(distance1_data[i]);
+        tx_estring_value.append(",");
+        tx_estring_value.append(pwm_data[i]);
+        Serial.println(tx_estring_value.c_str());
+        tx_characteristic_string.writeValue(tx_estring_value.c_str());
+    }
+    break;
+}</pre>
+                        </div>
+
+                        <p>The last part of the bluetooth code was on the Python end, where I would receive the data to
+                            plot and analyze. I used a notification handler similar to the ones from previous labs.</p>
+
+                        <div class="code-snippet">
+                            <pre>
+data = ""
+timeArr = [] 
+tof_pid = [] 
+pwm_pid = []
+
+def notification_handler_pid(uuid, array):
+    data = ble.bytearray_to_string(array)
+    if "," in data: 
+        arr = s.split(",")
+        else:
+            timeArr.append(int(arr[0]))
+            tof_pid.append(float(arr[1]))
+            pwm_pid.append(float(arr[2]))</pre>
+                        </div>
+
+                    </section>
+
+
+                    <section id="kp">
+                        <h3>Proportional Control</h3>
+
+                        <p>I began my PID implementation by first only using proportional control. To better organize my
+                            code, I
+                            made a function that used PID to update the pwm value. The code below shows just the P
+                            component.
+                        </p>
+
+                        <div class="code-snippet">
+                            <pre>
+int pid(float dist, float target_dist)
+{
+    float current_dist = dist;
+    float error = dist - target_dist;
+
+    float pwm = kp * error;
+
+    if (pwm > 0)
+    {
+        if (pwm > max_speed)
+            pwm = max_speed;
+
+        return pwm;
+    }
+    else if (pwm < 0)
+    {
+        if (pwm < -max_speed)
+            pwm = -max_speed;
+
+        return pwm;
+    }
+
+    return pwm;
+}</pre>
+                        </div>
+
+                        <p>I added a max_speed value, set to ~100, and clipped the pwm values so they wouldn't exceed
+                            that speed. This pid function is used in the main loop, updating the time, pwm, and tof
+                            arrays whenever new ToF readings were available. </p>
+
+                        <div class="code-snippet">
+                            <pre>
+if (pid_on)
+{
+int distance1;
+int pwm;
+
+if (distanceSensor1.checkForDataReady())
+{
+    distance1 = distanceSensor1.getDistance();
+    distanceSensor1.clearInterrupt();
+    distanceSensor1.stopRanging();
+    distanceSensor1.startRanging();
+
+    pwm = pid(distance1, target);
+
+    if(curr_time - start_time > 20000)
+    {
+        pid_on = false;
+        drive(0, 0);
+    }
+
+    if (pid_i < num_data_msgs)
+    {
+        distance1_data[pid_i] = distance1;
+        pwm_data[pid_i] = pwm;
+        times[pid_i] = (float)millis();
+        pid_i++;
+    }
+}
+if (pwm > 0)
+{
+    drive(1, pwm);
+}
+else if (pwm < 0)
+{
+    drive(-1, pwm);
+}
+else
+{
+    drive(0, 0);
+}</pre>
+                        </div>
+
+                        <p>I first check if the pid_on flag is true - this code is looped through repeatedly, and will
+                            only run the pid code if the pid_on flag has been set to true. Then, I check if the sensor
+                            placed at the front of my car (sensor 1) is ready to take a reading. If it is, I take the
+                            sensor reading and pass it into the previously mentioned pid function, which returns a
+                            corresponding PWM value. I implemented a timing failsafe that stops the pid control after 20
+                            seconds, in the case that Bluetooth disconnects and I am unable to call STOP_PID. I then
+                            check if the pid index is within the data array bounds before appending it to the arrays.
+                            Using the calculated PWM value, I either move the car foward, backwards, or have it stop
+                            (when the pwm is 0, the target has been reached and thus the car doesn't move). </p>
+
+                        <p>I started off by using a Kp value of 0.05, and the car stopped at the target distance without
+                            oscillating.</p>
+
+                        <iframe width="800" height="500" src="https://youtube.com/embed/46oZUAeEK9o"
+                            title="Oscilloscope" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen></iframe>
+
+                    </section>
+
+                </div>
+
+            </section>
+        </main>
+    </div>
+</body>
+
+</html>
