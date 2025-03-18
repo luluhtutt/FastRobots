@@ -293,14 +293,80 @@ if (pid_ori_on)
                             angle. A timeout condition is implemented to disable the PID control after 20 seconds by
                             setting pid_on to false and stopping motion using drive(0, 0).</p>
 
+                        <h4>Kp = 0.05</h4>
+                        <p>I first tried using the same PID values as in Lab 5, which was Kp=0.05, Ki=0, and Kd=0. When
+                            I ran this, however, the car would not move, and I saw that many PWM values of 0 were being
+                            printed out when I had print statements to debug.</p>
+
+                        <h4>Kp = 4.0, Ki = 0.0001</h4>
+                        <p>The next thing I tried was increasing my Kp by a lot, setting it all the way up to 4.0. I
+                            tested Kp values of 2 and 3.5 as well, but found that Kp=4.0 yielded the best results.
+                            Furthermore, the car would struggle when Ki was set to 0, so I decided to tweak the Ki value
+                            and see if that would help. After this fix, the car was able to correct itself when shaken
+                            off its preferred orientation.</p>
+
+                        <iframe width="750" height="450"
+                            src="https://www.youtube.com/embed/DbIjETLgtU8?si=y4XgqV75yYz0rDv1"
+                            title="YouTube video player" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+
+                        <p>Using my pre-set Bluetooth functions, I took and plotted data of the robot correcting itself
+                            when moved from its heading.</p>
+
+                        <img src="images/lab6_images/pi_angle.png" alt="pi_angle" class="lab-photo" width="600px">
+                        <img src="images/lab6_images/pi_error.png" alt="pi_error" class="lab-photo" width="600px">
+
+                        <p>The plot for angles is slightly strange, as I set the desired target to be 0. I think this is
+                            due to the wrapping around of degree values, and thats why the car is osillating so much. As
+                            you can see from the video, the car doesn't oscillate fully from -180 to 180 degrees, it
+                            just moves slightly around the zero degree mark. The error graph visually matches the angle
+                            values in pattern.
+                        </p>
+
+                        <img src="images/lab6_images/pi_pwm.png" alt="pi_pwm" class="lab-photo" width="600px">
+                        <p>I also plotted the PWM data for a similar run with the same Kp and Ki values, also with
+                            correcting. The PWM values are always either -200 or 200, likely due to some form of integer
+                            multiplication issue in my code (ie a value was assigned to an integer when it should have
+                            been a float or double). I set my maximum pwm speed to 200, so this was a good check to make
+                            sure that these constraints were being held.</p>
+
+                        <h4>Notes</h4>
+                        <p>While testing and messing around, I observed that every time I ran START_PID_ORI, the car
+                            would first spin around rapidly and then calm down to smaller oscillations that were still
+                            bigger than what was shown in the video above. It would take some take with these bigger
+                            oscillations, correcting itself when necessary, and then it would go back to very small
+                            oscillations again. I believe this is due to some kind of calibration or warming up. A video
+                            of this happening is attached:</p>
+
+                        <iframe width="750" height="450" src="https://youtube.com/embed/yF8V6_Vv1do"
+                            title="YouTube video player" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+                    </section>
+
+                    <section id="speed">
+                        <h3>Speed and Sampling Rate</h3>
+
+                        <p>I used the same method as Lab 5 to check the sampling rate of the IMU readings and the PID
+                            loop. I etermined that the PID loop without taking sensor measurements took ~9 ms, which is
+                            a frequency of 111.11 Hz. The ToF sampling period was 40 ms, or ~25 Hz. </p>
+
                     </section>
 
                     <section id="conclusion">
-                        <h3>Notes and References</h3>
-
                         <h4>Conclusion</h4>
+                        <p>My issues with my battery from the last two labs culminated into a rough time with this lab,
+                            as I wouldn't even be able to power through one test before the battery died on me. I was
+                            able to use the battery of someone I was working with, and kept using it.</p>
 
                         <h4>References</h4>
+                        <p>I referred to Nila Narayan's Lab 6 report from last year. Furthermore, I worked with Jennie
+                            Redrovan and Sana Chawla on this lab. As previously mentioned, my battery wasn't working,
+                            and we were left with just one working battery. Thus, we all used the same hardware but ran
+                            our code separately.</p>
                     </section>
 
                 </div>
