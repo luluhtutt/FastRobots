@@ -47,6 +47,12 @@
                         </a>
                     </li>
 
+                    <li>
+                        <a href="#conclusion">
+                            <h4>Notes and References</h4>
+                        </a>
+                    </li>
+
                 </ul>
             </nav>
         </aside>
@@ -119,16 +125,6 @@ case START_PID:
     break;
 }</pre>
                         </div>
-                        <!-- 
-                        <div class="code-snippet">
-                            <pre>
-case STOP_PID:
-{
-    pid_on = false;
-    drive(0, 0);
-    break;
-}</pre>
-                        </div> -->
 
                         <p>The third case that I added was GET_PID_DATA, which returns time, distance, and pwm. I
                             implemented this in the same way as in previous labs.</p>
@@ -270,7 +266,7 @@ else
                             Using the calculated PWM value, I either move the car foward, backwards, or have it stop
                             (when the pwm is 0, the target has been reached and thus the car doesn't move). </p>
 
-                        <p>I started off by using a Kp value of 0.05, and the car stopped at the target distance without
+                        <p>I start off by using a Kp value of 0.05, and the car stopped at the target distance without
                             oscillating.</p>
 
                         <iframe width="800" height="500" src="https://youtube.com/embed/46oZUAeEK9o"
@@ -278,6 +274,61 @@ else
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                             allowfullscreen></iframe>
 
+                        <p>I tested this Kp value in different areas to make sure that it would work on different kinds
+                            of floors, and confirmed that my robot was able to stop 1 foot away without oscillating
+                            noticeably. You can see this also in the ToF and error plots from one of the runs' data
+                            collection:</p>
+
+                        <img src="images/lab5_images/05_tof.png" alt="05_tof" class="lab-photo" width="600px">
+                        <img src="images/lab5_images/05_error.png" alt="05_error" class="lab-photo" width="600px">
+
+                        <p>In the ToF graph, the red dotted line is the target distance (1 foot). As the plots show,
+                            there is basically no oscillation once the robot reaches the target distance. The error
+                            graph on the right follows a similar trend, as once it reaches an error value of zero, it
+                            doesn't oscillate further than that. I took this to mean that 0.05 is a good value for my P
+                            controller.</p>
+
+                        <p>I also plotted the PWM values for this run:</p>
+                        <img src="images/lab5_images/05_pwm.png" alt="05_pwm" class="lab-photo" width="600px">
+                        <p>My robot starts off at a PWM near the max, and slows down until it reaches the target.
+                            Because there was no backwards movement for this run, there are no negative PWM values
+                            shown.</p>
+
+                        <p>While I was pretty lucky in getting a good Kp value on my first attempt, I also tested a Kp
+                            value of 0.2.</p>
+
+                        <img src="images/lab5_images/kp0-2_tof.png" alt="kp0-2_tof" class="lab-photo" width="600px">
+                        <img src="images/lab5_images/kp0-2_error.png" alt="kp0-2_error" class="lab-photo" width="600px">
+
+                        <p>As predicted, this run had the car moving back and forth to reach the target distance.</p>
+
+                    </section>
+
+                    <section id="extrapolation">
+                        <h3>Extrapolation</h3>
+
+                        <p>The next step was to analyze the sampling rate of the ToF sensors, and of the PID loop. Using
+                            a similar strategy to Lab 3's sampling rate calculations, I took measurements of both. I
+                            determined that the PID loop without taking sensor measurements took ~7 ms, which is a
+                            frequency of 142.86 Hz. The ToF sampling period was 40 ms, or ~25 Hz. Because the ToF sensor
+                            readings update at a lower frequency, I implemented extrapolation to estimate the robot's
+                            position in between readings bcased on the last two sensor readings.</p>
+                    </section>
+
+                    <section id="conclusion">
+                        <h3>Notes and References</h3>
+
+                        <h4>Conclusion</h4>
+                        <p>This lab presented several hardware related struggles, but ultimately gave me a better
+                            understanding of PID control. I had a lot of issues with my battery, as it would charge for
+                            long periods of time but only last enough time for a couple of runs. I attempted to use my
+                            friend's battery, and it was perfectly functional. I had to adjust the placement of my
+                            forward facing ToF sensor, as it was slightly tilted down and thus made my car stop whenever
+                            it touched the ground, but run properly in the air. My ToF sensor would also often sense
+                            things in front of it when there was nothing close by.</p>
+
+                        <h4>References</h4>
+                        <p>I referenced Mikayla Lahr and Nila Narayan's past Lab 5 reports.</p>
                     </section>
 
                 </div>
