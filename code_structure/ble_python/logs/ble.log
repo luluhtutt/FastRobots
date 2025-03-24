@@ -1,0 +1,31 @@
+2025-03-22 16:29:21,839 | MainThread   | [INFO    ] | disconnect_handler  |: Disconnected from AC6D8405-1EA0-1D63-D5D5-053EFC3848E0
+2025-03-22 16:30:37,812 | MainThread   | [INFO    ] | _connect            |: Looking for Artemis Nano Peripheral Device: c0:81:20:26:0e:64
+2025-03-22 16:30:40,407 | MainThread   | [INFO    ] | _connect            |: Connected to c0:81:20:26:0e:64
+2025-03-22 16:31:15,990 | MainThread   | [INFO    ] | disconnect_handler  |: Disconnected from AC6D8405-1EA0-1D63-D5D5-053EFC3848E0
+2025-03-22 16:32:02,153 | MainThread   | [INFO    ] | _connect            |: Looking for Artemis Nano Peripheral Device: c0:81:20:26:0e:64
+2025-03-22 16:32:04,851 | MainThread   | [INFO    ] | _connect            |: Connected to c0:81:20:26:0e:64
+2025-03-22 16:32:47,292 | MainThread   | [INFO    ] | disconnect_handler  |: Disconnected from AC6D8405-1EA0-1D63-D5D5-053EFC3848E0
+2025-03-22 16:33:35,361 | MainThread   | [INFO    ] | _connect            |: Looking for Artemis Nano Peripheral Device: c0:81:20:26:0e:64
+2025-03-22 16:33:38,194 | MainThread   | [INFO    ] | _connect            |: Connected to c0:81:20:26:0e:64
+2025-03-22 16:35:20,723 | MainThread   | [INFO    ] | disconnect_handler  |: Disconnected from AC6D8405-1EA0-1D63-D5D5-053EFC3848E0
+2025-03-22 16:36:10,055 | MainThread   | [INFO    ] | _connect            |: Looking for Artemis Nano Peripheral Device: c0:81:20:26:0e:64
+2025-03-22 16:36:12,823 | MainThread   | [INFO    ] | _connect            |: Connected to c0:81:20:26:0e:64
+2025-03-22 16:39:36,423 | MainThread   | [INFO    ] | disconnect_handler  |: Disconnected from AC6D8405-1EA0-1D63-D5D5-053EFC3848E0
+2025-03-22 16:40:17,450 | MainThread   | [INFO    ] | _connect            |: Looking for Artemis Nano Peripheral Device: c0:81:20:26:0e:64
+2025-03-22 16:40:22,072 | MainThread   | [INFO    ] | _connect            |: Connected to c0:81:20:26:0e:64
+2025-03-22 16:43:04,704 | MainThread   | [INFO    ] | disconnect_handler  |: Disconnected from AC6D8405-1EA0-1D63-D5D5-053EFC3848E0
+2025-03-22 16:44:22,199 | MainThread   | [INFO    ] | _connect            |: Looking for Artemis Nano Peripheral Device: c0:81:20:26:0e:64
+2025-03-22 16:44:24,915 | MainThread   | [INFO    ] | _connect            |: Connected to c0:81:20:26:0e:64
+2025-03-22 16:46:20,778 | MainThread   | [INFO    ] | disconnect_handler  |: Disconnected from AC6D8405-1EA0-1D63-D5D5-053EFC3848E0
+2025-03-22 16:53:19,094 | MainThread   | [INFO    ] | _connect            |: Looking for Artemis Nano Peripheral Device: c0:81:20:26:0e:64
+2025-03-22 16:53:21,970 | MainThread   | [INFO    ] | _connect            |: Connected to c0:81:20:26:0e:64
+2025-03-22 17:03:45,910 | MainThread   | [INFO    ] | disconnect_handler  |: Disconnected from AC6D8405-1EA0-1D63-D5D5-053EFC3848E0
+2025-03-22 17:10:57,897 | MainThread   | [INFO    ] | _connect            |: Looking for Artemis Nano Peripheral Device: c0:81:20:26:0e:64
+2025-03-22 17:11:01,016 | MainThread   | [INFO    ] | _connect            |: Connected to c0:81:20:26:0e:64
+2025-03-22 17:12:26,148 | MainThread   | [INFO    ] | disconnect_handler  |: Disconnected from AC6D8405-1EA0-1D63-D5D5-053EFC3848E0
+2025-03-22 17:13:18,918 | MainThread   | [INFO    ] | _connect            |: Looking for Artemis Nano Peripheral Device: c0:81:20:26:0e:64
+2025-03-22 17:13:21,775 | MainThread   | [INFO    ] | _connect            |: Connected to c0:81:20:26:0e:64
+2025-03-22 17:32:28,767 | MainThread   | [INFO    ] | disconnect_handler  |: Disconnected from AC6D8405-1EA0-1D63-D5D5-053EFC3848E0
+2025-03-22 17:35:02,936 | MainThread   | [INFO    ] | _connect            |: Looking for Artemis Nano Peripheral Device: c0:81:20:26:0e:64
+2025-03-22 17:35:05,790 | MainThread   | [INFO    ] | _connect            |: Connected to c0:81:20:26:0e:64
+2025-03-22 21:26:03,040 | MainThread   | [INFO    ] | disconnect_handler  |: Disconnected from AC6D8405-1EA0-1D63-D5D5-053EFC3848E0

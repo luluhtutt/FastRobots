@@ -7,5 +7,9 @@ Website is hosted at: [https://luluhtutt.github.io/FastRobots/](https://luluhtut
 ### Repository Structure
 * docs/
   * writeup pages; the root for Github pages
-* labs/
-  * each lab has a folder (lab{n}) with corresponding Arduino and Python code, as well as any other resources used
+* arduino/
+  * folder storing all the arduino code written, files labelled by lab name
+* python/
+  * all python code for labs
+* code_structure/
+  * example structure for running lab code - modify .ino and demo.ipynb accordingly
