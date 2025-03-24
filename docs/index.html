@@ -25,7 +25,7 @@
                     <li><a href="lab4.html">Lab 4 - Motors and Open Loop Control</a></li>
                     <li><a href="lab5.html">Lab 5 - Linear PID and Linear Interpolation</a></li>
                     <li><a href="lab6.html">Lab 6 - Orientation PID</a></li>
-                    <!-- <li><a href="lab7.html">Lab 7 - Kalman Filtering</a></li> -->
+                    <li><a href="lab7.html">Lab 7 - Kalman Filtering</a></li>
                     <!-- <li><a href="lab8.html">Lab 8 - Stunts!</a></li> -->
                     <!-- <li><a href="lab9.html">Lab 9 - Mapping</a></li> -->
                     <!-- <li><a href="lab10.html">Lab 10 - Localization (sim)</a></li> -->
@@ -90,8 +90,8 @@
                                 <h3>Lab 2 - IMU</h3>
                                 <p><i>02.04.2025 - 02.11.2025</i></p>
                                 <p>Configuring the IMU sensor on our robot.</p>
-                                <p>Tasks include extensive testing of the IMU sensor, specifically the accelerometer and
-                                    the gyroscope. We also received the RC car and tested its capabilities.
+                                <p>Conducted in-depth analysis of accelerometer and gyroscope data to understand motion
+                                    detection capabilities. Received our RC car chassis and performed stunts.
                                 </p>
                             </div>
                         </div>
@@ -104,9 +104,10 @@
                                 <h3>Lab 3 - Time of Flight Sensors</h3>
                                 <p><i>02.11.2025 - 02.25.2025</i></p>
                                 <p>Equipping the robot with distance sensors.</p>
-                                <p>Tasks include soldering components to the Artemis and configuring our time of flight
-                                    sensors, which measure distance in order to help detect obstacles and the
-                                    surrounding environment.
+                                <p>Enhanced the robot's environmental awareness by adding distance perception. Soldered
+                                    components to the Artemis board and configured Time of Flight sensors to measure
+                                    distances accurately. These sensors will be crucial for obstacle detection and
+                                    spatial mapping in future labs
                                 </p>
                             </div>
                         </div>
@@ -119,9 +120,9 @@
                                 <h3>Lab 4 - Motors and Open Loop Control</h3>
                                 <p><i>02.25.2025 - 03.04.2025</i></p>
                                 <p>Changing from manual to open loop control.</p>
-                                <p>Tasks include soldering two motor drivers to the Artemis board and car motors to
-                                    power the wheels, organizing all of the hardware components inside and on the car,
-                                    and calibrating the wheels.
+                                <p>Soldered motor drivers to the Artemis board and connected them to the car motors,
+                                    organized all hardware components on the chassis, and performed wheel calibration to
+                                    ensure predictable movement patterns.
                                 </p>
                             </div>
                         </div>
@@ -134,9 +135,9 @@
                                 <h3>Lab 5 - Linear PID and Linear Interpolation</h3>
                                 <p><i>03.04.2025 - 03.11.2025</i></p>
                                 <p>Changing from open loop to closed loop control.</p>
-                                <p>In this lab, we experimented with PID control to execute the task of having the car
-                                    stop when it is one foot away from the wall. Tasks included taking ToF sensor data,
-                                    analyzing received plots, and tuning Kp, Ki, and Kd values in response.
+                                <p>Developed a PID controller that enables the car to accurately stop at a set
+                                    distance from obstacles. Collected and analyzed ToF sensor data to tune the
+                                    controller parameters (Kp, Ki, Kd) for best performance.
                                 </p>
                             </div>
                         </div>
@@ -149,8 +150,24 @@
                                 <h3>Lab 6 - Orientation PID</h3>
                                 <p><i>03.11.2025 - 03.18.2025</i></p>
                                 <p>Using a PID controller to maintain orientation.</p>
-                                <p>In this lab, we experimented with PID control to point the car in a particular
-                                    heading and maintain that orientation.
+                                <p>Designed and implemented a PID controller for maintaining the car's
+                                    heading, allowing it to point in a specific direction regardless of external
+                                    disturbances and maintain that orientation.
+                                </p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section id="lab7">
+                        <div class="lab-card" onclick="navigateToLab('lab7.html')">
+                            <img src="images/lab7_icon.png" alt="Lab 7 Icon" class="lab-icon">
+                            <div class="lab-content">
+                                <h3>Lab 7 - Kalman Filtering</h3>
+                                <p><i>03.18.2025 - 03.25.2025</i></p>
+                                <p>Implementing a Kalman Filter.</p>
+                                <p>Implemented a Kalman filter algorithm to combine and optimize data from our slowly
+                                    sampling ToF sensors. This improved sensor reliability enables more complex
+                                    maneuvers like precision stopping, flipping, and other various stunts.
                                 </p>
                             </div>
                         </div>
