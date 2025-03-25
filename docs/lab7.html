@@ -382,7 +382,9 @@ pwm = pid(kf_distance, target);</pre>
                             the most difference were when the robot was oscillating between back and forth, and the
                             original distance estimate at time 0. (Note: I labeled the second graph wrong and corrected
                             it in preview, which is why the text "KF" looks strange).</p>
+
                         <img src="images/lab7_images/robot_pwm.png" alt="pi_error" class="lab-photo" width="800px">
+
                         <p>The PWM values graphed above bring up some issues I had with the PID implementation. I
                             originally noticed that my car would stop a little bit further than 1 ft, but the motor
                             drivers would still be trying to move forwards. I came to the conclusion that this was a
