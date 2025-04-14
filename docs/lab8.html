@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab 8 - Fast Robots</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <script src="scripts.js"></script>
+    <script type="text/javascript" async src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script type="text/javascript" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <div class="container">
+        <aside class="sidebar">
+            <div class="profile">
+                <h1>Fast Robots</h1>
+                <h3>Spring 2025</h3>
+            </div>
+            <nav>
+                <ul>
+                    <li>
+                        <h3>Lab 8 - Stunts!</h3>
+                    </li>
+                    <li>
+                        <a href="index.html">
+                            <h4>Home</h4>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#implementation">
+                            <h4>Implementation</h4>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#flip1">
+                            <h4>Flip 1</h4>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#flip2">
+                            <h4>Flip 2</h4>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#flip3">
+                            <h4>Flip 3</h4>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#bloopers">
+                            <h4>Bloopers</h4>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#conclusion">
+                            <h4>Notes and Conclusion</h4>
+                        </a>
+                    </li>
+
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="content">
+            <section class="lab-content">
+                <div class="general-text">
+
+                    <h2>Lab 8: Stunts!</h2>
+
+                    <p><i>03.25.2025 - 04.08.2025</i></p>
+
+                    <p>In this lab, we combined all our previous work to perform high-speed, sensor-driven stunts. I
+                        chose to implement the flip maneuver, where the robot drives quickly toward a wall, performs a
+                        flip on a sticky mat, and then returns to its starting position.</p>
+
+                    <section id="implementation">
+                        <h3>Implementation</h3>
+                        <p>In order to implement the flip, I created a new case called flip.</p>
+
+                        <div class="code-snippet">
+                            <pre>
+case FLIP:
+{
+    set_up_tof();
+    data_i = 0;
+
+    start_time = (float)millis();
+    current_time = (float)millis();
+    float elapsed = current_time - start_time;
+    distanceSensor1.startRanging();
+    while (elapsed < 3500)
+    {
+        if (distanceSensor1.checkForDataReady() && data_i < num_data_msgs)
+        {
+            distanceSensor1.startRanging();
+            distance1_data[data_i] = distanceSensor1.getDistance();
+            distanceSensor1.clearInterrupt();
+            distanceSensor1.stopRanging();
+
+            if (elapsed < 750)
+            {
+                drive(1, 255);
+            }
+            else
+            {
+                drive(-1, 255);
+            }
+
+            times[data_i] = elapsed;
+
+            data_i++;
+        }
+        current_time = (float)millis();
+        elapsed = current_time - start_time;
+    }
+    drive(0, 0);
+
+    for (int i = 0; i < data_i; i++)
+    {
+        tx_estring_value.clear();
+        tx_estring_value.append(times[i]);
+        tx_estring_value.append(",");
+        tx_estring_value.append(distance1_data[i]);
+        tx_characteristic_string.writeValue(tx_estring_value.c_str());
+    }
+
+    break;
+}</pre>
+                        </div>
+                        <p>First, the code initializes the Time-of-Flight (TOF) sensors and sets up variables to track
+                            time and store distance data. It then enters a timed sequence lasting 3.5 seconds that
+                            controls the robot's movements.</p>
+                        <p>During the first 750 milliseconds, the robot drives forward at maximum speed (PWM value of
+                            255) to build up enough momentum to perform the flip. After this initial period, the robot
+                            immediately reverses direction at the same speed, which causes the robot to flip due to the
+                            sudden change in momentum while the front wheels encounter the sticky mat. Throughout this
+                            process, the TOF sensor continuously measures the distance to objects in front of the robot,
+                            storing this data along with timestamps for later analysis.</p>
+
+                        <p>Because I did the flip in my room without a measuring tape, I just put tape down, and later
+                            measured the distance from the door to be roughyl 2.25 meters.</p>
+
+                    </section>
+
+                    <section id="flip1">
+                        <h3>Flip 1</h3>
+
+                        <iframe width="750" height="450" src="https://youtube.com/embed/0mVGtZo4ZpM"
+                            title="YouTube video player" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+                        <p>This flip took 2.56 seconds to travel to the door and back. Below, you can see the distance
+                            and pwm graphs.</p>
+
+                        <img src="images/lab8_images/flip1_dist.png" alt="pi_angle" class="lab-photo" width="450px">
+                        <img src="images/lab8_images/pwm_data.png" alt="pi_angle" class="lab-photo" width="450px">
+
+                    </section>
+
+                    <section id="flip2">
+                        <h3>Flip 2</h3>
+
+                        <iframe width="750" height="450" src="https://youtube.com/embed/hVuKis8ZHxM"
+                            title="YouTube video player" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+                        <p>This flip took 2.47 seconds to travel to the door and back.</p>
+
+                        <img src="images/lab8_images/flip2_dist.png" alt="pi_angle" class="lab-photo" width="450px">
+                        <img src="images/lab8_images/pwm_data.png" alt="pi_angle" class="lab-photo" width="450px">
+
+                    </section>
+
+                    <section id="flip3">
+                        <h3>Flip 3</h3>
+
+                        <iframe width="750" height="450" src="https://youtube.com/embed/ohOXeprM9J0"
+                            title="YouTube video player" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+                        <p>This flip took 2.27 seconds to travel to the door and back.</p>
+
+                        <img src="images/lab8_images/flip3_dist.png" alt="pi_angle" class="lab-photo" width="450px">
+                        <img src="images/lab8_images/pwm_data.png" alt="pi_angle" class="lab-photo" width="450px">
+
+                    </section>
+
+                    <section id="bloopers">
+                        <h3>Bloopers</h3>
+                        <p>Enjoy, and subcribe and like.</p>
+
+                        <iframe width="750" height="450"
+                            src="https://www.youtube.com/embed/7UwkbQG6LAA?si=cj_9bOeSmA8wrsew"
+                            title="YouTube video player" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </section>
+
+                    <section id="conclusion">
+                        <h4>Conclusion</h4>
+                        <p>I had a lot of fun flipping the car for this lab. At first, I tried to do a drift, but
+                            decided not to because of time constraints. I thought I would have to weigh the car down on
+                            one end with rocks, but because I ran it on carpet which has more friction, I didn't need
+                            to.</p>
+                    </section>
+
+                </div>
+
+            </section>
+        </main>
+    </div>
+</body>
+
+</html>
