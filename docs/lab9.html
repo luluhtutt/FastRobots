@@ -197,6 +197,183 @@ case START_MAP:
 
                     </section>
 
+                    <section id="readings">
+                        <h3>Readings</h3>
+
+                        <p>After implementing the mapping command, I had to take data at four different points in order
+                            to map the robots surroundings. I wasn't able to finish in time to do the mapping in lab, so
+                            I took measurements in a hallway.</p>
+
+                        <img src="images/lab9_images/hallway.JPG" alt="pi_angle" class="lab-photo" width="400px">
+
+                        <p>The videos below show mapping in action at (0, 12), (-12,0), and (-24,0), respectively.</p>
+
+                        <iframe width="750" height="450" src="https://youtube.com/embed/KZrs3Tgd5q0"
+                            title="YouTube video player" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+                        <iframe width="750" height="450" src="https://youtube.com/embed/Q6Ef_db28gI"
+                            title="YouTube video player" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+                        <iframe width="750" height="450" src="https://youtube.com/embed/Tmlt0vdk3d4"
+                            title="YouTube video player" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+                        <p>After collecting data for each angle, I sent over the distance and yaw values via BLE. I
+                            plotted the average distances for each location on polar axes to ensure that the data I was
+                            collecting was valid.</p>
+
+                        <img src="images/lab9_images/tof_p1.png" alt="pi_angle" class="lab-photo" height="400px"
+                            width="400px">
+                        <img src="images/lab9_images/tof_p2.png" alt="pi_angle" class="lab-photo" height="400px"
+                            width="400px">
+                        <img src="images/lab9_images/tof_p3.png" alt="pi_angle" class="lab-photo" height="400px"
+                            width="400px">
+                        <img src="images/lab9_images/tof_p4.png" alt="pi_angle" class="lab-photo" height="400px"
+                            width="400px">
+
+                        <p>From these graphs, I could tell that the second sensor was shifted by 90 degrees, as the
+                            sensors are placed in the front and on the side of the car.</p>
+
+                        <p>While testing, I noticed that the robot was pretty inconsistent with what it considered to be
+                            0 degrees. Therefore, I concluded that I was better off trusting the orientation from the
+                            gyroscope. Furthermore, the error threshold I had was 5 degrees, so there will always be
+                            some kind of error that makes readings not equally spaced.</p>
+
+                    </section>
+
+                    <section id="transformation">
+                        <h3>Transformation</h3>
+                        <p>
+                            Next, I converted the distance measurements taken relative to the robot at each scan
+                            location into the arena's global reference coordinates (<i>x</i> and <i>y</i>). I did
+                            this by defining a three-dimensional transformation matrix <b>T</b>, such that:
+                        </p>
+                        <pre>
+                        T = [ R   d ] = [ cos(θ) -sin(θ)  x ]
+                            [ 0   1 ]   [ sin(θ)  cos(θ)  y ]
+                                        [   0       0     1 ]
+                            </pre>
+                        <p>
+                            I also defined two position vectors <b>P₁</b> and <b>P₂</b> for the two ToF sensors
+                            relative to the center of the robot:
+                        </p>
+                        <pre>
+                        P₁ = [ TOF₁ ]
+                             [   0   ]
+                             [   1   ]
+                        
+                        P₂ = [ -TOF₂ ]
+                             [   0    ]
+                             [   1    ]
+                            </pre>
+                        <p>
+                            In my case, the front sensor (TOF₁) is mounted about 2.5 inches in front of the center
+                            of the robot, while the side sensor (TOF₂) is located about 1 inches to the left of
+                            center. I applied these offsets to the distances measured by each sensor during mapping
+                            and transformed the resulting points into the environment's global reference frame.
+                        </p>
+                        <p>
+                            When all the data is plotted together, the result is a spatial map of the environment
+                            from four distinct scanning locations. Because the second sensor was giving me smaller
+                            values that seemed off, I decided to just use my ToF 1 data.
+                        </p>
+
+                        <img src="images/lab9_images/tof_map.png" alt="pi_angle" class="lab-photo" width="600px">
+
+                        <p>When I first generated the map, I noticed that a lot of the points weren't quite aligned in a
+                            hallway-looking shape. I realized that because my robot didn't start at the same
+                            orientation, I would have to rotate some of the points to make it the correct orientation.
+                        </p>
+
+                    </section>
+
+                    <section id="edges">
+                        <h3>Edges</h3>
+                        <p>
+                            Finally, using the map from prior, I drew lines according to the trend of distance points.
+                        </p>
+
+                        <img src="images/lab9_images/tof_map_lines.png" alt="pi_angle" class="lab-photo" width="600px">
+
+                        <p>Comparing it to the hallway, I would say that it matched up pretty well. One slight mistake
+                            was that my distance measurements at (0,0) were actually closer to the right wall than
+                            intended. Thus, the orange points show that there is a wall directly to its right, when it
+                            reality that wall was more likely to be where the red points' right wall are.</p>
+
+                        <p>From the lines that I drew, I made rough estimates for the starting and ending coordinates
+                            for each of these lines</p>
+
+                        <table border="1" style="border-collapse: collapse; width: 100%; text-align: center;">
+                            <thead>
+                                <tr>
+                                    <th>Line Number</th>
+                                    <th>Starting Coordinates (x, y)</th>
+                                    <th>Ending Coordinates (x, y)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>(-33, -3)</td>
+                                    <td>(-28, -3)</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>(-28, -3)</td>
+                                    <td>(-28, -7)</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>(-28, -7)</td>
+                                    <td>(-17, -7)</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>(-17, -7)</td>
+                                    <td>(-17, -3)</td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>(-17, -3)</td>
+                                    <td>(-5, -3)</td>
+                                </tr>
+                                <tr>
+                                    <td>6</td>
+                                    <td>(-5, -3)</td>
+                                    <td>(-5, -9)</td>
+                                </tr>
+                                <tr>
+                                    <td>7</td>
+                                    <td>(4, -9)</td>
+                                    <td>(4, 23)</td>
+                                </tr>
+                                <tr>
+                                    <td>8</td>
+                                    <td>(-4, 23)</td>
+                                    <td>(-4, 4)</td>
+                                </tr>
+                                <tr>
+                                    <td>9</td>
+                                    <td>(-4, 4)</td>
+                                    <td>(-33, 4)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </section>
+
+                    <section id="conclusion">
+                        <h3>Notes and Conclusion</h3>
+
+                        <p>I worked with Jennie Redrovan, Sana Chawla, Daniela Tran, and Henry Calderon on this lab. I
+                            also referenced Stephen Wagner's Lab 7 Report from last year.</p>
+                    </section>
+
                 </div>
 
             </section>
