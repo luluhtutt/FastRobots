@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab 9 - Fast Robots</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <script src="scripts.js"></script>
+    <script type="text/javascript" async src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script type="text/javascript" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <div class="container">
+        <aside class="sidebar">
+            <div class="profile">
+                <h1>Fast Robots</h1>
+                <h3>Spring 2025</h3>
+            </div>
+            <nav>
+                <ul>
+                    <li>
+                        <h3>Lab 9 - Mapping</h3>
+                    </li>
+                    <li>
+                        <a href="index.html">
+                            <h4>Home</h4>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#orientation">
+                            <h4>Orientation Control</h4>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#readings">
+                            <h4>Readings</h4>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#transformation">
+                            <h4>Transformation</h4>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#edges">
+                            <h4>Edges</h4>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#conclusion">
+                            <h4>Notes and Conclusion</h4>
+                        </a>
+                    </li>
+
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="content">
+            <section class="lab-content">
+                <div class="general-text">
+
+                    <h2>Lab 9: Stunts!</h2>
+
+                    <p><i>04.08.2025 - 04.15.2025</i></p>
+
+                    <p>In this lab, we started building a static map of the lab environment using distance data from the
+                        robot’s ToF sensors. I used PID control on orientation to make the robot perform on-axis
+                        rotations at multiple marked positions, collecting evenly spaced distance readings as it turned.
+                        After gathering all the data, I transformed the measurements into the room’s reference frame and
+                        plotted them to create a map. This map will be used in future labs for localization and
+                        navigation.</p>
+
+                    <section id="orientation">
+                        <h3>Orientation Control</h3>
+
+                        <p>For the mapping routine, I decided to use orientation control since my Lab 6 PID had already
+                            shown solid and consistent performance. I chose to rotate the robot in 24-degree increments,
+                            capturing 15 distinct orientations at each scanning location, and took 5 distance and IMU
+                            measurements at each angle to improve reliability. To support this process, I added a
+                            START_MAPPING BLE command to the Artemis to initiate the orientation-based scanning routine.
+                        </p>
+
+                        <div class="code-snippet">
+                            <pre>
+case START_MAP:
+{
+    // setup
+    set_up_tof();
+    pid_ori_i = 0;
+    increment = 24;
+    num_readings = 5;
+    start_time = (float)millis();
+
+    // initialize control variables
+    pid_ori_error_threshold = 5;
+    error_ori = 0;
+    prev_error_ori = 0;
+    error_sum_ori = 0;
+    current_angle = 0;
+
+    distanceSensor1.startRanging();
+    distanceSensor2.startRanging();
+
+    for (int i = -180; i < 180; i += increment)
+    {
+        target_angle = i;
+        do
+        {
+            pid_ori(target_angle);
+            delay(10);
+        } while (!(abs(error_ori) < pid_ori_error_threshold));
+
+        drive(0, 0);
+        delay(10);
+
+        int j = 0;
+
+        while (j < num_readings)
+        {
+            if (distanceSensor1.checkForDataReady() && distanceSensor2.checkForDataReady() && myICM.dataReady() && pid_ori_i < num_data_msgs)
+            {
+                float yaw_g = 0, roll_g = 0, pitch_g = 0, dt = 0;
+                unsigned long last_time = millis();
+                if (j != 0)
+                {
+                    last_time = times[pid_ori_i - 1];
+                }
+                const float alpha = 0.0735;
+
+                times[pid_ori_i] = millis();
+
+                distanceSensor1.startRanging();
+                distance1_data[pid_ori_i] = distanceSensor1.getDistance();
+                distanceSensor1.clearInterrupt();
+                distanceSensor1.stopRanging();
+
+                distanceSensor2.startRanging();
+                distance2_data[pid_ori_i] = distanceSensor2.getDistance();
+                distanceSensor2.clearInterrupt();
+                distanceSensor2.stopRanging();
+
+                // yaw
+                myICM.getAGMT();
+
+                unsigned long current_tm = millis();
+
+                dt = (current_tm - last_time) / 1000.;
+                last_time = current_tm;
+                yaw_g = yaw_g + myICM.gyrZ() * dt;
+                gyro_yaw_raw[pid_ori_i] = yaw_g;
+
+                pid_ori_i++;
+                j++;
+            }
+            delay(100);
+        }
+    }
+
+    for (int i = 0; i < pid_ori_i; i++)
+    {
+        tx_estring_value.clear();
+        tx_estring_value.append(times[i]);
+        tx_estring_value.append(",");
+        tx_estring_value.append(distance1_data[i]);
+        tx_estring_value.append(",");
+        tx_estring_value.append(distance2_data[i]);
+        tx_estring_value.append(",");
+        tx_estring_value.append(gyro_yaw_raw[i]);
+        tx_characteristic_string.writeValue(tx_estring_value.c_str());
+    }
+    break;
+}
+</pre>
+                        </div>
+
+                        <p>I had to tweak my PID code and parameters from Lab 6 to be able to handle smaller changes in
+                            angle. I iterated through 360 degrees by using a for loop. At each angle, the robot pauses
+                            to take 5 distance readings using the ToF sensors. These readings are stored and averaged to
+                            improve accuracy. The current orientation angle is recorded using IMU data for precise
+                            angular tracking. Once the scan at a position is complete, the robot continues on to the
+                            next angle. The mapping data is formatted into a structured message, including distance and
+                            orientation, to simplify post-processing.
+                        </p>
+                        <p>One issue I had was not having enough power to my wheels for small angle changes. Tweaking my
+                            parameters helped, but ultimately I had to clip any values smaller than 75 to 75. This
+                            ensured that even with small errors, the car would still be able to overcome the ground's
+                            friction and rotate.</p>
+
+
+                    </section>
+
+                </div>
+
+            </section>
+        </main>
+    </div>
+</body>
+
+</html>
