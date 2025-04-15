@@ -372,6 +372,86 @@ case START_MAP:
 
                         <p>I worked with Jennie Redrovan, Sana Chawla, Daniela Tran, and Henry Calderon on this lab. I
                             also referenced Stephen Wagner's Lab 7 Report from last year.</p>
+
+                        <p>I tweaked my PID ori implementation, the updated version can be seen below:</p>
+
+                        <div class="code-snippet">
+                            <pre>
+int pid_ori(float target_angle)
+{
+    if (millis() < 1000)
+    {
+        drive(0, 0);
+        return 0;
+    }
+    current_time = millis();
+    float pid_dt = (current_time - prev_time) / 1000;
+    prev_time = current_time;
+
+    icm_20948_DMP_data_t data;
+    myICM.readDMPdataFromFIFO(&data);
+
+    if ((myICM.status == ICM_20948_Stat_Ok) || (myICM.status == ICM_20948_Stat_FIFOMoreDataAvail))
+    {
+        if ((data.header & DMP_header_bitmap_Quat6) > 0)
+        {
+            double q1 = ((double)data.Quat6.Data.Q1) / 1073741824.0; // Convert to double. Divide by 2^30
+            double q2 = ((double)data.Quat6.Data.Q2) / 1073741824.0;
+            double q3 = ((double)data.Quat6.Data.Q3) / 1073741824.0;
+
+            current_angle = quaternion_to_yaw(q1, q2, q3);
+        }
+    }
+    // Calculate error
+    prev_error_ori = error_ori;
+    error_ori = target_angle - current_angle;
+
+    if (error_ori > 180)
+    {
+        error_ori -= 360;
+    }
+    else if (error_ori < -180)
+    {
+        error_ori += 360;
+    }
+
+    float p_term = Kp_ori * error_ori;
+
+    error_sum_ori += error_ori * pid_dt;
+    error_sum_ori = constrain(error_sum_ori, -100, 100);
+    float i_term = Ki_ori * error_sum_ori;
+
+    float d_term = Kd_ori * (error_ori - prev_error_ori) / pid_dt;
+
+    pid_speed = (int)(p_term + i_term + d_term);
+    pid_speed = constrain(pid_speed, -255, 255);
+    if (pid_speed > 0 && pid_speed < 75)
+    {
+        pid_speed = 75;
+    }
+    else if (pid_speed < 0 && pid_speed > -75)
+    {
+        pid_speed = -75;
+    }
+    Serial.print("pid speed: ");
+    Serial.println(pid_speed);
+
+    if (abs(pid_speed) < pid_ori_error_threshold / 2)
+    {
+        drive(0, 0);
+    }
+    else if (pid_speed > 0)
+    {
+        drive(-2, constrain(abs(pid_speed) * 1.5, -255, 255)); // Turn left
+    }
+    else
+    {
+        drive(2, abs(pid_speed)); // Turn right
+    }
+
+    return pid_speed;
+}</pre>
+                        </div>
                     </section>
 
                 </div>
