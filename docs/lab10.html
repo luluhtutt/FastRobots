@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab 10 - Fast Robots</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <script src="scripts.js"></script>
+    <script type="text/javascript" async src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script type="text/javascript" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <div class="container">
+        <aside class="sidebar">
+            <div class="profile">
+                <h1>Fast Robots</h1>
+                <h3>Spring 2025</h3>
+            </div>
+            <nav>
+                <ul>
+                    <li>
+                        <h3>Lab 10 - Localization (Simulation)</h3>
+                    </li>
+                    <li>
+                        <a href="index.html">
+                            <h4>Home</h4>
+                        </a>
+                    </li>
+
+                    <li>
+                        <h4 class="collapsible">Localization</h4>
+                        <ul class="collapsible-content">
+                            <li><a href="#overview">Overview</a></li>
+                            <li><a href="#bayes">Bayes Filter</a></li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <h4 class="collapsible">Implementation</h4>
+                        <ul class="collapsible-content">
+                            <li><a href="#compute_control">compute_control</a></li>
+                            <li><a href="#odom_motion_model">odom_motion_model</a></li>
+                            <li><a href="#prediction_step">prediction_step</a></li>
+                            <li><a href="#sensor_model">sensor_model</a></li>
+                            <li><a href="#update_step">update_step</a></li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="#sim">
+                            <h4>Simulation</h4>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#conclusion">
+                            <h4>Notes and Conclusion</h4>
+                        </a>
+                    </li>
+
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="content">
+            <section class="lab-content">
+                <div class="general-text">
+
+                    <h2>Lab 10: Localization (Simulation)</h2>
+
+                    <p><i>04.15.2025 - 04.22.2025</i></p>
+
+                    <section id="overview" class="lab-content">
+                        <div class="general-text">
+                            <h3>Grid Localization</h3>
+
+                            <h4>Overview</h4>
+
+                            <p>Robot localization is the process of determining where a robot is located within its
+                                environment. Since robots don't have perfect knowledge of their position, we use sensors
+                                and probabilistic methods to estimate their location.</p>
+
+                            <p>In this lab, we implement grid localization using a Bayes filter. The robot's position is
+                                represented by three values: x and y coordinates, and an orientation angle θ. To make
+                                calculations manageable, we divide the continuous space into a 3D grid with discrete
+                                cells.</p>
+
+                            <p>Each grid cell measures 0.3048m × 0.3048m × 20°, creating a grid of 12×9×18 cells (1944
+                                total cells). Each cell stores a probability value representing how likely it is that
+                                the robot is located in that position and orientation.</p>
+
+                            <p>The cell with the highest probability after running the Bayes filter represents our best
+                                guess of where the robot is located. By tracking this highest-probability cell over
+                                time, we can follow the robot's movement through the environment.</p>
+                        </div>
+                    </section>
+
+                    <section id="bayes" class="lab-content">
+                        <div class="general-text">
+                            <h4>Bayes Filter Algorithm</h4>
+
+                            <p>The Bayes filter is an iterative algorithm that updates the robot's belief about its
+                                state based on control inputs and sensor measurements. Each iteration consists of two
+                                major steps, the prediction step, which incorporates control input (movement) data to
+                                predict the new state, and the update step, which incorporates observation (measurement)
+                                data to refine the prediction</p>
+
+                            <p>The prediction step typically increases uncertainty in the belief as motion introduces
+                                noise, while the update step reduces uncertainty by integrating sensor information. The
+                                belief calculated after the prediction step is called the prior belief.
+                            </p>
+
+                            <img src="images/lab10_images/bayes.png" alt="pi_angle" class="lab-photo" width="500px">
+                            <p>The Bayes filter algorithm works with three key inputs: the previous belief bel(xₜ₋₁),
+                                the control input uₜ, and sensor measurements zₜ. The previous belief is stored as a 3D
+                                probability grid where each cell represents how likely it is that the robot occupies
+                                that specific position and orientation. The control input represents the robot's
+                                movement command, while the sensor measurements include 18 distance readings taken at
+                                20-degree intervals around the robot. For each possible current robot pose xₜ, the
+                                algorithm performs the following steps:</p>
+                            <p>First, it calculates the predicted belief bel̄(xₜ) by summing over all possible previous
+                                poses. For each previous pose, it multiplies the probability of transitioning from that
+                                pose to the current pose (given the control input) by the previous belief value.</p>
+
+                            <p>
+                                Second, it updates this prediction with sensor information. It multiplies the predicted
+                                belief by the probability of getting the observed sensor readings if the robot were
+                                actually at the current pose, then normalizes the result using the factor η to ensure
+                                all probabilities sum to 1.</p>
+                        </div>
+                    </section>
+
+                    <section id="compute_control">
+
+                        <h3>Implementation</h3>
+
+                        <h4>compute_control</h4>
+
+                        <div class="code-snippet">
+                            <pre>
+    def compute_control(cur_pose, prev_pose):
+    """ Given the current and previous odometry poses, this function extracts
+    the control information based on the odometry motion model.
+    
+    Args:
+        cur_pose  ([Pose]): Current Pose
+        prev_pose ([Pose]): Previous Pose
+    
+    Returns:
+        [delta_rot_1]: Rotation 1  (degrees)
+        [delta_trans]: Translation (meters)
+        [delta_rot_2]: Rotation 2  (degrees)
+    """
+    cur_x, cur_y, cur_theta = cur_pose
+    prev_x, prev_y, prev_theta = prev_pose
+    
+    delta_rot_1 = mapper.normalize_angle(np.degrees(np.arctan2(cur_y - prev_y, cur_x - prev_x)) - prev_theta,)
+    delta_trans = np.hypot(cur_y - prev_y, cur_x - prev_x)
+    delta_rot_2 = mapper.normalize_angle(cur_theta - prev_theta - delta_rot_1)
+    
+    return delta_rot_1, delta_trans, delta_rot_2</pre>
+                        </div>
+
+                        <p>The compute_control() function converts robot movement into the odometry motion model by
+                            comparing two poses. This model breaks any movement into three sequential steps.</p>
+
+                        <p>1. Initial rotation (δrot1): The robot turns to face its destination</p>
+                        <p>2. Translation (δtrans): The robot moves forward in a straight line</p>
+                        <p>3. Final rotation (δrot2): The robot adjusts to reach the final orientation</p>
+
+                        <p>Using pose tuples (x, y, θ) as inputs, the function calculates these parameters with NumPy's
+                            arctan2 and hypot functions, normalizing all angles to [-180°, 180°]. This representation
+                            allows us to accurately model and predict the robot's movement through space.</p>
+
+                    </section>
+
+                    <section id="odom_motion_model">
+
+                        <h4>odom_motion_model</h4>
+
+                        <div class="code-snippet">
+                            <pre>
+def odom_motion_model(cur_pose, prev_pose, u):
+""" Odometry Motion Model
+
+Args:
+    cur_pose  ([Pose]): Current Pose
+    prev_pose ([Pose]): Previous Pose
+    (rot1, trans, rot2) (float, float, float): A tuple with control data in the format
+                                                format (rot1, trans, rot2) with units (degrees, meters, degrees)
+
+
+Returns:
+    prob [float]: Probability p(x'|x, u)
+"""
+delta_rot_1, delta_trans, delta_rot_2 = compute_control(cur_pose, prev_pose)
+
+prob_rot_1 = loc.gaussian(delta_rot_1, u[0], loc.odom_rot_sigma)
+prob_trans = loc.gaussian(delta_trans, u[1], loc.odom_trans_sigma)
+prob_rot_2 = loc.gaussian(delta_rot_2, u[2], loc.odom_rot_sigma)
+
+return prob_rot_1 * prob_trans * prob_rot_2</pre>
+                        </div>
+
+                        <p>The odom_motion_model() function calculates the probability of transitioning between poses by
+                            comparing actual and theoretical movements. First, it extracts the three odometry parameters
+                            (initial rotation, translation, final
+                            rotation) from both:</p>
+                        <p>- The "actual" path taken by the robot based on sensor readings</p>
+                        <p>- The "theoretical" path needed to move between any two grid states</p>
+
+                        <p>It then treats each parameter as an independent Gaussian probability distribution, with
+                            means centered on the ideal movements and standard deviations representing expected motion
+                            noise. By multiplying these three probabilities together, we get the likelihood that the
+                            robot moved from a specific previous state to the current state given the recorded control
+                            input. This probabilistic approach handles the inherent uncertainty in robot movement.</p>
+
+                    </section>
+
+                    <section id="prediction_step">
+
+                        <h4>prediction_step</h4>
+
+                        <div class="code-snippet">
+                            <pre>
+def prediction_step(cur_odom, prev_odom):
+""" Prediction step of the Bayes Filter.
+Update the probabilities in loc.bel_bar based on loc.bel from the previous time step and the odometry motion model.
+
+Args:
+    cur_odom  ([Pose]): Current Pose
+    prev_odom ([Pose]): Previous Pose
+"""
+u = compute_control(cur_odom, prev_odom)
+
+loc.bel_bar = np.zeros((mapper.MAX_CELLS_X, mapper.MAX_CELLS_Y, mapper.MAX_CELLS_A))
+
+for prev_x in range(mapper.MAX_CELLS_X):
+    for prev_y in range(mapper.MAX_CELLS_Y):
+        for prev_theta in range(mapper.MAX_CELLS_A):
+            if (loc.bel[prev_x, prev_y, prev_theta] < 0.0001): continue
+
+            for cur_x in range(mapper.MAX_CELLS_X):
+                for cur_y in range(mapper.MAX_CELLS_Y):
+                    for cur_theta in range(mapper.MAX_CELLS_A):
+                        p = odom_motion_model(
+                            mapper.from_map(cur_x, cur_y, cur_theta),
+                            mapper.from_map(prev_x, prev_y, prev_theta),
+                            u
+                        )
+
+                        loc.bel_bar[cur_x, cur_y, cur_theta] += p * loc.bel[prev_x, prev_y, prev_theta]
+
+loc.bel_bar /= np.sum(loc.bel_bar)</pre>
+                        </div>
+
+                        <p>The prediction_step() function calculates the robot's probable locations after movement by:
+                        </p>
+
+                        <p>1. Extracting the actual movement parameters from odometry readings</p>
+                        <p>2. Computing a new belief distribution by systematically examining all possible state
+                            transitions</p>
+                        <p>3. For each current grid cell (x, y, θ), it evaluates the probability of arriving there from
+                            every previous cell</p>
+                        <p>4. These probabilities are multiplied by the previous belief values and summed to create the
+                            predicted belief bel―</p>
+
+                    </section>
+
+                    <section id="sensor_model">
+
+                        <h4>sensor_model</h4>
+
+                        <div class="code-snippet">
+                            <pre>
+def sensor_model(obs):
+""" This is the equivalent of p(z|x).
+Args:
+    obs ([ndarray]): A 1D array consisting of the true observations for a specific robot pose in the map
+Returns:
+    [ndarray]: Returns a 1D array of size 18 (=loc.OBS_PER_CELL) with the likelihoods of each individual sensor measurement
+"""
+return [loc.gaussian(obs[i], loc.obs_range_data[i], loc.sensor_sigma)
+    for i in range(mapper.OBS_PER_CELL)]</pre>
+                        </div>
+
+                        <p>This function takes an array of true observations (obs) for a specific robot pose
+                            It returns an array of 18 values (one for each sensor measurement direction)
+                            Each value represents the likelihood of that sensor reading given the true state
+                            It uses a Gaussian distribution with mean = the true observation value and standard
+                            deviation = loc.sensor_sigma</p>
+
+                    </section>
+
+                    <section id="update_step">
+
+                        <h4>update_step</h4>
+
+                        <div class="code-snippet">
+                            <pre>
+def update_step():
+""" Update step of the Bayes Filter.
+Update the probabilities in loc.bel based on loc.bel_bar and the sensor model.
+"""
+for cur_x in range(mapper.MAX_CELLS_X):
+    for cur_y in range(mapper.MAX_CELLS_Y):
+        for cur_theta in range(mapper.MAX_CELLS_A):
+            p = sensor_model(mapper.get_views(cur_x, cur_y, cur_theta))
+            loc.bel[cur_x, cur_y, cur_theta] = np.prod(p) * loc.bel_bar[cur_x, cur_y, cur_theta]
+            
+loc.bel /= np.sum(loc.bel)</pre>
+                        </div>
+
+                        <p>The update_step() function implements the update phase of the Bayes Filter. It iterates
+                            through every possible robot position in the discretized environment (x, y coordinates and
+                            orientation θ) and updates the posterior belief (loc.bel) based on the predicted belief
+                            (loc.bel_bar) and current sensor measurements.
+                            For each potential position, the function:</p>
+
+                        <p>1. Retrieves the expected observations using mapper.get_views()</p>
+                        <p>2. Calculates the likelihood of the actual sensor readings using sensor_model()</p>
+                        <p>3. Computes the product of these individual sensor likelihoods using np.prod(p)</p>
+                        <p>4. Multiplies this likelihood by the prior belief (loc.bel_bar) for that position</p>
+                        <p>5. Finally normalizes the entire belief distribution to ensure it sums to 1</p>
+                        <p>This updated posterior belief represents the robot's refined estimation of its position
+                            after incorporating both motion prediction and sensor information, completing one full cycle
+                            of the Bayes Filter.</p>
+
+                    </section>
+
+                    <section id="sim">
+                        <h3>Simulation</h3>
+
+                        <p>Here is a video that shows a trajectory and localization simulation without a Bayes filter.
+                            We can tell that the odometry model is not great, as it wanders outside of the bounds of the
+                            map.</p>
+
+                        <iframe width="700" height="400"
+                            src="https://www.youtube.com/embed/PYz1Abnd8yw?si=0I_W4WbQmVJYpYFt"
+                            title="YouTube video player" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+                        <p>Here are two videos of successful localization runs with Bayes.</p>
+
+                        <iframe width="700" height="400"
+                            src="https://www.youtube.com/embed/jAhN8I8UYaY?si=hWOZbAJm75fN0pp8"
+                            title="YouTube video player" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+                        <iframe width="700" height="400"
+                            src="https://www.youtube.com/embed/WgQ3gpZ3b0o?si=CHO_vWHxMvoMgy_T"
+                            title="YouTube video player" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </section>
+
+                    <section id="conclusion">
+                        <h3>Notes and Conclusion</h3>
+                        <p>I referenced Stephen Wagner's lab report, and got some help from Sana Chawla.</p>
+                    </section>
+
+                </div>
+
+            </section>
+        </main>
+    </div>
+</body>
+
+</html>
