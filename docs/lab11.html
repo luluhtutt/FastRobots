@@ -95,9 +95,16 @@
 
                     <section id="reality">
                         <h3>Reality</h3>
-                        <p>To localize the real robot, I first implemented a data collection function that processes
-                            incoming sensor readings via BLE notifications. The robot sends back distance and yaw
-                            measurements at 20° increments while spinning in place during the observation loop.</p>
+                        <p>For real-world localization, I first implemented the <code>data_collect()</code> function,
+                            which is responsible for receiving and parsing sensor data sent over BLE from the robot.
+                            As the robot rotated, it transmitted distance and yaw readings at fixed angular increments.
+                            The <code>data_collect()</code> function listens for these BLE messages, decodes them into
+                            readable strings,
+                            splits the incoming data by commas, and extracts the distance and yaw values.
+                            It then stores the measurements into two global arrays: <code>sensor_data</code> for
+                            distances and <code>yaw_data</code> for yaw angles.
+                            This setup ensures that each incoming reading is indexed properly as the robot completes a
+                            full 360° scan with 18 measurements spaced roughly 20° apart.</p>
 
                         <div class="code-snippet">
                             <pre>
@@ -118,9 +125,20 @@ def data_collect(uuid, byte_array):
             index += 1</pre>
                         </div>
 
-                        <p>Next, I wrote the perform_observation_loop() function inside the provided RealRobot class.
-                            This method commands the robot to rotate in place and collect 18 distance measurements,
-                            then packages the data into numpy arrays for the Bayes filter update step.</p>
+                        <p>After setting up data collection, I implemented the <code>perform_observation_loop()</code>
+                            function within the provided <code>RealRobot</code> class.
+                            This function initiates the scan behavior by commanding the robot to rotate in place while
+                            recording ToF distance measurements.
+                            It begins by resetting the sensor data arrays and starting BLE notifications tied to
+                            <code>data_collect()</code>.
+                            Then, it sends the <code>CMD.START_MAP</code> command to the robot to begin the 360°
+                            rotation and recording process.
+                            To allow the robot enough time to complete the scan, the function pauses execution using
+                            <code>asyncio.run(asyncio.sleep(20))</code>.
+                            Once the rotation is complete, BLE notifications are stopped, and the collected distance
+                            measurements are converted from millimeters to meters
+                            and returned as a numpy column array.
+                        </p>
 
                         <div class="code-snippet">
                             <pre>
