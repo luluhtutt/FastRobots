@@ -29,7 +29,7 @@
                     <li><a href="lab8.html">Lab 8 - Stunts!</a></li>
                     <li><a href="lab9.html">Lab 9 - Mapping</a></li>
                     <li><a href="lab10.html">Lab 10 - Localization (sim)</a></li>
-                    <!-- <li><a href="lab11.html">Lab 11 - Localization (real)</a></li> -->
+                    <li><a href="lab11.html">Lab 11 - Localization (real)</a></li>
                     <!-- <li><a href="lab12.html">Lab 12 - Planning and Execution</a></li> -->
                 </ul>
             </nav>
@@ -211,10 +211,24 @@
                                 <h3>Lab 10 - Localization (Sim)</h3>
                                 <p><i>04.15.2025 - 04.22.2025</i></p>
                                 <p>Using Bayes Filter to implement grid localization.</p>
-                                <p>Used PID orientation control to rotate the robot in place at multiple known
-                                    locations, collecting evenly spaced ToF sensor readings. Converted measurements into
-                                    the room's inertial reference frame using transformation matrices and plotted a
-                                    detailed map. This map will be used for localization and navigation in future labs.
+                                <p>Used a Bayes filter to achieve grid localization of a virtual robot in a simulated 2D
+                                    environment similar to the arena set up in our lab space.
+                                </p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section id="lab11">
+                        <div class="lab-card" onclick="navigateToLab('lab11.html')">
+                            <img src="images/lab11_icon.png" alt="Lab 11 Icon" class="lab-icon">
+                            <div class="lab-content">
+                                <h3>Lab 11 - Localization (Real)</h3>
+                                <p><i>04.22.2025 - 04.29.2025</i></p>
+                                <p>Using Bayes Filter to implement grid localization.</p>
+                                <p>In this lab, we adapted our Bayes filter localization system to the real robot. Using
+                                    only sensor updates from ToF scans, we estimated the robot's pose at marked
+                                    locations in the arena. By comparing the belief distribution to ground truth, we
+                                    evaluated how real-world noise affects localization performance.
                                 </p>
                             </div>
                         </div>
