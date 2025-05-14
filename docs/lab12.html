@@ -201,7 +201,8 @@ void navigate(int x1, int y1, int x2, int y2)
                             realized that this was because my ToF sensor was angled too upwards, which made it miss
                             reading the wall at far distances. Instead, it would read above the wall. Thus, I had to
                             relocate my ToF sensors, but in the process of doing that I broke one sensor. As a result, I
-                            only use one sensor for now.</p>
+                            only use one sensor for now. I also tried to use my kalman filter, but because I didn't see
+                            a big difference in performance, I commented that out.</p>
 
                         <p>After I fixed my ToF hardware, I ran the case PATH that I created to try to navigate through
                             the map.</p>
