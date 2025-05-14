@@ -71,6 +71,8 @@
                             to go forwards however much it needs to reach the next point.
                         </p>
 
+                        <h4>PID Use</h4>
+
                         <p>Below, you can see the navigate method I created to implement this functionality.</p>
 
                         <div class="code-snippet">
@@ -235,86 +237,43 @@ case PATH:
 
                         <p>After fixing the ToF issues, I managed to navigate through the first three waypoints
                             occasionally. Unfortunately, I have no videos of the successful runs because I'm unlucky
-                            like that. I do promise that it did work though. Below are a few videos of this function
-                            almost working - either the angle is slightly off or it doesn't start at the correct initial
-                            position or car moving forwards too far, etc.</p>
+                            like that. I do promise that it did work though, the anger of not getting a proper video
+                            simmers inside of me. It would often be a little bit off from working. Small issues like the
+                            angle being a couple degrees off or the initial position being off compounded as the robot
+                            navigated more, so good runs were rare.</p>
 
-                    </section>
-
-                    <section id="results">
-                        <h3>Results</h3>
-                        <p>Below are the results for each marked location. The green dot in each plot represents the
-                            ground truth, which was manually added in Python for each placement of the robot. The blue
-                            dot represents the belief after the Bayes filter update step. The observations at each
-                            location were made with 360° scans taken at 20-degree increments. The results show how well
-                            the localization algorithm performed at different poses.</p>
-
-                        <h4 id="n3n2">(-3, -2)</h4>
-                        <img src="images/lab11_images/plot_-3-2_3.png" alt="Marked Pose (-3, -2)" class="lab-photo"
-                            width="600px">
-                        <p>The update step at this position yielded slightly inaccurate results, with a distance of
-                            0.4306 m from the ground truth. I repeated this test several times and found that the belief
-                            remained relatively consistent across trials.</p>
-
-                        <p>Below, you can see a video of the update step running after collecting mapping data.</p>
-
-                        <iframe width="700" height="400" src="https://youtube.com/embed/TqXHrNSFXyU"
+                        <iframe width="700" height="400" src="https://youtube.com/embed/CEbCVAbnFkA"
                             title="YouTube video player" frameborder="0"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                             referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-                        <h4 id="03">(0, 3)</h4>
-                        <img src="images/lab11_images/plot_03_1.png" alt="Marked Pose (0, 3)" class="lab-photo"
-                            width="600px">
-                        <p>This pose also showed a slight misalignment between the belief and the ground truth, with a
-                            distance of 0.305m. This could have been caused by the lab's suggestion that sensor noise
-                            can influence the localization process, especially when the robot is placed near features
-                            with significant depth differences. In this spot, there was a huge difference in distance to
-                            the wall on the left and the distance to the wall on the right. I ran this pose multiple
-                            times, and still got the same belief values, which makes me believe that my robot was
-                            consistent if not fully accurate. Perhaps the misalignment is due to orientation mishaps.
-                        </p>
+                        <p>As you can see in the video, the initial position is disturbed, and as a result everything is
+                            slightly off. The car drives much more than it should have, and the next target angle was
+                            not correct either. However, I did notice that the angles were both shifted from their
+                            intended angles by roughly the same amount. This meant that my logic was probably fine, I
+                            just didn't orient the IMU correctly.</p>
 
-                        <h4 id="5n3">(5, -3)</h4>
-                        <img src="images/lab11_images/plot_5-3_1.png" alt="Marked Pose (5, -3)" class="lab-photo"
-                            width="600px">
-                        <p>The localization results at this position were inconsistent. While a couple of the tests
-                            provided a very close match to the ground truth, with a distance of 0.4113 meters, others
-                            were very off. In particular, I struggled with the robot believing itself to be in the upper
-                            left coordinate, around (0,3). I believe this is because the surrounding environment is
-                            pretty similar, but reflected. Many of the ToF readings would have matched, so I think a lot
-                            of those predictions were caused by incorrect orientation. The more open space in this area
-                            of the arena could have resulted in fewer distinct landmarks for the robot's sensors to rely
-                            on. With fewer walls or objects to provide reliable distance readings, the sensor data may
-                            have introduced more uncertainty, leading to varied localization results.</p>
+                        <p>The next implementation I treied was replacing the pid linear with a timed move forward. This
+                            would require tuning depending on battery as well.</p>
 
-                        <h4 id="53">(5, 3)</h4>
-                        <img src="images/lab11_images/plot_53_1.png" alt="Marked Pose (5, 3)" class="lab-photo"
-                            height="300px">
-                        <img src="images/lab11_images/plot_53_2.png" alt="Marked Pose (5, 3)" class="lab-photo"
-                            height="300px">
-                        <p>The belief at this pose was exactly the ground truth in the first run, and slightly off in
-                            the second, with a distance of 0.3044m. The second point still showed good accuracy, so I
-                            believe that my robot was consistent in predicting this pose.</p>
+                    </section>
 
+                    <section id="pid">
+                        <h3>Results</h3>
+                        <p>In the group I worked with, we managed to get one car working using PID orientation and
+                            linear. The code is slightly different for that run, but it has the same approach and
+                            algorithm.</p>
 
-                        <h4 id="00">(0, 0)</h4>
-                        <img src="images/lab11_images/plot_00_1.png" alt="Marked Pose (5, 3)" class="lab-photo"
-                            width="600px">
-                        <p>I also conducted an additional test at the origin (0,0). As can be seen, the robot yielded
-                            very accurate and consistent results, with all three of my tests resulting in beliefs right
-                            at the origin.</p>
+                        <iframe width="700" height="400" src="https://youtube.com/embed/Pz7tM9CjPTI"
+                            title="YouTube video player" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-                        <h4>Beliefs</h4>
-                        <p>Below, you can see all of the belief results.</p>
-                        <img src="images/lab11_images/beliefs.png" alt="Marked Pose (5, 3)" class="lab-photo"
-                            width="600px">
                     </section>
 
                     <section id="conclusion">
                         <h3>Notes and Conclusion</h3>
-                        <p>I referenced Stephen Wagner's lab report, and worked together with Sana Chawla and Jennie
-                            Redrovan.</p>
+                        <p>I worked together with Sana Chawla and Jennie Redrovan.</p>
                     </section>
 
                 </div>
